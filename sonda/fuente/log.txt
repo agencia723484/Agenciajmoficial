@@ -1,0 +1,2 @@
+project/Main.dc.html 404 text/plain; charset=utf-8 10
+project/canvas.json 404 text/plain; charset=utf-8 10
