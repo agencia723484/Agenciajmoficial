@@ -10,47 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Bajar imágenes de la página
+      - name: Bajar el diseño de la página
         run: |
-          set -u
-          mkdir -p img
-          B=https://4be3037d-26bc-44d3-8402-ecf34e00a19b.frame.claudeusercontent.com/_blob
-          while read id name; do
-            curl -sSL --max-time 60 -A "Mozilla/5.0" -o "img/$name" -w "$name %{http_code} %{content_type} %{size_download}\n" "$B/$id" || echo "$name FALLO"
-          done <<'LIST' | tee img-log.txt
-          1eaa86e4f0958a687ada4d1d8bfbaa74 quiniela.png
-          1c401ef6e4a330b0b1bf6c9a65bf78e0 quiniela-plus.png
-          b20f732583dfe194410f704213ff52f4 quini6.png
-          2d741827ba390ca0d4bd1f272136809e telekino.png
-          e8d6929e0267dd31b867c6e64d45ac60 loto-plus.png
-          af293c20bb4201518503264f34c9da9f loto5.png
-          f2fc58adfd7af40eea242bd952abe0ae brinco.png
-          5521b360bce44fbd7eead1fb0e17b1d8 recorte-prode.jpg
-          78b46bc219af206b95a1c69163566451 frente.jpg
-          e4b1d7d36c8b84486a81d2329a561c8b vereda.jpg
-          32c11940537755223c2c269b3fad8307 ticket-quiniela-plus.jpg
-          LIST
-          file img/* | tee -a img-log.txt
-      - name: Explorar fuentes de resultados
-        run: |
-          mkdir -p sonda
-          i=0
-          for u in \
-            "https://www.loteria.gba.gob.ar/" \
-            "https://www.loteria.gba.gob.ar/index.php/resultados" \
-            "https://www.loteria.gba.gob.ar/index.php/resultados/quiniela" \
-            "https://www.lanacion.com.ar/loterias/" \
-            "https://www.lanacion.com.ar/loterias/quiniela-provincia/" \
-            "https://www.ruta1000.com.ar/index2008.php?Resultado_sorteo=QUINIELA_PROVINCIA" \
-            "https://quinieleando.com.ar/quinielas/provincia" \
-            "https://www.jugandoonline.com.ar/" ; do
-            i=$((i+1))
-            curl -sSL --max-time 40 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" -o "sonda/$i.html" -w "$i %{http_code} %{size_download} %{url_effective} <- $u\n" "$u" || echo "$i FALLO $u"
-          done | tee sonda/log.txt
+          mkdir -p sonda/fuente
+          B=https://4be3037d-26bc-44d3-8402-ecf34e00a19b.frame.claudeusercontent.com
+          for p in project/Main.dc.html project/canvas.json; do
+            curl -sSL --max-time 60 -A "Mozilla/5.0" -o "sonda/fuente/$(basename $p)" -w "$p %{http_code} %{content_type} %{size_download}\n" "$B/$p" || echo "$p FALLO"
+          done | tee sonda/fuente/log.txt
       - name: Guardar
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898+github-actions[bot]@users.noreply.github.com"
-          git add -A img img-log.txt sonda
-          git commit -m "Sonda: imágenes y fuentes" || true
+          git add -A sonda
+          git commit -m "Sonda: diseño de la página" || true
           git push
