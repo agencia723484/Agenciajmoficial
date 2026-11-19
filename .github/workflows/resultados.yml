@@ -1,0 +1,32 @@
+name: Actualizar resultados de la Quiniela
+# Lee el extracto oficial de la Lotería de la Provincia y lo guarda en
+# data/extractos.json. Corre cada 10 minutos en el horario de los sorteos
+# (de lunes a sábado, de 10 a 22 hs de Argentina).
+on:
+  schedule:
+    - cron: '*/10 13-23 * * 1-6'   # 10:00 a 20:59 hs (Argentina = UTC-3)
+    - cron: '*/10 0-1 * * 0,2-6'   # 21:00 a 22:59 hs (ya es el día siguiente en UTC)
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: resultados
+  cancel-in-progress: false
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Leer el extracto oficial
+        run: python3 scripts/actualizar_extractos.py
+      - name: Rearmar la página
+        run: python3 scripts/construir.py
+      - name: Guardar si hay números nuevos
+        run: |
+          if git diff --quiet; then echo "Sin cambios"; exit 0; fi
+          git config user.name "robot-resultados"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/extractos.json app.js
+          git commit -m "Resultados de la Quiniela $(TZ=America/Argentina/Buenos_Aires date '+%d/%m %H:%M')"
+          git push

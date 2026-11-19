@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Agencia Juan Molina</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wght@400;500;600;700;800&amp;family=Alfa+Slab+One&amp;family=Rye&amp;family=Yellowtail&amp;display=swap">
+<style>
+body{margin:0;background:#F6F7F2}
+a{color:#1F5135}a:hover{color:#123222}
+@keyframes pal-latido{0%,100%{transform:scale(1);box-shadow:0 0 0 10px rgba(227,179,65,.25),0 0 0 22px rgba(227,179,65,.12)}50%{transform:scale(1.04);box-shadow:0 0 0 16px rgba(227,179,65,.32),0 0 0 34px rgba(227,179,65,.14),0 0 60px rgba(227,179,65,.45)}}
+@keyframes pal-giro{to{transform:rotate(360deg)}}
+@keyframes pal-temblor{0%,100%{transform:translateY(0)}25%{transform:translateY(-4px)}75%{transform:translateY(4px)}}
+@keyframes pal-pop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.18);opacity:1}100%{transform:scale(1)}}
+@keyframes pal-chispa{0%{transform:translateY(0) scale(.4);opacity:1}100%{transform:translateY(-175px) scale(1.1);opacity:0}}
+@keyframes pal-brillo{0%{opacity:.9}100%{opacity:0;transform:scale(1.6)}}
+@keyframes pal-guino{0%,100%{opacity:.55}50%{opacity:1}}
+.pal-latido{animation:pal-latido 1.6s ease-in-out infinite}
+.pal-giro{animation:pal-giro .9s linear infinite}
+.pal-temblor{animation:pal-temblor .12s linear infinite;filter:blur(1.5px)}
+.pal-pop{animation:pal-pop .55s cubic-bezier(.2,1.4,.4,1) both}
+.pal-chispa{animation:pal-chispa .9s ease-out both}
+.pal-brillo{animation:pal-brillo .7s ease-out both}
+.pal-guino{animation:pal-guino 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.pal-latido,.pal-giro,.pal-temblor,.pal-pop,.pal-chispa,.pal-brillo,.pal-guino{animation:none;filter:none}}
+</style>
+</helmet>
+<div style="width: 100%; background: #F6F7F2; color: #17211B; font-family: 'Archivo', system-ui, sans-serif; font-size: 18px; line-height: 1.55">
+
+<header style="background: {{primary}}; color: #FFFFFF">
+<div style="max-width: 1100px; margin: 0 auto; padding: 24px 20px 18px">
+<sc-if value="{{cartelA}}" hint-placeholder-val="{{ false }}">
+<div style="position: relative; background: #141210; border-radius: 18px; padding: clamp(30px, 4.5vw, 48px) clamp(22px, 5vw, 64px); text-align: center; box-shadow: inset 0 0 0 3px #E3B341, inset 0 0 0 9px #141210, inset 0 0 0 11px #B8862A, 0 16px 32px rgba(0,0,0,0.35)">
+<svg viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; top: 18px; left: 18px; width: clamp(34px, 6vw, 64px); height: clamp(34px, 6vw, 64px)"><path d="M6 58V22C6 12 12 6 22 6h36" fill="none" stroke="#E3B341" stroke-width="2.5" stroke-linecap="round"></path><path d="M22 14c-6 0-8 7-3 9 4 1 7-2 5-5" fill="none" stroke="#E3B341" stroke-width="2" stroke-linecap="round"></path><path d="M28 13q9-9 18-4-7 7-18 4z" fill="#B03A2E"></path><path d="M13 28q-9 9-4 18 7-7 4-18z" fill="#B03A2E"></path><circle cx="58" cy="6" r="2.6" fill="#E3B341"></circle><circle cx="6" cy="58" r="2.6" fill="#E3B341"></circle></svg>
+<svg viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; top: 18px; right: 18px; width: clamp(34px, 6vw, 64px); height: clamp(34px, 6vw, 64px); transform: scaleX(-1)"><path d="M6 58V22C6 12 12 6 22 6h36" fill="none" stroke="#E3B341" stroke-width="2.5" stroke-linecap="round"></path><path d="M22 14c-6 0-8 7-3 9 4 1 7-2 5-5" fill="none" stroke="#E3B341" stroke-width="2" stroke-linecap="round"></path><path d="M28 13q9-9 18-4-7 7-18 4z" fill="#B03A2E"></path><path d="M13 28q-9 9-4 18 7-7 4-18z" fill="#B03A2E"></path><circle cx="58" cy="6" r="2.6" fill="#E3B341"></circle><circle cx="6" cy="58" r="2.6" fill="#E3B341"></circle></svg>
+<svg viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; bottom: 18px; left: 18px; width: clamp(34px, 6vw, 64px); height: clamp(34px, 6vw, 64px); transform: scaleY(-1)"><path d="M6 58V22C6 12 12 6 22 6h36" fill="none" stroke="#E3B341" stroke-width="2.5" stroke-linecap="round"></path><path d="M22 14c-6 0-8 7-3 9 4 1 7-2 5-5" fill="none" stroke="#E3B341" stroke-width="2" stroke-linecap="round"></path><path d="M28 13q9-9 18-4-7 7-18 4z" fill="#B03A2E"></path><path d="M13 28q-9 9-4 18 7-7 4-18z" fill="#B03A2E"></path><circle cx="58" cy="6" r="2.6" fill="#E3B341"></circle><circle cx="6" cy="58" r="2.6" fill="#E3B341"></circle></svg>
+<svg viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; bottom: 18px; right: 18px; width: clamp(34px, 6vw, 64px); height: clamp(34px, 6vw, 64px); transform: scale(-1, -1)"><path d="M6 58V22C6 12 12 6 22 6h36" fill="none" stroke="#E3B341" stroke-width="2.5" stroke-linecap="round"></path><path d="M22 14c-6 0-8 7-3 9 4 1 7-2 5-5" fill="none" stroke="#E3B341" stroke-width="2" stroke-linecap="round"></path><path d="M28 13q9-9 18-4-7 7-18 4z" fill="#B03A2E"></path><path d="M13 28q-9 9-4 18 7-7 4-18z" fill="#B03A2E"></path><circle cx="58" cy="6" r="2.6" fill="#E3B341"></circle><circle cx="6" cy="58" r="2.6" fill="#E3B341"></circle></svg>
+<div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px">
+<span style="font-family: 'Yellowtail', cursive; font-size: clamp(30px, 4.4vw, 44px); line-height: 1; color: #E3B341">Agencia Oficial</span>
+<span style="font-family: 'Alfa Slab One', Georgia, serif; font-size: clamp(42px, 9.5vw, 108px); line-height: 1.02; letter-spacing: 0.03em; color: #FFF4D6; text-shadow: 0.025em 0.025em 0 #E3B341, 0.05em 0.05em 0 #E3B341, 0.075em 0.075em 0 #B03A2E, 0.1em 0.1em 0 #B03A2E, 0.12em 0.15em 0.22em rgba(0,0,0,0.65); padding-bottom: 0.1em">JUAN MOLINA</span>
+<div aria-hidden="true" style="display: flex; align-items: center; gap: 12px; width: min(420px, 80%)">
+<span style="flex: 1 1 auto; height: 2px; background: #E3B341"></span>
+<span style="flex: 0 0 auto; width: 10px; height: 10px; background: #B03A2E; border: 2px solid #E3B341; transform: rotate(45deg)"></span>
+<span style="flex: 1 1 auto; height: 2px; background: #E3B341"></span>
+</div>
+<span style="font-size: clamp(13px, 1.6vw, 17px); font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #E3B341">Lotería de la Provincia · Legajo N° 723484</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{cartelB}}" hint-placeholder-val="{{ true }}">
+<div style="position: relative; background: #F5E9C8; border-radius: 18px; padding: clamp(36px, 5vw, 56px) clamp(22px, 5vw, 64px) clamp(28px, 4vw, 40px); text-align: center; box-shadow: inset 0 0 0 4px #9E1B1B, inset 0 0 0 9px #F5E9C8, inset 0 0 0 11px #1F5135, 0 16px 32px rgba(0,0,0,0.35)">
+<svg viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; top: 18px; left: 18px; width: clamp(34px, 6vw, 64px); height: clamp(34px, 6vw, 64px)"><path d="M6 58V22C6 12 12 6 22 6h36" fill="none" stroke="#1F5135" stroke-width="2.5" stroke-linecap="round"></path><path d="M22 14c-6 0-8 7-3 9 4 1 7-2 5-5" fill="none" stroke="#1F5135" stroke-width="2" stroke-linecap="round"></path><path d="M28 13q9-9 18-4-7 7-18 4z" fill="#9E1B1B"></path><path d="M13 28q-9 9-4 18 7-7 4-18z" fill="#9E1B1B"></path><circle cx="58" cy="6" r="2.8" fill="#C8961E"></circle><circle cx="6" cy="58" r="2.8" fill="#C8961E"></circle></svg>
+<svg viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; top: 18px; right: 18px; width: clamp(34px, 6vw, 64px); height: clamp(34px, 6vw, 64px); transform: scaleX(-1)"><path d="M6 58V22C6 12 12 6 22 6h36" fill="none" stroke="#1F5135" stroke-width="2.5" stroke-linecap="round"></path><path d="M22 14c-6 0-8 7-3 9 4 1 7-2 5-5" fill="none" stroke="#1F5135" stroke-width="2" stroke-linecap="round"></path><path d="M28 13q9-9 18-4-7 7-18 4z" fill="#9E1B1B"></path><path d="M13 28q-9 9-4 18 7-7 4-18z" fill="#9E1B1B"></path><circle cx="58" cy="6" r="2.8" fill="#C8961E"></circle><circle cx="6" cy="58" r="2.8" fill="#C8961E"></circle></svg>
+<svg viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; bottom: 18px; left: 18px; width: clamp(34px, 6vw, 64px); height: clamp(34px, 6vw, 64px); transform: scaleY(-1)"><path d="M6 58V22C6 12 12 6 22 6h36" fill="none" stroke="#1F5135" stroke-width="2.5" stroke-linecap="round"></path><path d="M22 14c-6 0-8 7-3 9 4 1 7-2 5-5" fill="none" stroke="#1F5135" stroke-width="2" stroke-linecap="round"></path><path d="M28 13q9-9 18-4-7 7-18 4z" fill="#9E1B1B"></path><path d="M13 28q-9 9-4 18 7-7 4-18z" fill="#9E1B1B"></path><circle cx="58" cy="6" r="2.8" fill="#C8961E"></circle><circle cx="6" cy="58" r="2.8" fill="#C8961E"></circle></svg>
+<svg viewBox="0 0 64 64" aria-hidden="true" style="position: absolute; bottom: 18px; right: 18px; width: clamp(34px, 6vw, 64px); height: clamp(34px, 6vw, 64px); transform: scale(-1, -1)"><path d="M6 58V22C6 12 12 6 22 6h36" fill="none" stroke="#1F5135" stroke-width="2.5" stroke-linecap="round"></path><path d="M22 14c-6 0-8 7-3 9 4 1 7-2 5-5" fill="none" stroke="#1F5135" stroke-width="2" stroke-linecap="round"></path><path d="M28 13q9-9 18-4-7 7-18 4z" fill="#9E1B1B"></path><path d="M13 28q-9 9-4 18 7-7 4-18z" fill="#9E1B1B"></path><circle cx="58" cy="6" r="2.8" fill="#C8961E"></circle><circle cx="6" cy="58" r="2.8" fill="#C8961E"></circle></svg>
+<div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px">
+<span style="display: inline-block; background: #9E1B1B; color: #FFF4D6; font-family: 'Yellowtail', cursive; font-size: clamp(26px, 3.8vw, 38px); line-height: 1; padding: 8px 46px 12px; clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 50%, 100% 100%, 0 100%, 20px 50%)">Agencia Oficial</span>
+<span style="font-family: 'Rye', Georgia, serif; font-size: clamp(34px, 8.6vw, 98px); line-height: 1.05; letter-spacing: 0.02em; color: #9E1B1B; text-shadow: 0.02em 0.02em 0 #C8961E, 0.04em 0.04em 0 #C8961E, 0.06em 0.06em 0 #141210, 0.08em 0.08em 0 #141210; padding-bottom: 0.08em">JUAN MOLINA</span>
+<div aria-hidden="true" style="display: flex; align-items: center; gap: 12px; width: min(420px, 80%)">
+<span style="flex: 1 1 auto; height: 2px; background: #1F5135"></span>
+<span style="flex: 0 0 auto; width: 10px; height: 10px; background: #9E1B1B; border: 2px solid #C8961E; transform: rotate(45deg)"></span>
+<span style="flex: 1 1 auto; height: 2px; background: #1F5135"></span>
+</div>
+<span style="font-size: clamp(13px, 1.6vw, 17px); font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #1F5135">Lotería de la Provincia · Legajo N° 723484</span>
+</div>
+</div>
+</sc-if>
+</div>
+<div id="contacto" style="max-width: 1100px; margin: 0 auto; padding: 0 20px 18px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px">
+<a href="https://www.google.com/maps/search/?api=1&amp;query=Juan+Molina+256+Bahia+Blanca" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 16px; border-radius: 999px; background: rgba(0,0,0,0.22); color: #FFFFFF; font-size: 16px; font-weight: 700; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E3B341" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+Juan Molina 256
+</a>
+<span style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 16px; border-radius: 999px; background: rgba(0,0,0,0.22); color: #FFFFFF; font-size: 16px; font-weight: 700">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E3B341" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+Lun a Vie 9 a 14 y 17 a 20 · Sáb 9 a 14
+</span>
+<a href="https://wa.me/5492914357210" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 16px; border-radius: 999px; background: rgba(0,0,0,0.22); color: #FFFFFF; font-size: 16px; font-weight: 700; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E3B341" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+WhatsApp 291 435-7210
+</a>
+</div>
+</header>
+
+<section style="background: {{primary}}; color: #FFFFFF">
+<div style="max-width: 1100px; margin: 0 auto; padding: 48px 20px 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 40px">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<span style="font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #E3B341">Desde 1972 en el barrio</span>
+<h1 style="margin: 0; font-size: clamp(40px, 7vw, 68px); line-height: 1.02; font-weight: 800">Más de 50 años juntos</h1>
+<p style="margin: 0; font-size: 21px; max-width: 560px; color: #FFFFFF">Somos Agencia Oficial Juan Molina, nos ubicamos en Juan Molina 256. Tres generaciones de vecinos jugando sus números con nosotros, con la misma atención de siempre.</p>
+<a href="#jugada" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 26px; border-radius: 12px; background: #E3B341; color: #17211B; font-size: 19px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M8 8h8M8 12h8M8 16h5"></path></svg>
+Armá tu jugada
+</a>
+</div>
+<div style="flex: 1 1 260px; display: flex; justify-content: center">
+<div style="position: relative; width: 260px; height: 320px">
+<svg width="260" height="320" viewBox="0 0 260 320" aria-hidden="true" style="position: absolute; left: 0; top: 0; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.35))">
+<defs>
+<linearGradient id="oro" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#FFF1B0"></stop>
+<stop offset="0.28" stop-color="#E9C155"></stop>
+<stop offset="0.55" stop-color="#B8862A"></stop>
+<stop offset="0.8" stop-color="#F2D27A"></stop>
+<stop offset="1" stop-color="#9A6A14"></stop>
+</linearGradient>
+<linearGradient id="oroInterior" x1="1" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#F6DA86"></stop>
+<stop offset="0.5" stop-color="#D9AE45"></stop>
+<stop offset="1" stop-color="#F3D47C"></stop>
+</linearGradient>
+<linearGradient id="cinta" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#A8202A"></stop>
+<stop offset="1" stop-color="#6E1219"></stop>
+</linearGradient>
+</defs>
+<polygon points="78,200 120,232 98,318 80,296 54,306" fill="url(#cinta)"></polygon>
+<polygon points="182,200 140,232 162,318 180,296 206,306" fill="url(#cinta)"></polygon>
+<polygon fill="url(#oro)" points="130.0,2.0 140.2,13.4 152.2,3.9 160.3,17.0 173.8,9.7 179.4,24.0 194.0,19.1 197.1,34.2 212.3,31.9 212.7,47.3 228.1,47.7 225.8,62.9 240.9,66.0 236.0,80.6 250.3,86.2 243.0,99.7 256.1,107.8 246.6,119.8 258.0,130.0 246.6,140.2 256.1,152.2 243.0,160.3 250.3,173.8 236.0,179.4 240.9,194.0 225.8,197.1 228.1,212.3 212.7,212.7 212.3,228.1 197.1,225.8 194.0,240.9 179.4,236.0 173.8,250.3 160.3,243.0 152.2,256.1 140.2,246.6 130.0,258.0 119.8,246.6 107.8,256.1 99.7,243.0 86.2,250.3 80.6,236.0 66.0,240.9 62.9,225.8 47.7,228.1 47.3,212.7 31.9,212.3 34.2,197.1 19.1,194.0 24.0,179.4 9.7,173.8 17.0,160.3 3.9,152.2 13.4,140.2 2.0,130.0 13.4,119.8 3.9,107.8 17.0,99.7 9.7,86.2 24.0,80.6 19.1,66.0 34.2,62.9 31.9,47.7 47.3,47.3 47.7,31.9 62.9,34.2 66.0,19.1 80.6,24.0 86.2,9.7 99.7,17.0 107.8,3.9 119.8,13.4"></polygon>
+<circle cx="130" cy="130" r="104" fill="url(#oroInterior)" stroke="#8A5E10" stroke-width="2"></circle>
+<circle cx="130" cy="130" r="95" fill="none" stroke="#8A5E10" stroke-width="1.5" stroke-dasharray="2 4"></circle>
+<path d="M44 96 A92 92 0 0 1 216 96" fill="none" stroke="#FFF6CC" stroke-width="3" stroke-linecap="round" opacity="0.6"></path>
+</svg>
+<div style="position: absolute; left: 0; top: 0; width: 260px; height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #4A2F06">
+<span style="font-size: 14px; font-weight: 800; letter-spacing: 0.16em">MÁS DE</span>
+<span style="font-size: 88px; font-weight: 800; line-height: 0.95; text-shadow: 0 1px 0 #FFF3C4, 0 -1px 0 #8A5E10">50</span>
+<span style="font-size: 14px; font-weight: 800; letter-spacing: 0.16em">AÑOS JUNTOS</span>
+<span style="font-size: 13px; font-weight: 700; padding-top: 6px; letter-spacing: 0.08em">1972 · 2026</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<sc-if value="{{navidadVigente}}" hint-placeholder-val="{{ true }}">
+<section id="navidad" style="background: #F6F7F2">
+<div style="max-width: 1100px; margin: 0 auto; padding: 40px 20px 8px">
+<div style="position: relative; overflow: hidden; border-radius: 22px; background: #A3101A; color: #FFF4D6; box-shadow: inset 0 0 0 3px #F2C14E, inset 0 0 0 9px #A3101A, inset 0 0 0 10px #F2C14E, 0 18px 36px rgba(80,0,0,0.28)">
+<svg viewBox="0 0 200 200" aria-hidden="true" style="position: absolute; right: -90px; top: -90px; width: 420px; height: 420px; opacity: 0.16"><g fill="#F2C14E"><polygon points="100,0 108,80 100,100 92,80"></polygon><polygon points="100,200 92,120 100,100 108,120"></polygon><polygon points="0,100 80,92 100,100 80,108"></polygon><polygon points="200,100 120,108 100,100 120,92"></polygon><polygon points="29,29 88,84 100,100 84,88"></polygon><polygon points="171,171 112,116 100,100 116,112"></polygon><polygon points="171,29 116,88 100,100 112,84"></polygon><polygon points="29,171 84,112 100,100 88,116"></polygon></g></svg>
+<svg viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 7%; bottom: 26px; width: 26px; height: 26px; opacity: 0.55"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z" fill="#F2C14E"></path></svg>
+<svg viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 46%; top: 30px; width: 16px; height: 16px; opacity: 0.5"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z" fill="#FFF4D6"></path></svg>
+<div style="position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 28px; padding: clamp(28px, 5vw, 52px) clamp(22px, 5vw, 52px)">
+<div style="flex: 999 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<span style="align-self: flex-start; background: #141210; color: #F2C14E; font-size: 14px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; padding: 7px 14px; border-radius: 6px">Sorteo Extraordinario · Lotería de la Provincia</span>
+<div style="display: flex; flex-direction: column">
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: clamp(76px, 15vw, 156px); line-height: 0.86; letter-spacing: 0.01em; text-transform: uppercase; color: #FFF4D6; text-shadow: 0.04em 0.04em 0 #141210">Gordo</span>
+<span style="font-family: 'Yellowtail', cursive; font-size: clamp(44px, 8vw, 82px); line-height: 1; color: #F2C14E; transform: rotate(-4deg); transform-origin: left center; padding-left: 0.2em; margin-top: -0.12em">de Navidad</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 4px 14px; padding-top: 6px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; width: 100%">Primer premio</span>
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: clamp(56px, 10vw, 104px); line-height: 0.9; color: #F2C14E; font-variant-numeric: tabular-nums">$1.400</span>
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: clamp(26px, 4vw, 40px); line-height: 1.1; text-transform: uppercase; padding-bottom: 0.15em">millones</span>
+</div>
+<p style="margin: 0; font-size: 19px; font-weight: 600">Más de $2.900 millones en premios, con terminaciones y aproximaciones.</p>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+Miércoles 23 de diciembre · 21 hs
+</div>
+</div>
+<div style="flex: 1 1 280px; position: relative; background: #FFF4D6; color: #17211B; border-radius: 16px; box-shadow: 0 12px 24px rgba(0,0,0,0.3); transform: rotate(1.5deg)">
+<div style="padding: 22px 24px 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px">
+<span style="font-size: 17px; font-weight: 700">Billete entero</span>
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 34px; line-height: 1.15; color: #A3101A; white-space: nowrap">$80.000</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px">
+<span style="font-size: 17px; font-weight: 700">Fracción <span style="font-weight: 500; color: #4A5650">(1 de 10)</span></span>
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 34px; line-height: 1.15; color: #A3101A; white-space: nowrap">$8.000</span>
+</div>
+</div>
+<div aria-hidden="true" style="position: relative; margin: 0 22px; border-top: 3px dashed #C9B98F">
+<span style="position: absolute; left: -36px; top: -15.5px; width: 28px; height: 28px; border-radius: 50%; background: #A3101A"></span>
+<span style="position: absolute; right: -36px; top: -15.5px; width: 28px; height: 28px; border-radius: 50%; background: #A3101A"></span>
+</div>
+<div style="padding: 18px 24px 24px; display: flex; flex-direction: column; gap: 14px; align-items: stretch; text-align: center">
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 40px; line-height: 1; text-transform: uppercase; color: #141210">{{navidadFaltan}}</span>
+<a href="https://wa.me/5492914357210?text=Hola!%20Quiero%20reservar%20un%20n%C3%BAmero%20del%20Gordo%20de%20Navidad" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 10px 18px; border-radius: 12px; background: #141210; color: #F2C14E; font-size: 19px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Reservá tu número
+</a>
+<span style="font-size: 15px; color: #4A5650">Elegís el número y te imprimimos el billete en el momento.</span>
+</div>
+</div>
+</div>
+<p style="position: relative; margin: 0; padding: 0 clamp(22px, 5vw, 52px) 26px; font-size: 14px; color: #FFE3C2">Se sortea en vivo por el canal oficial de YouTube de la Lotería. Controlá siempre tu billete con el extracto oficial.</p>
+</div>
+</div>
+</section>
+</sc-if>
+
+<section id="historia">
+<div style="max-width: 1100px; margin: 0 auto; padding: 40px 20px; display: flex; flex-direction: column; gap: 28px">
+<button type="button" onClick="{{toggleHistoria}}" aria-expanded="{{historiaAbierta}}" style="width: 100%; min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 24px; border-radius: 16px; border: 2px solid {{primary}}; background: #FFFFFF; color: {{primary}}; font-family: inherit; text-align: left; cursor: pointer">
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: clamp(24px, 4vw, 32px); font-weight: 800; line-height: 1.1">Nuestra historia</span>
+<span style="font-size: 16px; font-weight: 600; color: #4A5650">Más de 50 años en el barrio, desde 1972</span>
+</span>
+<span style="flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 800">
+{{historiaAccion}}
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{chevronRot}}; transition: transform 0.2s"><path d="M6 9l6 6 6-6"></path></svg>
+</span>
+</button>
+<sc-if value="{{historiaAbierta}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline">
+<span style="flex: 0 0 auto; min-width: 96px; padding: 6px 14px; border-radius: 8px; background: {{primary}}; color: #FFFFFF; font-weight: 800; font-size: 20px; text-align: center">1972</span>
+<p style="flex: 1 1 280px; margin: 0">Salvador Nóbile consiguió la habilitación de la Lotería para vender billetes y abrió la agencia en Juan Molina 270. Tres meses después obtuvo el permiso para tomar Prode, el juego que se había creado en noviembre de 1971, y fue una de las cinco primeras agencias de Bahía Blanca en tenerlo. Estuvo al frente durante 20 años.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline">
+<span style="flex: 0 0 auto; min-width: 96px; padding: 6px 14px; border-radius: 8px; background: {{primary}}; color: #FFFFFF; font-weight: 800; font-size: 20px; text-align: center">1982</span>
+<p style="flex: 1 1 280px; margin: 0">El 11 de abril de 1982 la agencia vendió un primer premio del Prode equivalente a 1.000.000 de dólares.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline">
+<span style="flex: 0 0 auto; min-width: 96px; padding: 6px 14px; border-radius: 8px; background: {{primary}}; color: #FFFFFF; font-weight: 800; font-size: 20px; text-align: center">1992</span>
+<p style="flex: 1 1 280px; margin: 0">Néstor tomó la posta y sigue al frente de la agencia hasta el día de hoy.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline">
+<span style="flex: 0 0 auto; min-width: 96px; padding: 6px 14px; border-radius: 8px; background: {{primary}}; color: #FFFFFF; font-weight: 800; font-size: 20px; text-align: center">2024</span>
+<p style="flex: 1 1 280px; margin: 0">El sábado 11 de mayo de 2024, una jugada de Quiniela Plus de $200 hecha en la agencia ganó $12.000.000.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline">
+<span style="flex: 0 0 auto; min-width: 96px; padding: 6px 14px; border-radius: 8px; background: {{primary}}; color: #FFFFFF; font-weight: 800; font-size: 20px; text-align: center">Hoy</span>
+<p style="flex: 1 1 280px; margin: 0">Desde entonces vendimos una innumerable cantidad de premios. Hoy, en Juan Molina 256, seguimos atendiendo a los vecinos de siempre y a los nuevos, con todos los juegos oficiales de la Provincia.</p>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<figure style="flex: 1 1 320px; margin: 0; display: flex; flex-direction: column; gap: 8px">
+<img src="/_blob/5521b360bce44fbd7eead1fb0e17b1d8" alt="Recorte de diario con la foto de Salvador Nóbile en la agencia y el título: Nuevamente el Prode quedó en Bahía Blanca" style="width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.18)">
+<figcaption style="font-size: 15px; color: #4A5650">Salvador en la agencia, en la tapa del diario: el Prode volvió a quedar en Bahía Blanca.</figcaption>
+</figure>
+<figure style="flex: 1 1 320px; margin: 0; display: flex; flex-direction: column; gap: 8px">
+<img src="/_blob/78b46bc219af206b95a1c69163566451" alt="Frente de la Agencia Juan Molina hoy, en Juan Molina 256, con el cartel de la Lotería de la Provincia, el del legajo 723484 y el de Quiniela" style="width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.18)">
+<figcaption style="font-size: 15px; color: #4A5650">La agencia hoy, en Juan Molina 256.</figcaption>
+</figure>
+<figure style="flex: 1 1 220px; max-width: 320px; margin: 0; display: flex; flex-direction: column; gap: 8px">
+<img src="/_blob/e4b1d7d36c8b84486a81d2329a561c8b" alt="La Agencia Juan Molina vista desde la vereda, con el cartel de Quiniela y la puerta celeste" style="width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.18)">
+<figcaption style="font-size: 15px; color: #4A5650">Desde la vereda.</figcaption>
+</figure>
+<figure style="flex: 1 1 220px; max-width: 320px; margin: 0; display: flex; flex-direction: column; gap: 8px">
+<img src="/_blob/32c11940537755223c2c269b3fad8307" alt="Ticket de Quiniela Plus del 11 de mayo de 2024, jugado en Juan Molina 256, con el comprobante de pago de un premio de 12 millones de pesos" style="width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.18)">
+<figcaption style="font-size: 15px; color: #4A5650">Quiniela Plus de mayo de 2024: una jugada de $200 que pagó $12.000.000.</figcaption>
+</figure>
+</div>
+</sc-if>
+<div id="suenos" style="display: flex; flex-direction: column; gap: 14px; padding-top: 12px">
+<button type="button" onClick="{{toggleSuenos}}" aria-expanded="{{suenosAbierta}}" style="width: 100%; min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 24px; border-radius: 16px; border: 2px solid {{primary}}; background: #FFFFFF; color: {{primary}}; font-family: inherit; text-align: left; cursor: pointer">
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: clamp(24px, 4vw, 32px); font-weight: 800; line-height: 1.1">Tabla de los sueños</span>
+<span style="font-size: 16px; font-weight: 600; color: #4A5650">¿Soñaste algo? Buscá qué número le corresponde, del 00 al 99.</span>
+</span>
+<span style="flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 800">
+{{suenosAccion}}
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{suenosRot}}; transition: transform 0.2s"><path d="M6 9l6 6 6-6"></path></svg>
+</span>
+</button>
+<sc-if value="{{suenosAbierta}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 15px; font-weight: 700; color: #4A5650">Buscá por número o por palabra
+<input type="search" placeholder="Ej: gato, 27" value="{{busqueda}}" onChange="{{buscar}}" style="width: 100%; max-width: 480px; min-height: 52px; box-sizing: border-box; padding: 0 16px; border-radius: 12px; border: 2px solid #9AA59E; background: #FFFFFF; font-family: inherit; font-size: 19px; color: #17211B">
+</label>
+<span aria-live="polite" style="font-size: 15px; font-weight: 700; color: #4A5650">{{resultadosTexto}}</span>
+<sc-if value="{{sinResultados}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 16px 18px; border-radius: 12px; background: #FFFFFF; border: 2px dashed #9AA59E; font-size: 17px; font-weight: 700; color: #4A5650">No encontramos ese sueño. Probá con otra palabra.</div>
+</sc-if>
+<div style="border: 2px solid {{primary}}; border-radius: 14px; overflow: hidden; background: {{primary}}">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 1px">
+<sc-for list="{{suenosLista}}" as="item" hint-placeholder-count="100">
+<div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: #FFFFFF; min-height: 44px">
+<span style="flex: 0 0 auto; min-width: 34px; font-size: 19px; font-weight: 800; color: {{primary}}; font-variant-numeric: tabular-nums">{{item.num}}</span>
+<span style="font-size: 17px; font-weight: 600; line-height: 1.25">{{item.texto}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<span style="font-size: 14px; color: #4A5650">Tabla tradicional de la quiniela porteña. Algunos significados cambian según la tabla que consultes.</span>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+
+<section id="juegos">
+<div style="max-width: 1100px; margin: 0 auto; padding: 44px 20px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 style="margin: 0; font-size: clamp(30px, 5vw, 42px); font-weight: 800; color: {{primary}}">Juegos que podés jugar acá</h2>
+<p style="margin: 0; color: #4A5650">Tocá un juego para ver cómo se juega.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; align-items: start">
+<sc-for list="{{juegos}}" as="item" hint-placeholder-count="6">
+<button type="button" onClick="{{item.toggle}}" aria-expanded="{{item.abierto}}" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 12px; border-radius: 14px; border: 2px solid {{item.borde}}; background: #FFFFFF; color: #17211B; font-family: inherit; text-align: center; cursor: pointer">
+<span style="height: 64px; width: 100%; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{item.tieneLogo}}" hint-placeholder-val="{{ true }}"><img src="{{item.logo}}" alt="{{item.alt}}" style="max-width: 100%; max-height: 64px; object-fit: contain"></sc-if>
+<sc-if value="{{item.sinLogo}}" hint-placeholder-val="{{ false }}"><span style="width: 100%; height: 64px; box-sizing: border-box; border: 2px dashed #9AA59E; border-radius: 10px; background: #ECEEE7; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #4A5650">[Logo {{item.nombre}}]</span></sc-if>
+</span>
+<span style="font-size: 20px; font-weight: 800; line-height: 1.15">{{item.nombre}}</span>
+<span style="font-size: 16px; font-weight: 800; color: #4A2F06; background: #FFF4D6; border: 1px solid #E3B341; border-radius: 999px; padding: 3px 12px">{{item.precio}}</span>
+<sc-if value="{{item.abierto}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 17px; line-height: 1.45; color: #4A5650; text-align: left">{{item.desc}}</span>
+</sc-if>
+<span style="font-size: 15px; font-weight: 700; color: {{primary}}">{{item.accion}}</span>
+</button>
+</sc-for>
+</div>
+<button type="button" onClick="{{toggleFormas}}" aria-expanded="{{formasAbierta}}" style="width: 100%; min-height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 22px; border-radius: 14px; border: 2px solid {{primary}}; background: #FFFFFF; color: {{primary}}; font-family: inherit; text-align: left; cursor: pointer">
+<span style="font-size: clamp(20px, 3vw, 24px); font-weight: 800; line-height: 1.15">Más formas de jugar a la Quiniela</span>
+<span style="flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 800">
+{{formasAccion}}
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{formasRot}}; transition: transform 0.2s"><path d="M6 9l6 6 6-6"></path></svg>
+</span>
+</button>
+<sc-if value="{{formasAbierta}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 240px; background: #FFFFFF; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px">
+<h4 style="margin: 0; font-size: 20px; font-weight: 800">Plus, Súper Plus y Chance Plus</h4>
+<p style="margin: 0; color: #4A5650">Con 8 números jugás las tres. Sale con la Nocturna. <strong style="color: #4A2F06">$1.000</strong></p>
+</div>
+<div style="flex: 1 1 240px; background: #FFFFFF; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px">
+<h4 style="margin: 0; font-size: 20px; font-weight: 800">Instantánea y Bailarina</h4>
+<p style="margin: 0; color: #4A5650">El resultado lo sabés en el momento.</p>
+</div>
+<div style="flex: 1 1 240px; background: #FFFFFF; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 6px">
+<h4 style="margin: 0; font-size: 20px; font-weight: 800">Extraordinaria</h4>
+<p style="margin: 0; color: #4A5650">Sorteos especiales en fechas que anuncia la Lotería.</p>
+</div>
+</div>
+</sc-if>
+</div>
+</section>
+
+<section id="hoy" style="background: #ECEEE7">
+<div style="max-width: 1100px; margin: 0 auto; padding: 64px 20px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: clamp(30px, 5vw, 42px); font-weight: 800; color: {{primary}}">Resultados de la Quiniela</h2>
+<p style="margin: 0; color: #4A5650">Quiniela de la Provincia: los 20 números de cada sorteo, tal como figuran en el extracto oficial de la Lotería de la Provincia de Buenos Aires.</p>
+</div>
+<div role="group" aria-label="Día de los resultados" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{resDias}}" as="item" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{item.on}}" onClick="{{item.pick}}" style="min-height: 48px; padding: 0 20px; border-radius: 999px; border: 2px solid {{primary}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">{{item.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+<span style="font-size: clamp(24px, 4vw, 32px); font-weight: 800; color: #17211B">{{resFecha}}</span>
+<sc-if value="{{resHayVivo}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: #9B1C1C; color: #FFFFFF; font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase"><span class="pal-guino" aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #FFFFFF"></span>En vivo</span>
+</sc-if>
+</div>
+<sc-if value="{{resSinSorteo}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 18px 20px; border-radius: 14px; background: #FFFFFF; border: 2px dashed #9AA59E; font-size: 18px; font-weight: 700; color: #4A5650">Hoy no hay sorteos de Quiniela. Mirá los del último día en "{{resAnteriorLabel}}".</div>
+</sc-if>
+<sc-if value="{{resConSorteo}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; align-items: start">
+<sc-for list="{{resCartas}}" as="item" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 18px; border-radius: 14px; background: {{item.fondo}}; border: 2px {{item.trazo}} {{item.borde}}">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+<span style="font-size: 20px; font-weight: 800; color: #17211B">{{item.nombre}}</span>
+<span style="font-size: 15px; font-weight: 700; color: #4A5650">{{item.hora}} hs</span>
+</div>
+<sc-if value="{{item.tieneNums}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 10px; background: {{primary}}; color: #FFFFFF">
+<span style="font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #E3B341">A la cabeza</span>
+<span style="font-size: 40px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums">{{item.cabeza}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; font-size: 16px">
+<sc-for list="{{item.resto}}" as="n" hint-placeholder-count="19">
+<div style="display: flex; gap: 6px; align-items: baseline; padding: 4px 6px; border-radius: 6px; background: #F6F7F2"><span style="font-size: 12px; color: #4A5650; min-width: 18px">{{n.pos}}</span><span style="font-weight: 700; font-variant-numeric: tabular-nums">{{n.num}}</span></div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{item.esVivo}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 16px; padding: 8px 0">
+<span aria-hidden="true" style="position: relative; flex: 0 0 auto; width: 64px; height: 64px; border-radius: 50%; background: #E3B341; display: flex; align-items: center; justify-content: center">
+<span class="pal-giro" style="position: absolute; inset: 6px; border-radius: 50%; border: 3px dashed #17211B"></span>
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 26px; color: #17211B">?</span>
+</span>
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 800; color: #9B1C1C; text-transform: uppercase"><span class="pal-guino" style="width: 10px; height: 10px; border-radius: 50%; background: #9B1C1C"></span>Sorteando</span>
+<span style="font-size: 16px; color: #4A5650">Los números aparecen acá apenas los tengamos.</span>
+</span>
+</div>
+</sc-if>
+<sc-if value="{{item.esGris}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 17px; font-weight: 600; color: #4A5650">{{item.aviso}}</span>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</section>
+
+<section id="sorteos" style="background: #ECEEE7">
+<div style="max-width: 1100px; margin: 0 auto; padding: 64px 20px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: clamp(30px, 5vw, 42px); font-weight: 800; color: {{primary}}">Sorteos de la Quiniela</h2>
+<p style="margin: 0; color: #4A5650">De lunes a sábado. Horarios de referencia: la Lotería puede modificarlos.</p>
+</div>
+<div style="max-width: 600px; width: 100%; background: #FFFFFF; border-radius: 16px; border: 2px solid {{primary}}; overflow: hidden">
+<table style="width: 100%; border-collapse: collapse; font-size: 20px">
+<thead>
+<tr style="background: {{primary}}; color: #FFFFFF">
+<th scope="col" style="text-align: left; padding: 14px 20px; font-size: 16px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase">Sorteo</th>
+<th scope="col" style="text-align: right; padding: 14px 20px; font-size: 16px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase">Horario</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid #DDE2DA"><td style="padding: 14px 20px; font-weight: 700">La Previa</td><td style="padding: 14px 20px; text-align: right; font-weight: 800; color: {{primary}}; font-variant-numeric: tabular-nums">10:15 hs</td></tr>
+<tr style="border-bottom: 1px solid #DDE2DA"><td style="padding: 14px 20px; font-weight: 700">Primera</td><td style="padding: 14px 20px; text-align: right; font-weight: 800; color: {{primary}}; font-variant-numeric: tabular-nums">12:00 hs</td></tr>
+<tr style="border-bottom: 1px solid #DDE2DA"><td style="padding: 14px 20px; font-weight: 700">Matutina</td><td style="padding: 14px 20px; text-align: right; font-weight: 800; color: {{primary}}; font-variant-numeric: tabular-nums">15:00 hs</td></tr>
+<tr style="border-bottom: 1px solid #DDE2DA"><td style="padding: 14px 20px; font-weight: 700">Vespertina</td><td style="padding: 14px 20px; text-align: right; font-weight: 800; color: {{primary}}; font-variant-numeric: tabular-nums">18:00 hs</td></tr>
+<tr><td style="padding: 14px 20px; font-weight: 700">Nocturna</td><td style="padding: 14px 20px; text-align: right; font-weight: 800; color: {{primary}}; font-variant-numeric: tabular-nums">21:00 hs</td></tr>
+</tbody>
+</table>
+</div>
+<div style="max-width: 600px; display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 12px; background: #FFF4D6; border: 2px solid #E3B341">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5410" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+<span style="font-size: 18px; font-weight: 700; color: #4A2F06">El cierre de apuestas es 15 minutos antes de cada sorteo.</span>
+</div>
+</div>
+</section>
+
+<section id="palpito" style="background: #17211B; color: #FFFFFF">
+<div style="max-width: 1100px; margin: 0 auto; padding: 72px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 48px">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #E3B341">El pálpito de la agencia</span>
+<h2 style="margin: 0; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; font-weight: 800">¿No sabés qué jugarle a la Nocturna?</h2>
+<p style="margin: 0; font-size: 20px; color: #FFFFFF">Hay un número esperándote para el sorteo de las 21 hs. Tocá la bolilla y descubrilo.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px">
+<button type="button" onClick="{{revelar}}" aria-disabled="{{palGirando}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 24px; border-radius: 12px; border: 0; background: #E3B341; color: #17211B; font-family: inherit; font-weight: 800; font-size: 18px; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.1 5.4L20 9.3l-4.5 3.9L17 19l-5-3-5 3 1.5-5.8L4 9.3l5.9-.9z"></path></svg>
+{{palBoton}}
+</button>
+<sc-if value="{{palListo}}" hint-placeholder-val="{{ false }}">
+<a href="#jugada" onClick="{{jugarPalpito}}" class="pal-pop" style="display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 24px; border-radius: 12px; border: 2px solid #E3B341; color: #FFFFFF; font-weight: 800; font-size: 18px; text-decoration: none">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+Jugarlo
+</a>
+</sc-if>
+</div>
+<p style="margin: 0; font-size: 15px; color: #C9D1CC">Es un número al azar, sin ninguna garantía. Jugá con responsabilidad.</p>
+</div>
+<div style="flex: 0 0 auto; display: flex; justify-content: center">
+<button type="button" onClick="{{revelar}}" aria-disabled="{{palGirando}}" aria-label="{{palAria}}" class="{{palClaseBola}}" style="position: relative; width: 280px; height: 280px; padding: 0; border: 0; border-radius: 50%; background: #E3B341; display: flex; align-items: center; justify-content: center; font-family: inherit; cursor: pointer; box-shadow: 0 0 0 10px rgba(227,179,65,0.25), 0 0 0 22px rgba(227,179,65,0.12)">
+<span aria-hidden="true" class="{{palClaseAro}}" style="position: absolute; left: 22px; top: 22px; width: 236px; height: 236px; box-sizing: border-box; border-radius: 50%; border: 3px dashed #1F5135; z-index: 2"></span>
+<span style="width: 236px; height: 236px; border-radius: 50%; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #17211B; box-sizing: border-box; overflow: hidden">
+<span style="font-size: 14px; font-weight: 800; letter-spacing: 0.14em; color: #1F5135">NOCTURNA</span>
+<sc-if value="{{palOculto}}" hint-placeholder-val="{{ true }}">
+<span class="pal-guino" style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 110px; line-height: 1; color: #1F5135">?</span>
+</sc-if>
+<sc-if value="{{palGirando}}" hint-placeholder-val="{{ false }}">
+<span class="pal-temblor" style="font-size: 104px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; color: #7A5410">{{palGiro}}</span>
+</sc-if>
+<sc-if value="{{palListo}}" hint-placeholder-val="{{ false }}">
+<span class="pal-pop" aria-live="polite" style="font-size: 104px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; color: #17211B">{{palpito}}</span>
+</sc-if>
+<span style="font-size: 14px; font-weight: 800; letter-spacing: 0.14em; color: #1F5135">{{palPie}}</span>
+</span>
+<sc-if value="{{palListo}}" hint-placeholder-val="{{ false }}">
+<span aria-hidden="true" class="pal-brillo" style="position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 6px #F2C14E, 0 0 50px 10px rgba(242,193,78,0.7)"></span>
+<sc-for list="{{chispas}}" as="item" hint-placeholder-count="10">
+<span aria-hidden="true" style="position: absolute; left: 132px; top: 132px; width: 16px; height: 16px; transform: rotate({{item.rot}})">
+<span class="pal-chispa" style="display: block; width: 16px; height: 16px; animation-delay: {{item.delay}}">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z" fill="{{item.color}}"></path></svg>
+</span>
+</span>
+</sc-for>
+</sc-if>
+</button>
+</div>
+</div>
+</section>
+
+<section id="jugada" style="background: #FFFFFF">
+<div style="max-width: 1100px; margin: 0 auto; padding: 64px 20px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7A5410">Desde tu celu</span>
+<h2 style="margin: 0; font-size: clamp(30px, 5vw, 42px); font-weight: 800; color: {{primary}}">Armá tu jugada</h2>
+<p style="margin: 0; color: #4A5650; max-width: 640px">Jugá sin moverte de tu casa. Elegí tus números y mandanos la jugada por WhatsApp: te confirmamos el total, transferís al alias de la agencia, la cargamos en el sistema y te enviamos tu ticket.</p>
+</div>
+<div role="group" aria-label="Qué querés jugar" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{modos}}" as="item" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{item.on}}" onClick="{{item.pick}}" style="min-height: 48px; padding: 0 22px; border-radius: 999px; border: 2px solid {{primary}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 18px; font-weight: 800; cursor: pointer">{{item.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 999 1 520px; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px; background: #F6F7F2; border: 2px solid #DDE2DA; border-radius: 18px; padding: clamp(16px, 3vw, 28px)">
+
+<sc-if value="{{esQuiniela}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">1 · Tus números</span>
+<sc-for list="{{lineas}}" as="item" hint-placeholder-count="1">
+<div style="display: flex; flex-direction: column; gap: 6px; background: #FFFFFF; border-radius: 14px; padding: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px">
+<label style="flex: 1 1 110px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A5650">Número
+<input type="text" inputmode="numeric" maxlength="4" placeholder="Ej: 27" value="{{item.num}}" onChange="{{item.setNum}}" style="width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; font-family: inherit; font-size: 26px; font-weight: 800; letter-spacing: 0.08em; color: #17211B; font-variant-numeric: tabular-nums">
+</label>
+<label style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A5650">Ubicación
+<select value="{{item.ubic}}" onChange="{{item.setUbic}}" style="width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 12px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; font-family: inherit; font-size: 18px; font-weight: 700; color: #17211B">
+<option value="1">A la cabeza</option>
+<option value="5">A los 5</option>
+<option value="10">A los 10</option>
+<option value="20">A los 20</option>
+</select>
+</label>
+<label style="flex: 1 1 120px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A5650">Importe ($)
+<input type="text" inputmode="numeric" maxlength="7" placeholder="100" value="{{item.imp}}" onChange="{{item.setImp}}" style="width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; font-family: inherit; font-size: 22px; font-weight: 800; color: #17211B; font-variant-numeric: tabular-nums">
+</label>
+<sc-if value="{{item.puedeQuitar}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{item.quitar}}" aria-label="Quitar este número" style="flex: 0 0 auto; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; border: 2px solid #DDE2DA; background: #FFFFFF; color: #7A2E2E; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</sc-if>
+</div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 17px; font-weight: 700; color: #17211B; cursor: pointer">
+<input type="checkbox" checked="{{item.redo}}" onChange="{{item.toggleRedo}}" style="flex: 0 0 auto; width: 24px; height: 24px; margin: 0; accent-color: #1F5135">
+Redoblona
+</label>
+<sc-if value="{{item.redo}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px; border-top: 2px dashed #DDE2DA; padding-top: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px">
+<label style="flex: 0 1 140px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A5650">Segundo número
+<input type="text" inputmode="numeric" maxlength="2" placeholder="Ej: 45" value="{{item.num2}}" onChange="{{item.setNum2}}" style="width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; font-family: inherit; font-size: 26px; font-weight: 800; letter-spacing: 0.08em; color: #17211B; font-variant-numeric: tabular-nums">
+</label>
+<div role="group" aria-label="Ubicación del segundo número" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{item.ubic2Chips}}" as="op" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{op.on}}" aria-disabled="{{op.off}}" onClick="{{op.toggle}}" style="min-height: 52px; padding: 0 14px; border-radius: 10px; border: 2px solid {{op.borde}}; background: {{op.bg}}; color: {{op.fg}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: {{op.cursor}}">{{op.label}}</button>
+</sc-for>
+</div>
+</div>
+<span style="font-size: 15px; color: #4A5650">Manda la primera ubicación: el segundo número va a la misma o a una más amplia. Los dos, de 2 cifras.</span>
+</div>
+</sc-if>
+<sc-if value="{{item.tieneError}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; font-weight: 700; color: #9B1C1C">{{item.error}}</span>
+</sc-if>
+</div>
+</sc-for>
+<sc-if value="{{puedeAgregar}}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{agregarLinea}}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 2px dashed {{primary}}; background: transparent; color: {{primary}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+Agregar otro número
+</button>
+</sc-if>
+<span style="font-size: 15px; color: #4A5650">De 1 a 4 cifras. Mínimo $100 por número.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">2 · Quinielas</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{quinielasChips}}" as="item" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{item.on}}" aria-disabled="{{item.off}}" onClick="{{item.toggle}}" style="min-height: 46px; padding: 0 16px; border-radius: 10px; border: 2px solid {{item.borde}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: {{item.cursor}}">{{item.label}}</button>
+</sc-for>
+</div>
+<span style="font-size: 15px; color: #4A5650">Montevideo sortea solo en la Matutina y la Nocturna.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">3 · Sorteos</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{sorteosChips}}" as="item" hint-placeholder-count="5">
+<button type="button" aria-pressed="{{item.on}}" aria-disabled="{{item.off}}" onClick="{{item.toggle}}" style="min-height: 46px; padding: 0 16px; border-radius: 10px; border: 2px solid {{item.borde}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: {{item.cursor}}">{{item.label}}</button>
+</sc-for>
+</div>
+<span style="font-size: 15px; color: #4A5650">Cada sorteo cierra 15 minutos antes. Los que ya cerraron no se pueden elegir.</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{esOtros}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">1 · Elegí el juego</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{otrosChips}}" as="item" hint-placeholder-count="5">
+<button type="button" aria-pressed="{{item.on}}" onClick="{{item.pick}}" style="min-height: 46px; padding: 0 16px; border-radius: 10px; border: 2px solid {{item.borde}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">{{item.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">2 · {{otroConsigna}}</span>
+<span aria-live="polite" style="font-size: 17px; font-weight: 800; color: {{primary}}">{{otroContador}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 6px">
+<sc-for list="{{bolillas}}" as="item" hint-placeholder-count="46">
+<button type="button" aria-pressed="{{item.on}}" aria-label="Número {{item.label}}" onClick="{{item.toggle}}" style="height: 50px; border-radius: 50%; border: 2px solid {{item.borde}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; cursor: pointer">{{item.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" onClick="{{alAzar}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 0; background: #E3B341; color: #17211B; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"></circle><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle></svg>
+Completar al azar
+</button>
+<button type="button" onClick="{{borrarBolillas}}" style="min-height: 48px; padding: 0 18px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; color: #17211B; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Borrar</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; background: #FFF4D6; border: 2px solid #E3B341; border-radius: 18px">
+<div style="padding: 22px 22px 18px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #7A5410">Tu boleta · {{boletaJuego}}</span>
+<sc-for list="{{resumen}}" as="item" hint-placeholder-count="1">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+<span style="font-size: 19px; font-weight: 800; font-variant-numeric: tabular-nums">{{item.izq}}</span>
+<span style="font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums">{{item.der}}</span>
+</div>
+</sc-for>
+<sc-if value="{{resumenVacio}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 17px; color: #4A2F06">Todavía no elegiste ningún número.</span>
+</sc-if>
+<span style="font-size: 16px; line-height: 1.45; color: #4A2F06; white-space: pre-line">{{detalle}}</span>
+</div>
+<div aria-hidden="true" style="margin: 0 18px; border-top: 3px dashed #C9B98F"></div>
+<div style="padding: 16px 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+<span style="font-size: 18px; font-weight: 800">Total</span>
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 40px; line-height: 1; color: #17211B; font-variant-numeric: tabular-nums">{{totalTexto}}</span>
+</div>
+<div style="padding: 0 22px 22px; display: flex; flex-direction: column; gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06">Tu nombre
+<input type="text" autocomplete="name" placeholder="Para identificar tu jugada" value="{{nombre}}" onChange="{{setNombre}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B">
+</label>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06">Tu celular
+<input type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Ej: 291 4357210" value="{{celular}}" onChange="{{setCelular}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B; font-variant-numeric: tabular-nums">
+<span style="font-size: 14px; font-weight: 500">Con código de área, sin 0 ni 15. Ahí te mandamos la foto de tu ticket.</span>
+</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 17px; font-weight: 700; color: #17211B; cursor: pointer">
+<input type="checkbox" checked="{{mayor}}" onChange="{{toggleMayor}}" style="flex: 0 0 auto; width: 24px; height: 24px; margin: 0; accent-color: #1F5135">
+Soy mayor de 18 años
+</label>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 14px; background: #FFFFFF; border: 2px solid #C9B98F">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #7A5410">Pagá por transferencia</span>
+<span style="font-size: 15px; font-weight: 700; color: #4A2F06">Alias · Banco Provincia</span>
+<span style="font-size: 24px; font-weight: 800; color: #17211B; word-break: break-all; user-select: all">Agencia.juan.molina</span>
+<span style="font-size: 16px; font-weight: 700; color: #4A2F06">A nombre de Néstor Osvaldo Nóbile</span>
+<button type="button" onClick="{{copiarCbu}}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid #17211B; background: #FFFFFF; color: #17211B; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+<span aria-live="polite">{{copiarTexto}}</span>
+</button>
+<span style="font-size: 14px; color: #4A2F06">Esperá que te confirmemos el total por WhatsApp, transferí a este alias y mandanos el comprobante.</span>
+</div>
+<div role="note" style="display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 14px; background: #FFFFFF; border: 2px solid #1F5135">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F5135" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>
+<span style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #1F5135">Cuidate de las estafas</span>
+<span style="font-size: 16px; line-height: 1.4; color: #17211B">Solo tomamos jugadas por el WhatsApp <strong>291 435-7210</strong> y solo cobramos al alias <strong>Agencia.juan.molina</strong>, a nombre de <strong>Néstor Osvaldo Nóbile</strong>. Si te escriben de otro número o te pasan otra cuenta, no es la agencia: no transfieras y avisanos.</span>
+</span>
+</div>
+<div role="note" style="display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 14px; background: #9B1C1C; color: #FFFFFF; box-shadow: 0 0 0 3px #F2C14E">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 3L2 21h20L12 3z"></path><path d="M12 10v5M12 18h.01"></path></svg>
+<span style="font-size: 18px; line-height: 1.3; font-weight: 800; text-transform: uppercase">Revisá tu apuesta. <span style="color: #F2C14E">No se aceptan reclamos pasados 3 minutos del envío de la foto.</span></span>
+</div>
+<sc-if value="{{listo}}" hint-placeholder-val="{{ false }}">
+<a href="{{waUrl}}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 18px; border-radius: 12px; background: #17211B; color: #E3B341; font-size: 19px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Enviar jugada por WhatsApp
+</a>
+</sc-if>
+<sc-if value="{{noListo}}" hint-placeholder-val="{{ true }}">
+<button type="button" disabled style="min-height: 56px; border-radius: 12px; border: 0; background: #DDD3B5; color: #4A2F06; font-family: inherit; font-size: 19px; font-weight: 800">Enviar jugada por WhatsApp</button>
+<span aria-live="polite" style="font-size: 16px; font-weight: 700; color: #7A2E2E">{{falta}}</span>
+</sc-if>
+<span style="font-size: 14px; line-height: 1.45; color: #4A2F06">El total final lo confirma la agencia al cargar la jugada en el sistema. Tu jugada queda hecha cuando se acredita el pago y te mandamos el ticket. Mandala con tiempo: el cierre es 15 minutos antes de cada sorteo.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="resultados" style="background: {{primary}}; color: #FFFFFF">
+<div style="max-width: 1100px; margin: 0 auto; padding: 56px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: clamp(28px, 4.5vw, 38px); font-weight: 800">Resultados oficiales</h2>
+<p style="margin: 0; color: #FFFFFF">Los extractos los publica la Lotería de la Provincia de Buenos Aires. Controlá siempre tu ticket con el resultado oficial.</p>
+</div>
+<a href="https://www.loteria.gba.gob.ar" target="_blank" rel="noopener noreferrer" style="flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 56px; padding: 0 28px; border-radius: 12px; background: #E3B341; color: #17211B; font-weight: 800; font-size: 19px; text-decoration: none">Ver resultados oficiales</a>
+</div>
+</section>
+
+<section id="premios">
+<div style="max-width: 1100px; margin: 0 auto; padding: 64px 20px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: clamp(30px, 5vw, 42px); font-weight: 800; color: {{primary}}">Cobro de premios</h2>
+<p style="margin: 0; max-width: 760px">Si tu ticket salió premiado, acercate con el ticket original en buen estado.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 300px; background: #FFFFFF; border-radius: 14px; border: 2px solid {{primary}}; padding: 22px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5650">Quiniela</span>
+<span style="font-size: clamp(24px, 4vw, 30px); font-weight: 800; line-height: 1.15; color: {{primary}}">Sin tope: cobrás todo acá</span>
+<p style="margin: 0; color: #4A5650">El premio de la Quiniela se paga en la agencia, sea el monto que sea.</p>
+</div>
+<div style="flex: 1 1 300px; background: #FFFFFF; border-radius: 14px; border: 2px solid #E3B341; padding: 22px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #4A5650">Juegos con pozo</span>
+<span style="font-size: clamp(24px, 4vw, 30px); font-weight: 800; line-height: 1.15; color: #4A2F06">Hasta $5 millones, acá</span>
+<p style="margin: 0; color: #4A5650">Quini 6, Loto Plus, Loto 5, Brinco y Telekino: los premios de hasta $5.000.000 se cobran en la agencia. Si es más, se cobra donde indique el organismo y te orientamos en el trámite.</p>
+</div>
+</div>
+</div>
+</section>
+
+<footer style="background: #17211B; color: #FFFFFF">
+<div style="max-width: 1100px; margin: 0 auto; padding: 40px 20px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<span style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; border: 3px solid #E3B341; color: #E3B341; font-weight: 800; font-size: 18px">+18</span>
+<span style="flex: 1 1 260px; font-weight: 700">Prohibida la venta de juegos de azar a menores de 18 años.</span>
+</div>
+<p style="margin: 0; color: #FFFFFF">Jugá con responsabilidad. Si el juego dejó de ser un juego, el Programa de Prevención y Asistencia al Juego Compulsivo de la Provincia atiende gratis las 24 horas, los 365 días: <a href="tel:08004444000" style="color: #E3B341; font-weight: 700">0800-444-4000</a>.</p>
+<p style="margin: 0; font-size: 15px; color: #C9D1CC">Agencia Juan Molina · Agencia oficial de la Lotería de la Provincia de Buenos Aires · Legajo N° 723484. Este sitio pertenece a la agencia y no es la página oficial de la Lotería.</p>
+<p style="margin: 0; font-size: 15px; color: #C9D1CC">Privacidad: esta página no guarda tus datos. Tu nombre, tu celular y tu jugada viajan solo en el mensaje de WhatsApp que vos mandás a la agencia.</p>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"cartel":{"editor":"enum","options":["A","B"],"default":"B"},"primary":{"editor":"color","default":"#1F5135","options":["#1F5135","#1E3A5F","#7A2E2E"]},"$preview":{"width":1280,"height":9000}}'>
+class Component extends DCLogic {
+roll() {
+return String(Math.floor(Math.random() * 100)).padStart(2, '0');
+}
+revelarPalpito() {
+if (this.state && this.state.palFase === 'girando') { return; }
+(this._palTimers || []).forEach((t) => clearTimeout(t));
+this._palTimers = [];
+const final = this.roll();
+this.setState({ palFase: 'girando', palGiro: this.roll() });
+let espera = 0;
+for (let i = 1; i <= 14; i++) {
+espera += 60 + i * 8;
+this._palTimers.push(setTimeout(() => this.setState({ palGiro: this.roll() }), espera));
+}
+this._palTimers.push(setTimeout(() => this.setState({ palFase: 'listo', palpito: final }), espera + 250));
+}
+componentDidMount() {
+this._reloj = setInterval(() => this.forceUpdate(), 30000);
+}
+componentWillUnmount() {
+clearInterval(this._reloj);
+(this._palTimers || []).forEach((t) => clearTimeout(t));
+}
+extractos() {
+// Extractos oficiales de la Quiniela de la Provincia: fecha (AAAA-MM-DD) → sorteo → 20 números en orden.
+// EXTRACTOS-INICIO
+return {"2026-11-18": {"Previa": ["9189", "9296", "3233", "8456", "9418", "1177", "2421", "3266", "3486", "1596", "0425", "4620", "5544", "9294", "0721", "3036", "1966", "4689", "9314", "5921"]}, "2026-11-19": {"Previa": ["9112", "3598", "7577", "4714", "9794", "3806", "9269", "1771", "8762", "2136", "1023", "4100", "8257", "5158", "4855", "8561", "9633", "2038", "3757", "5231"]}};
+// EXTRACTOS-FIN
+}
+renderVals() {
+const palFase = (this.state && this.state.palFase) || 'oculto';
+const palpito = (this.state && this.state.palpito) || '';
+const historiaAbierta = !!(this.state && this.state.historia);
+const suenosAbierta = !!(this.state && this.state.suenos);
+const formasAbierta = !!(this.state && this.state.formas);
+const primaryColor = this.props.primary ?? '#1F5135';
+const juegoAbierto = (this.state && this.state.juego) || null;
+const juegos = [
+{ id: 'quiniela', nombre: 'Quiniela', alt: 'Logo de Quiniela Provincia', logo: '/_blob/1eaa86e4f0958a687ada4d1d8bfbaa74', precio: 'Mínimo $100', desc: 'Elegís un número de una a cuatro cifras y en qué ubicación lo jugás. No tiene tope, y el premio lo cobrás acá, sea el monto que sea.' },
+{ id: 'quinielaplus', nombre: 'Quiniela Plus', alt: 'Logo de Quiniela Plus', logo: '/_blob/1c401ef6e4a330b0b1bf6c9a65bf78e0', precio: '$1.000', desc: 'Elegís 8 números del 00 al 99 y con la misma jugada participás en Plus, Súper Plus y Chance Plus. Sale con la Nocturna.' },
+{ id: 'quini6', nombre: 'Quini 6', alt: 'Logo de Quini 6', logo: '/_blob/b20f732583dfe194410f704213ff52f4', precio: '$4.000', desc: 'Elegís 6 números del 00 al 45 y participás en cuatro modalidades. Sortea miércoles y domingos.' },
+{ id: 'telekino', nombre: 'Telekino', alt: 'Logo de Telekino', logo: '/_blob/2d741827ba390ca0d4bd1f272136809e', precio: '$3.000', desc: 'Elegís 15 números del 1 al 25. Sortea los domingos.' },
+{ id: 'loto', nombre: 'Loto Plus', alt: 'Logo de Loto Plus', logo: '/_blob/e8d6929e0267dd31b867c6e64d45ac60', precio: '$4.000', desc: 'Elegís 6 números y además se sortea un Número Plus: si lo acertás, triplica el monto de tu premio. Sortea miércoles y sábados.' },
+{ id: 'loto5', nombre: 'Loto 5', alt: 'Logo de Loto 5 Plus', logo: '/_blob/af293c20bb4201518503264f34c9da9f', precio: '$1.000', desc: 'Elegís 5 números del 0 al 36 y salen con ruleta. Un sorteo por semana.' },
+{ id: 'brinco', nombre: 'Brinco', alt: 'Logo de Brinco', logo: '/_blob/f2fc58adfd7af40eea242bd952abe0ae', precio: '$1.500', desc: 'Elegís 6 números del 00 al 39. Sortea los domingos a las 21 hs.' }
+].map((j) => {
+const abierto = juegoAbierto === j.id;
+return Object.assign({}, j, {
+abierto: abierto,
+tieneLogo: !!j.logo,
+sinLogo: !j.logo,
+borde: abierto ? primaryColor : '#FFFFFF',
+accion: abierto ? 'Cerrar' : 'Ver cómo se juega',
+toggle: () => this.setState({ juego: abierto ? null : j.id })
+});
+});
+const suenos = ['Los huevos','El agua','El niño','San Cono','La cama','El gato','El perro','El revólver','El incendio','El arroyo','El cañón','El minero','El soldado','La yeta','El borracho','La niña bonita','El anillo','La desgracia','La sangre','El pescado','La fiesta','La mujer','El loco','El cocinero','El caballo','La gallina','La misa','El peine','Los cerros','San Pedro','Santa Rosa','La luz','El dinero','Cristo','La cabeza','El pajarito','La castaña','El dentista','Las piedras','La lluvia','El cura','El cuchillo','Las zapatillas','El balcón','La cárcel','El vino','Los tomates','El muerto','El muerto que habla','La carne','El pan','El serrucho','Madre e hijo','El barco','La vaca','La música','La caída','El jorobado','El ahogado','Las plantas','La Virgen','La escopeta','La inundación','El casamiento','El llanto','El cazador','Las lombrices','La mordida','Los sobrinos','Los vicios','El muerto sueño','Excremento','La sorpresa','El hospital','Personas negras','Los besos','Las llamas','Las piernas de mujer','La ramera','El ladrón','La bocha','Las flores','La pelea','El mal tiempo','La iglesia','La linterna','El humo','Los piojos','El Papa','La rata','El miedo','El excusado','El médico','El enamorado','El cementerio','Los anteojos','El marido','La mesa','La lavandera','Los hermanos'];
+const norm = (s) => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+const busqueda = (this.state && this.state.q) || '';
+const q = norm(busqueda);
+const suenosLista = suenos.map((t, i) => ({ num: String(i).padStart(2, '0'), texto: t })).filter((it) => !q || it.num.indexOf(q) !== -1 || norm(it.texto).indexOf(q) !== -1);
+const st = this.state || {};
+const fmt = (n) => '$' + Number(n).toLocaleString('es-AR');
+const dos = (n) => String(n).padStart(2, '0');
+const chip = (on) => ({ on: on, bg: on ? primaryColor : '#FFFFFF', fg: on ? '#FFFFFF' : '#17211B', borde: on ? primaryColor : '#9AA59E' });
+const modo = st.modo || 'quiniela';
+const modos = [{ id: 'quiniela', label: 'Quiniela' }, { id: 'otros', label: 'Quini 6, Loto y otros' }].map((m) => Object.assign({}, m, chip(modo === m.id), {
+bg: modo === m.id ? primaryColor : '#FFFFFF', fg: modo === m.id ? '#FFFFFF' : primaryColor,
+pick: () => this.setState({ modo: m.id })
+}));
+const ubicTxt = { '1': 'a la cabeza', '5': 'a los 5', '10': 'a los 10', '20': 'a los 20' };
+const lineasSt = st.lineas || [{ id: 1, num: '', ubic: '1', imp: '' }];
+const setLinea = (id, campo, valor) => this.setState({ lineas: lineasSt.map((l) => l.id === id ? Object.assign({}, l, { [campo]: valor }) : l) });
+// Redoblona: manda la primera ubicación. La segunda va a los 5, 10 o 20 y nunca es menor que la primera.
+const ubic2Min = (u) => String(Math.max(5, parseInt(u, 10) || 1));
+const ubic2De = (l) => (parseInt(l.ubic2, 10) || 0) >= parseInt(ubic2Min(l.ubic), 10) ? l.ubic2 : ubic2Min(l.ubic);
+const setCampos = (id, cambios) => this.setState({ lineas: lineasSt.map((x) => x.id === id ? Object.assign({}, x, cambios) : x) });
+const lineas = lineasSt.map((l) => {
+const imp = parseInt(l.imp, 10) || 0;
+const redo = !!l.redo;
+const num2 = l.num2 || '';
+const ubic2 = ubic2De(l);
+const errRedo = redo && ((l.num && l.num.length !== 2) || (num2 && num2.length !== 2)) ? 'En la redoblona van números de 2 cifras (del 00 al 99).' : '';
+const error = errRedo || ((l.num && l.imp && imp < 100) ? 'El mínimo es $100.' : '');
+const numOk = redo ? (/^\d{2}$/.test(l.num) && /^\d{2}$/.test(num2)) : /^\d{1,4}$/.test(l.num);
+return Object.assign({}, l, {
+redo: redo,
+num2: num2,
+valida: numOk && imp >= 100,
+impNum: imp,
+txt: redo ? (l.num + ' ' + ubicTxt[l.ubic] + ' + ' + num2 + ' ' + ubicTxt[ubic2] + ' (redoblona)') : (l.num + ' ' + ubicTxt[l.ubic]),
+error: error,
+tieneError: !!error,
+puedeQuitar: lineasSt.length > 1,
+toggleRedo: () => setCampos(l.id, { redo: !redo, ubic2: ubic2 }),
+setNum2: (e) => setLinea(l.id, 'num2', e.target.value.replace(/\D/g, '').slice(0, 2)),
+ubic2Chips: ['5', '10', '20'].map((u) => parseInt(u, 10) < parseInt(ubic2Min(l.ubic), 10) ? { label: 'A los ' + u, on: false, off: true, cursor: 'not-allowed', bg: '#ECEEE7', fg: '#4A5650', borde: '#DDE2DA', toggle: () => {} } : Object.assign({ label: 'A los ' + u, off: false, cursor: 'pointer' }, chip(u === ubic2), {
+toggle: () => setLinea(l.id, 'ubic2', u)
+})),
+setNum: (e) => setLinea(l.id, 'num', e.target.value.replace(/\D/g, '').slice(0, 4)),
+setUbic: (e) => { const u = e.target.value; setCampos(l.id, { ubic: u, ubic2: ubic2De({ ubic: u, ubic2: l.ubic2 }) }); },
+setImp: (e) => setLinea(l.id, 'imp', e.target.value.replace(/\D/g, '').slice(0, 7)),
+quitar: () => this.setState({ lineas: lineasSt.filter((x) => x.id !== l.id) })
+});
+});
+const nuevaLinea = (num) => ({ id: Date.now() + Math.random(), num: num || '', ubic: '1', imp: '' });
+const partes = {};
+new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date()).forEach((x) => { partes[x.type] = x.value; });
+const hoyKey = partes.year + '-' + partes.month + '-' + partes.day;
+const minAhora = (parseInt(partes.hour, 10) % 24) * 60 + parseInt(partes.minute, 10);
+const diaSemana = (k) => new Date(k + 'T12:00:00Z').getUTCDay();
+const hoySortea = diaSemana(hoyKey) !== 0;
+const chipOff = (label) => ({ label: label, on: false, off: true, cursor: 'not-allowed', bg: '#ECEEE7', fg: '#4A5650', borde: '#DDE2DA', toggle: () => {} });
+// Cierre de apuestas: 15 minutos antes de cada sorteo (minutos desde las 00:00).
+const CIERRES = { 'La Previa': 600, 'Primera': 705, 'Matutina': 885, 'Vespertina': 1065, 'Nocturna': 1245 };
+const sorteosNom = ['La Previa', 'Primera', 'Matutina', 'Vespertina', 'Nocturna'];
+const sorteoAbierto = (n) => hoySortea && minAhora < CIERRES[n];
+const sorteosAbiertos = sorteosNom.filter(sorteoAbierto);
+const sorteosSel = (st.sorteos || []).filter(sorteoAbierto);
+const sorteosChips = sorteosNom.map((n) => !sorteoAbierto(n) ? chipOff(n + ' · cerró') : Object.assign({ label: n, off: false, cursor: 'pointer' }, chip(sorteosSel.indexOf(n) !== -1), {
+toggle: () => this.setState({ sorteos: sorteosSel.indexOf(n) !== -1 ? sorteosSel.filter((x) => x !== n) : sorteosNom.filter((x) => x === n || sorteosSel.indexOf(x) !== -1) })
+}));
+// Quinielas que no sortean en todos los turnos.
+const SOLO_EN = { 'Montevideo': ['Matutina', 'Nocturna'] };
+const juegaEn = (q, s) => !SOLO_EN[q] || SOLO_EN[q].indexOf(s) !== -1;
+const baseSorteos = sorteosSel.length ? sorteosSel : sorteosAbiertos;
+const quinielaDisponible = (q) => !baseSorteos.length || baseSorteos.some((s) => juegaEn(q, s));
+const quinielasNom = ['Provincia', 'Ciudad', 'Córdoba', 'Santa Fe', 'Entre Ríos', 'Montevideo'];
+const quinielasSel = (st.quinielas || ['Provincia']).filter(quinielaDisponible);
+const quinielasChips = quinielasNom.map((n) => !quinielaDisponible(n) ? chipOff(n + ' · no sortea') : Object.assign({ label: n, off: false, cursor: 'pointer' }, chip(quinielasSel.indexOf(n) !== -1), {
+toggle: () => this.setState({ quinielas: quinielasSel.indexOf(n) !== -1 ? quinielasSel.filter((x) => x !== n) : quinielasNom.filter((x) => x === n || quinielasSel.indexOf(x) !== -1) })
+}));
+const jugadas = sorteosSel.map((s) => ({ s: s, qs: quinielasSel.filter((q) => juegaEn(q, s)) }));
+const sorteoVacio = jugadas.find((x) => !x.qs.length);
+const jugadasOk = jugadas.filter((x) => x.qs.length);
+const precioDe = (id) => { const j = juegos.find((x) => x.id === id); return j ? (parseInt(String(j.precio).replace(/\D/g, ''), 10) || 0) : 0; };
+const otros = [
+{ id: 'quini6', nombre: 'Quini 6', cant: 6, min: 0, max: 45 },
+{ id: 'loto', nombre: 'Loto Plus', cant: 6, min: 0, max: 41 },
+{ id: 'telekino', nombre: 'Telekino', cant: 15, min: 1, max: 25 },
+{ id: 'brinco', nombre: 'Brinco', cant: 6, min: 0, max: 39 },
+{ id: 'loto5', nombre: 'Loto 5', cant: 5, min: 0, max: 36 },
+{ id: 'quinielaplus', nombre: 'Quiniela Plus', cant: 8, min: 0, max: 99 }
+];
+const otroId = st.otro || 'quini6';
+const otro = otros.find((o) => o.id === otroId) || otros[0];
+const otroPrecio = precioDe(otro.id);
+const sel = (st.sel || []).filter((n) => n >= otro.min && n <= otro.max);
+const otrosChips = otros.map((o) => Object.assign({ label: o.nombre }, chip(o.id === otro.id), {
+pick: () => this.setState({ otro: o.id, sel: [] })
+}));
+const bolillas = [];
+for (let n = otro.min; n <= otro.max; n++) {
+const on = sel.indexOf(n) !== -1;
+bolillas.push(Object.assign({ label: dos(n) }, chip(on), {
+toggle: () => {
+if (on) { this.setState({ sel: sel.filter((x) => x !== n) }); }
+else if (sel.length < otro.cant) { this.setState({ sel: sel.concat([n]) }); }
+}
+}));
+}
+const alAzar = () => {
+const lista = sel.slice();
+while (lista.length < otro.cant) {
+const n = otro.min + Math.floor(Math.random() * (otro.max - otro.min + 1));
+if (lista.indexOf(n) === -1) { lista.push(n); }
+}
+this.setState({ sel: lista });
+};
+const selOrden = sel.slice().sort((a, b) => a - b);
+const esQuiniela = modo === 'quiniela';
+const validas = lineas.filter((l) => l.valida);
+const nombre = st.nombre || '';
+const mayor = !!st.mayor;
+let resumen, detalle, total, falta, boletaJuego, msg;
+if (esQuiniela) {
+boletaJuego = 'Quiniela';
+// Cada número se juega una vez por cada par sorteo + quiniela que realmente sortea.
+const mult = jugadasOk.reduce((a, x) => a + x.qs.length, 0);
+total = validas.reduce((a, l) => a + l.impNum, 0) * mult;
+resumen = validas.map((l) => ({ izq: l.txt, der: fmt(l.impNum) }));
+const porSorteo = jugadasOk.map((x) => x.s + ': ' + x.qs.join(', ')).join('\n');
+detalle = jugadasOk.length ? (porSorteo + (mult > 1 && validas.length ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '')) : ((sorteosSel.length ? '' : 'Sin sorteo elegido\n') + (quinielasSel.length ? '' : 'Sin quiniela elegida'));
+falta = !hoySortea ? 'Los domingos no hay sorteos de Quiniela.' : (!sorteosAbiertos.length ? 'Ya cerraron todos los sorteos de hoy. Mañana podés mandar tu jugada.' : (!validas.length ? 'Cargá al menos un número con su importe.' : (!quinielasSel.length ? 'Elegí al menos una quiniela.' : (!sorteosSel.length ? 'Elegí al menos un sorteo.' : (sorteoVacio ? ('En ' + sorteoVacio.s + ' no sortea ninguna de las quinielas que elegiste. Sacá ese sorteo o sumá otra quiniela.') : '')))));
+msg = 'Hola! Quiero hacer esta jugada de Quiniela:\n' + validas.map((l) => '• ' + l.txt + ' — ' + fmt(l.impNum)).join('\n') + '\n' + porSorteo + (mult > 1 ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '');
+} else {
+boletaJuego = otro.nombre;
+total = sel.length === otro.cant ? otroPrecio : 0;
+resumen = sel.length ? [{ izq: otro.nombre, der: otroPrecio ? fmt(otroPrecio) : 'Consultá' }] : [];
+detalle = sel.length ? 'Números: ' + selOrden.map(dos).join(' - ') : '';
+falta = sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '';
+msg = 'Hola! Quiero hacer esta jugada de ' + otro.nombre + ':\nNúmeros: ' + selOrden.map(dos).join(' - ');
+}
+if (!falta && !nombre.trim()) { falta = 'Poné tu nombre así identificamos tu jugada.'; }
+const celular = st.celular || '';
+const celDig = celular.replace(/\D/g, '').replace(/^0/, '');
+if (!falta && !celDig) { falta = 'Poné tu celular así te mandamos la foto del ticket.'; }
+if (!falta && celDig.length !== 10) { falta = 'Revisá el celular: código de área y número, sin 0 ni 15 (10 números).'; }
+if (!falta && !mayor) { falta = 'Confirmá que sos mayor de 18 años.'; }
+msg += '\nTotal: ' + fmt(total) + '\nNombre: ' + nombre.trim() + '\nCelular: ' + celDig + '\nEspero que me confirmen el total para transferir.';
+const ext = this.extractos();
+const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const fechaLarga = (k) => { const d = diaSemana(k); const p = k.split('-'); const t = DIAS[d] + ' ' + parseInt(p[2], 10) + ' de ' + MESES[parseInt(p[1], 10) - 1]; return t.charAt(0).toUpperCase() + t.slice(1); };
+const fechaCorta = (k) => { const p = k.split('-'); return DIAS[diaSemana(k)] + ' ' + parseInt(p[2], 10) + '/' + parseInt(p[1], 10); };
+const anteriorKey = Object.keys(ext).filter((k) => k < hoyKey).sort().pop() || null;
+const SORTEOS = [{ nombre: 'Previa', largo: 'La Previa', hora: '10:15', min: 615 }, { nombre: 'Primera', largo: 'Primera', hora: '12:00', min: 720 }, { nombre: 'Matutina', largo: 'Matutina', hora: '15:00', min: 900 }, { nombre: 'Vespertina', largo: 'Vespertina', hora: '18:00', min: 1080 }, { nombre: 'Nocturna', largo: 'Nocturna', hora: '21:00', min: 1260 }];
+const resTab = st.resTab || (hoySortea || !anteriorKey ? 'hoy' : 'anterior');
+const verKey = resTab === 'anterior' && anteriorKey ? anteriorKey : hoyKey;
+const esHoy = verKey === hoyKey;
+const datosDia = ext[verKey] || {};
+const estado = (so) => {
+const d = datosDia[so.nombre];
+if (d) { return 'listo'; }
+if (!esHoy) { return 'sin'; }
+if (minAhora < so.min) { return 'futuro'; }
+if (minAhora < so.min + 45) { return 'vivo'; }
+return 'camino';
+};
+const resDias = [{ id: 'hoy', label: 'Hoy · ' + fechaCorta(hoyKey) }].concat(anteriorKey ? [{ id: 'anterior', label: 'Anterior · ' + fechaCorta(anteriorKey) }] : []).map((d) => {
+const on = (d.id === 'anterior' ? !esHoy : esHoy);
+return { label: d.label, on: on, bg: on ? primaryColor : '#FFFFFF', fg: on ? '#FFFFFF' : primaryColor, pick: () => this.setState({ resTab: d.id }) };
+});
+const resCartas = SORTEOS.map((so) => {
+const e = estado(so);
+const d = datosDia[so.nombre];
+const nums = e === 'listo' && Array.isArray(d) ? d : [];
+const vivo = e === 'vivo';
+return {
+nombre: so.largo, hora: so.hora,
+tieneNums: nums.length > 0,
+cabeza: nums[0] || '',
+resto: nums.slice(1).map((n, i) => ({ pos: i + 2, num: n })),
+esVivo: vivo,
+esGris: !nums.length && !vivo,
+aviso: e === 'futuro' ? ('Sortea a las ' + so.hora + ' hs.') : (e === 'camino' ? 'Ya se sorteó. Los números aparecen apenas los publique la Lotería.' : 'Sin datos de este sorteo.'),
+fondo: nums.length || vivo ? '#FFFFFF' : 'transparent',
+trazo: nums.length || vivo ? 'solid' : 'dashed',
+borde: vivo ? '#9B1C1C' : (nums.length ? '#1F5135' : '#9AA59E')
+};
+});
+const resSinSorteo = esHoy && !hoySortea;
+const ahoraNav = Date.now();
+const diasNav = Math.ceil((new Date('2026-12-23T00:00:00-03:00').getTime() - ahoraNav) / 86400000);
+return {
+navidadVigente: ahoraNav < new Date('2026-12-23T21:00:00-03:00').getTime(),
+navidadFaltan: diasNav > 1 ? ('Faltan ' + diasNav + ' días') : (diasNav === 1 ? 'Falta 1 día' : '¡Es hoy a las 21!'),
+primary: this.props.primary ?? '#1F5135',
+cartelA: (this.props.cartel ?? 'B') === 'A',
+cartelB: (this.props.cartel ?? 'B') !== 'A',
+palpito: palpito,
+historiaAbierta: historiaAbierta,
+historiaAccion: historiaAbierta ? 'Cerrar' : 'Leer',
+chevronRot: historiaAbierta ? 'rotate(180deg)' : 'rotate(0deg)',
+toggleHistoria: () => this.setState({ historia: !historiaAbierta }),
+suenosAbierta: suenosAbierta,
+suenosAccion: suenosAbierta ? 'Cerrar' : 'Abrir',
+suenosRot: suenosAbierta ? 'rotate(180deg)' : 'rotate(0deg)',
+toggleSuenos: () => this.setState({ suenos: !suenosAbierta }),
+formasAbierta: formasAbierta,
+formasAccion: formasAbierta ? 'Cerrar' : 'Ver',
+formasRot: formasAbierta ? 'rotate(180deg)' : 'rotate(0deg)',
+toggleFormas: () => this.setState({ formas: !formasAbierta }),
+juegos: juegos,
+resDias: resDias,
+resFecha: fechaLarga(verKey),
+resHayVivo: esHoy && hoySortea && SORTEOS.some((so) => estado(so) === 'vivo'),
+resSinSorteo: resSinSorteo,
+resConSorteo: !resSinSorteo,
+resAnteriorLabel: anteriorKey ? 'Anterior · ' + fechaCorta(anteriorKey) : 'Anterior',
+resCartas: resCartas,
+modos: modos,
+esQuiniela: esQuiniela,
+esOtros: !esQuiniela,
+lineas: lineas,
+puedeAgregar: lineasSt.length < 8,
+agregarLinea: () => this.setState({ lineas: lineasSt.concat([nuevaLinea()]) }),
+sorteosChips: sorteosChips,
+quinielasChips: quinielasChips,
+otrosChips: otrosChips,
+otroConsigna: 'Elegí ' + otro.cant + ' números del ' + dos(otro.min) + ' al ' + dos(otro.max),
+otroContador: sel.length + ' de ' + otro.cant,
+bolillas: bolillas,
+alAzar: alAzar,
+borrarBolillas: () => this.setState({ sel: [] }),
+boletaJuego: boletaJuego,
+resumen: resumen,
+resumenVacio: resumen.length === 0,
+detalle: detalle,
+totalTexto: fmt(total),
+nombre: nombre,
+setNombre: (e) => this.setState({ nombre: e.target.value.replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ' .-]/g, '').replace(/\s{2,}/g, ' ').slice(0, 40) }),
+copiarTexto: st.copiado === true ? '¡Alias copiado!' : (st.copiado === 'error' ? 'Mantené apretado el alias para copiarlo' : 'Copiar alias'),
+copiarCbu: () => {
+const ok = () => this.setState({ copiado: true });
+const no = () => this.setState({ copiado: 'error' });
+try { navigator.clipboard.writeText('Agencia.juan.molina').then(ok, no); } catch (e) { no(); }
+},
+celular: celular,
+setCelular: (e) => this.setState({ celular: e.target.value.replace(/[^\d\s-]/g, '').slice(0, 16) }),
+mayor: mayor,
+toggleMayor: () => this.setState({ mayor: !mayor }),
+listo: !falta,
+noListo: !!falta,
+falta: falta,
+waUrl: 'https://wa.me/5492914357210?text=' + encodeURIComponent(msg),
+jugarPalpito: () => {
+const vacia = lineasSt.find((l) => !l.num);
+const nuevas = vacia ? lineasSt.map((l) => l === vacia ? Object.assign({}, l, { num: palpito, ubic: '1' }) : l) : lineasSt.concat([nuevaLinea(palpito)]);
+this.setState({ modo: 'quiniela', lineas: nuevas.slice(0, 8), sorteos: (sorteosSel.indexOf('Nocturna') !== -1 || !sorteoAbierto('Nocturna')) ? sorteosSel : sorteosSel.concat(['Nocturna']) });
+},
+busqueda: busqueda,
+buscar: (e) => this.setState({ q: e.target.value }),
+suenosLista: suenosLista,
+sinResultados: suenosLista.length === 0,
+resultadosTexto: q ? (suenosLista.length + (suenosLista.length === 1 ? ' resultado' : ' resultados')) : 'Los 100 números, del 00 al 99',
+revelar: () => this.revelarPalpito(),
+palOculto: palFase === 'oculto',
+palGirando: palFase === 'girando',
+palListo: palFase === 'listo',
+palGiro: (this.state && this.state.palGiro) || '00',
+palBoton: palFase === 'oculto' ? 'Descubrí tu pálpito' : (palFase === 'girando' ? 'Girando…' : 'Otro pálpito'),
+palPie: palFase === 'oculto' ? 'TOCÁ Y DESCUBRILO' : (palFase === 'girando' ? 'SE VIENE…' : 'A LA CABEZA'),
+palAria: palFase === 'listo' ? ('Tu pálpito es el ' + palpito + '. Tocá para pedir otro.') : 'Descubrí tu pálpito para la Nocturna',
+palClaseBola: palFase === 'oculto' ? 'pal-latido' : '',
+palClaseAro: palFase === 'girando' ? 'pal-giro' : '',
+chispas: [0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((a, i) => ({ rot: a + 'deg', delay: (i % 3) * 60 + 'ms', color: i % 2 ? '#F2C14E' : '#FFF4D6' }))
+};
+}
+}
+</script>
+</body>
+</html>

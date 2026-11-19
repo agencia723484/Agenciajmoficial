@@ -1,0 +1,43 @@
+name: Cargar un sorteo a mano
+# Plan B por si el robot no puede leer la página de la Lotería.
+# En GitHub: Actions → "Cargar un sorteo a mano" → Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      fecha:
+        description: 'Fecha del sorteo (AAAA-MM-DD). Vacío = hoy'
+        required: false
+      sorteo:
+        description: 'Sorteo'
+        required: true
+        type: choice
+        options: [Previa, Primera, Matutina, Vespertina, Nocturna]
+      numeros:
+        description: 'Los 20 números en orden, separados por espacio o coma (el primero es la cabeza)'
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: resultados
+  cancel-in-progress: false
+jobs:
+  cargar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cargar el sorteo
+        env:
+          FECHA: ${{ inputs.fecha }}
+          SORTEO: ${{ inputs.sorteo }}
+          NUMEROS: ${{ inputs.numeros }}
+        run: python3 scripts/cargar_a_mano.py
+      - name: Rearmar y guardar
+        run: |
+          python3 scripts/construir.py
+          git config user.name "carga-manual"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/extractos.json app.js
+          git commit -m "Carga manual: $SORTEO" || exit 0
+          git push
+        env:
+          SORTEO: ${{ inputs.sorteo }}
