@@ -1,7 +1,7 @@
 # Agencia Oficial Juan Molina
 
 Página web de la Agencia Oficial Juan Molina (Lotería de la Provincia, legajo 723484),
-Juan Molina 256, Bahía Blanca. Se publica en **https://agenciajmoficial.com.ar**.
+Juan Molina 256, Bahía Blanca. Se publica en **https://agenciajmoficial.com.ar** (cuando el dominio esté delegado; mientras tanto en agencia723484.github.io/Agenciajmoficial).
 
 ## Cómo está armada
 
