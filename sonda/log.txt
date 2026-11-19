@@ -1,0 +1,8 @@
+1 200 78314 https://loteria.gba.gob.ar/ <- https://www.loteria.gba.gob.ar/
+2 200 4823082 https://loteria.gba.gob.ar/index.php/resultados <- https://www.loteria.gba.gob.ar/index.php/resultados
+3 404 24642 https://loteria.gba.gob.ar/index.php/resultados/quiniela <- https://www.loteria.gba.gob.ar/index.php/resultados/quiniela
+4 200 422442 https://www.lanacion.com.ar/loterias/ <- https://www.lanacion.com.ar/loterias/
+5 200 414227 https://www.lanacion.com.ar/loterias/quiniela-provincia/ <- https://www.lanacion.com.ar/loterias/quiniela-provincia/
+6 200 116773 https://www.ruta1000.com.ar/index2008.php?Resultado_sorteo=QUINIELA_PROVINCIA <- https://www.ruta1000.com.ar/index2008.php?Resultado_sorteo=QUINIELA_PROVINCIA
+7 404 3753 https://quinieleando.com.ar/quinielas/provincia <- https://quinieleando.com.ar/quinielas/provincia
+8 200 71828 https://www.jugandoonline.com.ar/rHome.aspx <- https://www.jugandoonline.com.ar/
