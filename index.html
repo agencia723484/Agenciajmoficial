@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Agencia Oficial Juan Molina · Lotería de la Provincia · Bahía Blanca</title>
 <meta name="description" content="Agencia oficial de la Lotería de la Provincia en Juan Molina 256, Bahía Blanca, desde 1972. Quiniela, Quini 6, Loto, Telekino y Brinco. Armá tu jugada y mandala por WhatsApp.">
 <meta name="theme-color" content="#1F5135">
@@ -446,8 +448,8 @@ Reservá tu número
 <div style="max-width: 1100px; margin: 0 auto; padding: 72px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 48px">
 <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
 <span style="font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #E3B341">El pálpito de la agencia</span>
-<h2 style="margin: 0; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; font-weight: 800">¿No sabés qué jugarle a la Nocturna?</h2>
-<p style="margin: 0; font-size: 20px; color: #FFFFFF">Hay un número esperándote para el sorteo de las 21 hs. Tocá la bolilla y descubrilo.</p>
+<h2 style="margin: 0; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; font-weight: 800">¿No sabés qué jugar?</h2>
+<p style="margin: 0; font-size: 20px; color: #FFFFFF">Hay un número esperándote. Tocá la bolilla y descubrilo.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 4px">
 <button type="button" onClick="{{revelar}}" aria-disabled="{{palGirando}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 24px; border-radius: 12px; border: 0; background: #E3B341; color: #17211B; font-family: inherit; font-weight: 800; font-size: 18px; cursor: pointer">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.1 5.4L20 9.3l-4.5 3.9L17 19l-5-3-5 3 1.5-5.8L4 9.3l5.9-.9z"></path></svg>
@@ -466,9 +468,8 @@ Jugarlo
 <button type="button" onClick="{{revelar}}" aria-disabled="{{palGirando}}" aria-label="{{palAria}}" class="{{palClaseBola}}" style="position: relative; width: 280px; height: 280px; padding: 0; border: 0; border-radius: 50%; background: #E3B341; display: flex; align-items: center; justify-content: center; font-family: inherit; cursor: pointer; box-shadow: 0 0 0 10px rgba(227,179,65,0.25), 0 0 0 22px rgba(227,179,65,0.12)">
 <span aria-hidden="true" class="{{palClaseAro}}" style="position: absolute; left: 22px; top: 22px; width: 236px; height: 236px; box-sizing: border-box; border-radius: 50%; border: 3px dashed #1F5135; z-index: 2"></span>
 <span style="width: 236px; height: 236px; border-radius: 50%; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #17211B; box-sizing: border-box; overflow: hidden">
-<span style="font-size: 14px; font-weight: 800; letter-spacing: 0.14em; color: #1F5135">NOCTURNA</span>
 <sc-if value="{{palOculto}}" hint-placeholder-val="{{ true }}">
-<span class="pal-guino" style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 110px; line-height: 1; color: #1F5135">?</span>
+<span class="pal-guino" style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 140px; line-height: 1; color: #1F5135">?</span>
 </sc-if>
 <sc-if value="{{palGirando}}" hint-placeholder-val="{{ false }}">
 <span class="pal-temblor" style="font-size: 104px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; color: #7A5410">{{palGiro}}</span>
@@ -499,6 +500,13 @@ Jugarlo
 <span style="font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #7A5410">Desde tu celu</span>
 <h2 style="margin: 0; font-size: clamp(30px, 5vw, 42px); font-weight: 800; color: {{primary}}">Armá tu jugada</h2>
 <p style="margin: 0; color: #4A5650; max-width: 640px">Jugá sin moverte de tu casa. Elegí tus números y mandanos la jugada por WhatsApp: te confirmamos el total, transferís al alias de la agencia, la cargamos en el sistema y te enviamos tu ticket.</p>
+</div>
+<div role="alert" style="display: flex; gap: 14px; align-items: center; padding: clamp(16px, 3vw, 22px) clamp(16px, 3vw, 26px); border-radius: 16px; background: #17211B; border: 4px solid #F2C14E; box-shadow: 0 8px 20px rgba(0,0,0,0.18)">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z"></path><path d="M9 7h6M9 11h6M9 15h4"></path></svg>
+<span style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: clamp(22px, 4.2vw, 30px); line-height: 1.15; font-weight: 800; text-transform: uppercase; color: #F2C14E">{{avisoComprobante.principal}}</span>
+<span style="font-size: clamp(17px, 2.6vw, 20px); line-height: 1.35; font-weight: 700; color: #FFFFFF">{{avisoComprobante.apoyo}}</span>
+</span>
 </div>
 <div role="group" aria-label="Qué querés jugar" style="display: flex; flex-wrap: wrap; gap: 8px">
 <sc-for list="{{modos}}" as="item" hint-placeholder-count="2">
@@ -640,6 +648,10 @@ Completar al azar
 <span style="font-size: 18px; font-weight: 800">Total</span>
 <span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 40px; line-height: 1; color: #17211B; font-variant-numeric: tabular-nums">{{totalTexto}}</span>
 </div>
+<div role="note" style="margin: 0 18px 18px; display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: #17211B; border: 2px solid #F2C14E">
+<span style="font-size: 17px; line-height: 1.25; font-weight: 800; text-transform: uppercase; color: #F2C14E">{{avisoComprobante.principal}}</span>
+<span style="font-size: 15px; line-height: 1.35; font-weight: 700; color: #FFFFFF">{{avisoComprobante.apoyo}}</span>
+</div>
 <div style="padding: 0 22px 22px; display: flex; flex-direction: column; gap: 12px">
 <label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06">Tu nombre
 <input type="text" autocomplete="name" placeholder="Para identificar tu jugada" value="{{nombre}}" onChange="{{setNombre}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B">
@@ -662,6 +674,10 @@ Soy mayor de 18 años
 <span aria-live="polite">{{copiarTexto}}</span>
 </button>
 <span style="font-size: 14px; color: #4A2F06">Esperá que te confirmemos el total por WhatsApp, transferí a este alias y mandanos el comprobante.</span>
+<span role="note" style="display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: #17211B; border: 2px solid #F2C14E">
+<span style="font-size: 17px; line-height: 1.25; font-weight: 800; text-transform: uppercase; color: #F2C14E">{{avisoComprobante.principal}}</span>
+<span style="font-size: 15px; line-height: 1.35; font-weight: 700; color: #FFFFFF">{{avisoComprobante.apoyo}}</span>
+</span>
 </div>
 <div role="note" style="display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: 14px; background: #FFFFFF; border: 2px solid #1F5135">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F5135" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>

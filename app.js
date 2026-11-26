@@ -1,4 +1,9 @@
 /* Lógica de la página (copiada tal cual del diseño) + carga de resultados. */
+// AVISO DEL COMPROBANTE: el texto se cambia SOLO acá y se actualiza en todos los lugares de la página y en el mensaje de WhatsApp.
+const AVISO_COMPROBANTE = {
+principal: 'Sin comprobante, tu jugada NO se carga.',
+apoyo: 'Enviá tu comprobante apenas te confirmemos el monto.'
+};
 class Component extends DCLogic {
 roll() {
 return String(Math.floor(Math.random() * 100)).padStart(2, '0');
@@ -199,7 +204,7 @@ const celDig = celular.replace(/\D/g, '').replace(/^0/, '');
 if (!falta && !celDig) { falta = 'Poné tu celular así te mandamos la foto del ticket.'; }
 if (!falta && celDig.length !== 10) { falta = 'Revisá el celular: código de área y número, sin 0 ni 15 (10 números).'; }
 if (!falta && !mayor) { falta = 'Confirmá que sos mayor de 18 años.'; }
-msg += '\nTotal: ' + fmt(total) + '\nNombre: ' + nombre.trim() + '\nCelular: ' + celDig + '\nEspero que me confirmen el total para transferir.';
+msg += '\nTotal: ' + fmt(total) + '\nNombre: ' + nombre.trim() + '\nCelular: ' + celDig + '\nEspero que me confirmen el total para transferir.' + '\n\nIMPORTANTE: ' + AVISO_COMPROBANTE.principal + '\n' + AVISO_COMPROBANTE.apoyo;
 const ext = this.extractos();
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
@@ -245,6 +250,7 @@ const resSinSorteo = esHoy && !hoySortea;
 const ahoraNav = Date.now();
 const diasNav = Math.ceil((new Date('2026-12-23T00:00:00-03:00').getTime() - ahoraNav) / 86400000);
 return {
+avisoComprobante: AVISO_COMPROBANTE,
 navidadVigente: ahoraNav < new Date('2026-12-23T21:00:00-03:00').getTime(),
 navidadFaltan: diasNav > 1 ? ('Faltan ' + diasNav + ' días') : (diasNav === 1 ? 'Falta 1 día' : '¡Es hoy a las 21!'),
 primary: this.props.primary ?? '#1F5135',
@@ -309,7 +315,7 @@ waUrl: 'https://wa.me/5492914357210?text=' + encodeURIComponent(msg),
 jugarPalpito: () => {
 const vacia = lineasSt.find((l) => !l.num);
 const nuevas = vacia ? lineasSt.map((l) => l === vacia ? Object.assign({}, l, { num: palpito, ubic: '1' }) : l) : lineasSt.concat([nuevaLinea(palpito)]);
-this.setState({ modo: 'quiniela', lineas: nuevas.slice(0, 8), sorteos: (sorteosSel.indexOf('Nocturna') !== -1 || !sorteoAbierto('Nocturna')) ? sorteosSel : sorteosSel.concat(['Nocturna']) });
+this.setState({ modo: 'quiniela', lineas: nuevas.slice(0, 8) });
 },
 busqueda: busqueda,
 buscar: (e) => this.setState({ q: e.target.value }),
@@ -322,8 +328,8 @@ palGirando: palFase === 'girando',
 palListo: palFase === 'listo',
 palGiro: (this.state && this.state.palGiro) || '00',
 palBoton: palFase === 'oculto' ? 'Descubrí tu pálpito' : (palFase === 'girando' ? 'Girando…' : 'Otro pálpito'),
-palPie: palFase === 'oculto' ? 'TOCÁ Y DESCUBRILO' : (palFase === 'girando' ? 'SE VIENE…' : 'A LA CABEZA'),
-palAria: palFase === 'listo' ? ('Tu pálpito es el ' + palpito + '. Tocá para pedir otro.') : 'Descubrí tu pálpito para la Nocturna',
+palPie: palFase === 'oculto' ? 'Tocá y descubrilo' : (palFase === 'girando' ? 'SE VIENE…' : 'A LA CABEZA'),
+palAria: palFase === 'listo' ? ('Tu pálpito es el ' + palpito + '. Tocá para pedir otro.') : 'Descubrí tu pálpito',
 palClaseBola: palFase === 'oculto' ? 'pal-latido' : '',
 palClaseAro: palFase === 'girando' ? 'pal-giro' : '',
 chispas: [0, 36, 72, 108, 144, 180, 216, 252, 288, 324].map((a, i) => ({ rot: a + 'deg', delay: (i % 3) * 60 + 'ms', color: i % 2 ? '#F2C14E' : '#FFF4D6' }))
