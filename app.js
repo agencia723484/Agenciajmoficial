@@ -46,7 +46,7 @@ const juegos = [
 { id: 'quiniela', nombre: 'Quiniela', alt: 'Logo de Quiniela Provincia', logo: 'img/quiniela.png', precio: 'Mínimo $100', desc: 'Elegís un número de una a cuatro cifras y en qué ubicación lo jugás. No tiene tope, y el premio lo cobrás acá, sea el monto que sea.' },
 { id: 'quinielaplus', nombre: 'Quiniela Plus', alt: 'Logo de Quiniela Plus', logo: 'img/quiniela-plus.png', precio: '$1.000', desc: 'Elegís 8 números del 00 al 99 y con la misma jugada participás en Plus, Súper Plus y Chance Plus. Sale con la Nocturna.' },
 { id: 'quini6', nombre: 'Quini 6', alt: 'Logo de Quini 6', logo: 'img/quini6.png', precio: '$4.000', desc: 'Elegís 6 números del 00 al 45 y participás en cuatro modalidades. Sortea miércoles y domingos.' },
-{ id: 'telekino', nombre: 'Telekino', alt: 'Logo de Telekino', logo: 'img/telekino.png', precio: '$3.000', desc: 'Elegís 15 números del 1 al 25. Sortea los domingos.' },
+{ id: 'telekino', nombre: 'Telekino', alt: 'Logo de Telekino', logo: 'img/telekino.png', precio: '$3.000', desc: 'Elegís hasta 3 números del 1 al 25 y el resto sale al azar, o lo jugás todo al azar. Sortea los domingos.' },
 { id: 'loto', nombre: 'Loto Plus', alt: 'Logo de Loto Plus', logo: 'img/loto-plus.png', precio: '$4.000', desc: 'Elegís 6 números y además se sortea un Número Plus: si lo acertás, triplica el monto de tu premio. Sortea miércoles y sábados.' },
 { id: 'loto5', nombre: 'Loto 5', alt: 'Logo de Loto 5 Plus', logo: 'img/loto5.png', precio: '$1.000', desc: 'Elegís 5 números del 0 al 36 y salen con ruleta. Un sorteo por semana.' },
 { id: 'brinco', nombre: 'Brinco', alt: 'Logo de Brinco', logo: 'img/brinco.png', precio: '$1.500', desc: 'Elegís 6 números del 00 al 39. Sortea los domingos a las 21 hs.' }
@@ -106,7 +106,9 @@ toggle: () => setLinea(l.id, 'ubic2', u)
 })),
 setNum: (e) => setLinea(l.id, 'num', e.target.value.replace(/\D/g, '').slice(0, 4)),
 setUbic: (e) => { const u = e.target.value; setCampos(l.id, { ubic: u, ubic2: ubic2De({ ubic: u, ubic2: l.ubic2 }) }); },
-setImp: (e) => setLinea(l.id, 'imp', e.target.value.replace(/\D/g, '').slice(0, 7)),
+// Importe: solo números, hasta 5 cifras (99.999). Se guarda sin puntos y se muestra con punto de miles.
+setImp: (e) => setLinea(l.id, 'imp', e.target.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 5)),
+impVer: l.imp ? Number(l.imp).toLocaleString('es-AR') : '',
 quitar: () => this.setState({ lineas: lineasSt.filter((x) => x.id !== l.id) })
 });
 });
@@ -144,7 +146,7 @@ const precioDe = (id) => { const j = juegos.find((x) => x.id === id); return j ?
 const otros = [
 { id: 'quini6', nombre: 'Quini 6', cant: 6, min: 0, max: 45 },
 { id: 'loto', nombre: 'Loto Plus', cant: 6, min: 0, max: 41 },
-{ id: 'telekino', nombre: 'Telekino', cant: 15, min: 1, max: 25 },
+{ id: 'telekino', nombre: 'Telekino', cant: 15, elige: 3, min: 1, max: 25 },
 { id: 'brinco', nombre: 'Brinco', cant: 6, min: 0, max: 39 },
 { id: 'loto5', nombre: 'Loto 5', cant: 5, min: 0, max: 36 },
 { id: 'quinielaplus', nombre: 'Quiniela Plus', cant: 8, min: 0, max: 99 }
@@ -153,8 +155,10 @@ const otroId = st.otro || 'quini6';
 const otro = otros.find((o) => o.id === otroId) || otros[0];
 const otroPrecio = precioDe(otro.id);
 const sel = (st.sel || []).filter((n) => n >= otro.min && n <= otro.max);
+const limiteSel = otro.elige || otro.cant;
+const tkAzar = !!otro.elige && !!st.tkAzar && !sel.length;
 const otrosChips = otros.map((o) => Object.assign({ label: o.nombre }, chip(o.id === otro.id), {
-pick: () => this.setState({ otro: o.id, sel: [] })
+pick: () => this.setState({ otro: o.id, sel: [], tkAzar: false })
 }));
 const bolillas = [];
 for (let n = otro.min; n <= otro.max; n++) {
@@ -162,11 +166,12 @@ const on = sel.indexOf(n) !== -1;
 bolillas.push(Object.assign({ label: dos(n) }, chip(on), {
 toggle: () => {
 if (on) { this.setState({ sel: sel.filter((x) => x !== n) }); }
-else if (sel.length < otro.cant) { this.setState({ sel: sel.concat([n]) }); }
+else if (sel.length < limiteSel) { this.setState({ sel: sel.concat([n]), tkAzar: false }); }
 }
 }));
 }
 const alAzar = () => {
+if (otro.elige) { this.setState({ sel: [], tkAzar: true }); return; }
 const lista = sel.slice();
 while (lista.length < otro.cant) {
 const n = otro.min + Math.floor(Math.random() * (otro.max - otro.min + 1));
@@ -192,11 +197,14 @@ falta = !hoySortea ? 'Los domingos no hay sorteos de Quiniela.' : (!sorteosAbier
 msg = 'Hola! Quiero hacer esta jugada de Quiniela:\n' + validas.map((l) => '• ' + l.txt + ' — ' + fmt(l.impNum)).join('\n') + '\n' + porSorteo + (mult > 1 ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '');
 } else {
 boletaJuego = otro.nombre;
-total = sel.length === otro.cant ? otroPrecio : 0;
-resumen = sel.length ? [{ izq: otro.nombre, der: otroPrecio ? fmt(otroPrecio) : 'Consultá' }] : [];
-detalle = sel.length ? 'Números: ' + selOrden.map(dos).join(' - ') : '';
-falta = sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '';
-msg = 'Hola! Quiero hacer esta jugada de ' + otro.nombre + ':\nNúmeros: ' + selOrden.map(dos).join(' - ');
+// Telekino: hasta 3 números elegidos (el resto lo completa la terminal) o todo al azar.
+const otroCompleto = otro.elige ? (sel.length > 0 || tkAzar) : sel.length === otro.cant;
+const numerosTxt = tkAzar ? 'al azar' : (selOrden.map(dos).join(' - ') + (otro.elige ? ' (el resto, al azar)' : ''));
+total = otroCompleto ? otroPrecio : 0;
+resumen = (sel.length || tkAzar) ? [{ izq: otro.nombre, der: otroPrecio ? fmt(otroPrecio) : 'Consultá' }] : [];
+detalle = (sel.length || tkAzar) ? 'Números: ' + numerosTxt : '';
+falta = otro.elige ? (otroCompleto ? '' : 'Elegí hasta ' + otro.elige + ' números o tocá "Jugar al azar".') : (sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '');
+msg = 'Hola! Quiero hacer esta jugada de ' + otro.nombre + ':\nNúmeros: ' + numerosTxt;
 }
 if (!falta && !nombre.trim()) { falta = 'Poné tu nombre así identificamos tu jugada.'; }
 const celular = st.celular || '';
@@ -286,11 +294,12 @@ agregarLinea: () => this.setState({ lineas: lineasSt.concat([nuevaLinea()]) }),
 sorteosChips: sorteosChips,
 quinielasChips: quinielasChips,
 otrosChips: otrosChips,
-otroConsigna: 'Elegí ' + otro.cant + ' números del ' + dos(otro.min) + ' al ' + dos(otro.max),
-otroContador: sel.length + ' de ' + otro.cant,
+otroConsigna: otro.elige ? ('Elegí hasta ' + otro.elige + ' números del ' + dos(otro.min) + ' al ' + dos(otro.max) + ' o jugá al azar') : ('Elegí ' + otro.cant + ' números del ' + dos(otro.min) + ' al ' + dos(otro.max)),
+otroContador: tkAzar ? 'Al azar' : (sel.length + ' de ' + limiteSel),
+azarTexto: otro.elige ? 'Jugar al azar' : 'Completar al azar',
 bolillas: bolillas,
 alAzar: alAzar,
-borrarBolillas: () => this.setState({ sel: [] }),
+borrarBolillas: () => this.setState({ sel: [], tkAzar: false }),
 boletaJuego: boletaJuego,
 resumen: resumen,
 resumenVacio: resumen.length === 0,
