@@ -27,11 +27,120 @@ a{color:#1F5135}a:hover{color:#123222}
 .pal-brillo{animation:pal-brillo .7s ease-out both}
 .pal-guino{animation:pal-guino 1.6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.pal-latido,.pal-giro,.pal-temblor,.pal-pop,.pal-chispa,.pal-brillo,.pal-guino{animation:none;filter:none}}
+/* ===== GUIRNALDAS NAVIDEÑAS (inicio) ===== */
+.guir{position:relative;height:62px;overflow:hidden;overflow-x:clip;overflow-y:visible;pointer-events:none;background:linear-gradient(to bottom,rgba(255,214,150,.10),rgba(255,214,150,0))}
+.guir-escala{position:absolute;left:0;top:0;transform-origin:0 0}
+.guir-svg{display:block;overflow:visible}
+.guir-g0{animation:guir-a 3.7s ease-in-out infinite}
+.guir-g1{animation:guir-a 4.6s ease-in-out -1.3s infinite}
+.guir-g2{animation:guir-b 5.3s ease-in-out -2.1s infinite}
+.guir-g3{animation:guir-a 4.1s ease-in-out -3.4s infinite}
+.guir-g4{animation:guir-c 7.3s ease-in-out -0.7s infinite}
+.guir-g5{animation:guir-b 5.9s ease-in-out -4.2s infinite}
+@keyframes guir-a{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes guir-b{0%,100%{opacity:.68}40%{opacity:1}72%{opacity:.48}}
+@keyframes guir-c{0%,100%{opacity:.82}45%{opacity:1}86%{opacity:.96}87%{opacity:.18}88.5%{opacity:.9}90%{opacity:.35}91.5%{opacity:1}}
+.guir-lado{display:none;position:absolute;top:58px;width:48px;height:320px;overflow:visible;pointer-events:none}
+.guir-izq{left:8px}
+.guir-der{right:8px;transform:scaleX(-1)}
+@media (min-width:1260px){.guir-lado{display:block}}
+@media (max-width:640px){.guir{height:38px}.guir-escala{transform:scale(.6)}}
+@media (prefers-reduced-motion: reduce){.guir-g0,.guir-g1,.guir-g2,.guir-g3,.guir-g4,.guir-g5{animation:none;opacity:.9}}
+/* ===== GUIRNALDAS NAVIDEÑAS (fin) ===== */
 </style>
 </helmet>
 <div style="width: 100%; background: #F6F7F2; color: #17211B; font-family: 'Archivo', system-ui, sans-serif; font-size: 18px; line-height: 1.55">
 
-<header style="background: {{primary}}; color: #FFFFFF">
+<header style="position: relative; background: {{primary}}; color: #FFFFFF">
+<!-- ===== GUIRNALDAS NAVIDEÑAS (inicio) ===== -->
+<sc-if value="{{guirnaldas}}" hint-placeholder-val="{{ true }}">
+<div class="guir" aria-hidden="true">
+<div class="guir-escala">
+<svg class="guir-svg" width="2400" height="62" viewBox="0 0 2400 62" aria-hidden="true">
+<defs>
+<sc-for list="{{guirColores}}" as="c">
+<radialGradient id="{{c.idV}}" cx="0.42" cy="0.4" r="0.72">
+<stop offset="0" stop-color="{{c.claro}}"></stop>
+<stop offset="0.5" stop-color="{{c.medio}}"></stop>
+<stop offset="1" stop-color="{{c.borde}}"></stop>
+</radialGradient>
+<radialGradient id="{{c.idH}}" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0" stop-color="{{c.luz}}" stop-opacity="0.55"></stop>
+<stop offset="0.45" stop-color="{{c.luz}}" stop-opacity="0.18"></stop>
+<stop offset="1" stop-color="{{c.luz}}" stop-opacity="0"></stop>
+</radialGradient>
+</sc-for>
+</defs>
+<path d="{{guirCable}}" fill="none" stroke="#0E2116" stroke-width="2.6" stroke-linecap="round"></path>
+<path d="{{guirCable}}" fill="none" stroke="#35523D" stroke-width="1" stroke-dasharray="2.6 3.4" stroke-linecap="round" opacity="0.85"></path>
+<sc-for list="{{guirFocos}}" as="b">
+<g transform="{{b.tf}}">
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}" opacity="0.55"></path>
+<rect x="-3.3" y="0" width="6.6" height="7.8" rx="1.3" fill="#1A3423"></rect>
+<rect x="-3.3" y="2.6" width="6.6" height="0.9" fill="#0C1C12"></rect>
+<rect x="-3.3" y="4.8" width="6.6" height="0.9" fill="#0C1C12"></rect>
+</g>
+</sc-for>
+<sc-for list="{{guirGrupos}}" as="gr">
+<g class="{{gr.clase}}">
+<sc-for list="{{gr.focos}}" as="b">
+<g transform="{{b.tf}}">
+<circle cx="0" cy="16" r="26" fill="{{b.halo}}"></circle>
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}"></path>
+<ellipse cx="-2.1" cy="11.5" rx="1.1" ry="2.7" fill="#FFFFFF" opacity="0.8" transform="rotate(12 -2.1 11.5)"></ellipse>
+</g>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+</div>
+</div>
+<svg class="guir-lado guir-izq" viewBox="0 0 48 320" aria-hidden="true">
+<path d="{{guirLadoCable}}" fill="none" stroke="#0E2116" stroke-width="2.6" stroke-linecap="round"></path>
+<path d="{{guirLadoCable}}" fill="none" stroke="#35523D" stroke-width="1" stroke-dasharray="2.6 3.4" stroke-linecap="round" opacity="0.85"></path>
+<sc-for list="{{guirLadoFocos}}" as="b">
+<g transform="{{b.tf}}">
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}" opacity="0.55"></path>
+<rect x="-3.3" y="0" width="6.6" height="7.8" rx="1.3" fill="#1A3423"></rect>
+<rect x="-3.3" y="2.6" width="6.6" height="0.9" fill="#0C1C12"></rect>
+</g>
+</sc-for>
+<sc-for list="{{guirLadoGrupos}}" as="gr">
+<g class="{{gr.clase}}">
+<sc-for list="{{gr.focos}}" as="b">
+<g transform="{{b.tf}}">
+<circle cx="0" cy="16" r="24" fill="{{b.halo}}"></circle>
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}"></path>
+<ellipse cx="-2.1" cy="11.5" rx="1.1" ry="2.7" fill="#FFFFFF" opacity="0.8" transform="rotate(12 -2.1 11.5)"></ellipse>
+</g>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+<svg class="guir-lado guir-der" viewBox="0 0 48 320" aria-hidden="true">
+<path d="{{guirLadoCable2}}" fill="none" stroke="#0E2116" stroke-width="2.6" stroke-linecap="round"></path>
+<path d="{{guirLadoCable2}}" fill="none" stroke="#35523D" stroke-width="1" stroke-dasharray="2.6 3.4" stroke-linecap="round" opacity="0.85"></path>
+<sc-for list="{{guirLadoFocos2}}" as="b">
+<g transform="{{b.tf}}">
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}" opacity="0.55"></path>
+<rect x="-3.3" y="0" width="6.6" height="7.8" rx="1.3" fill="#1A3423"></rect>
+<rect x="-3.3" y="2.6" width="6.6" height="0.9" fill="#0C1C12"></rect>
+</g>
+</sc-for>
+<sc-for list="{{guirLadoGrupos2}}" as="gr">
+<g class="{{gr.clase}}">
+<sc-for list="{{gr.focos}}" as="b">
+<g transform="{{b.tf}}">
+<circle cx="0" cy="16" r="24" fill="{{b.halo}}"></circle>
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}"></path>
+<ellipse cx="-2.1" cy="11.5" rx="1.1" ry="2.7" fill="#FFFFFF" opacity="0.8" transform="rotate(12 -2.1 11.5)"></ellipse>
+</g>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+</sc-if>
+<!-- ===== GUIRNALDAS NAVIDEÑAS (fin) ===== -->
 <div style="max-width: 1100px; margin: 0 auto; padding: 24px 20px 18px">
 <sc-if value="{{cartelA}}" hint-placeholder-val="{{ false }}">
 <div style="position: relative; background: #141210; border-radius: 18px; padding: clamp(30px, 4.5vw, 48px) clamp(22px, 5vw, 64px); text-align: center; box-shadow: inset 0 0 0 3px #E3B341, inset 0 0 0 9px #141210, inset 0 0 0 11px #B8862A, 0 16px 32px rgba(0,0,0,0.35)">
@@ -739,6 +848,76 @@ const AVISO_COMPROBANTE = {
 principal: 'Sin comprobante, tu jugada NO se carga.',
 apoyo: 'Enviá tu comprobante apenas te confirmemos el monto.'
 };
+// ===== GUIRNALDAS NAVIDEÑAS (inicio) =====
+// Para sacarlas después de las fiestas: poner GUIRNALDAS = false (o borrar los bloques marcados "GUIRNALDAS").
+const GUIRNALDAS = true;
+const GUIR_VALORES = (function () {
+// Azar con semilla fija: la tira sale siempre igual (curvas y colores irregulares pero estables).
+let s = 20261225;
+const r = () => { s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+const n1 = (v) => Math.round(v * 10) / 10;
+// Paleta cálida clásica: predomina el blanco cálido / ámbar.
+const COLORES = [
+{ k: 'calido', claro: '#FFF8E6', medio: '#FFDC96', borde: '#D9A040', luz: '#FFD98A' },
+{ k: 'ambar', claro: '#FFE9BC', medio: '#F2B552', borde: '#B9701C', luz: '#FFC163' },
+{ k: 'rojo', claro: '#FFC9B8', medio: '#CF4B3C', borde: '#7E1D17', luz: '#FF7A5C' },
+{ k: 'verde', claro: '#D3F0CF', medio: '#3F9A5A', borde: '#1C5530', luz: '#7EE09A' },
+{ k: 'azul', claro: '#D5E3FF', medio: '#4F7FC9', borde: '#233F78', luz: '#8FB4FF' },
+{ k: 'dorado', claro: '#FFF2C2', medio: '#DDB04A', borde: '#9C6E17', luz: '#FFD766' }
+];
+const PESOS = ['calido', 'calido', 'calido', 'ambar', 'ambar', 'rojo', 'verde', 'azul', 'dorado'];
+const col = (k) => COLORES.find((c) => c.k === k);
+const elegirColor = () => col(PESOS[Math.floor(r() * PESOS.length)]);
+const elegirGrupo = () => { const v = r(); return v < 0.07 ? 4 : [0, 1, 2, 3, 5][Math.floor(r() * 5)]; };
+const foco = (x, y, ang) => { const c = elegirColor(); return { tf: 'translate(' + n1(x) + ' ' + n1(y) + ') rotate(' + n1(ang) + ')', vidrio: 'url(#guir-v-' + c.k + ')', halo: 'url(#guir-h-' + c.k + ')', g: elegirGrupo() }; };
+const agrupar = (focos) => [0, 1, 2, 3, 4, 5].map((g) => ({ clase: 'guir-g' + g, focos: focos.filter((f) => f.g === g) })).filter((x) => x.focos.length);
+// Tira de arriba: tramos que cuelgan por su peso, de largo y caída distintos.
+let x0 = -30, y0 = 4 + r() * 3, cable = 'M' + n1(x0) + ' ' + n1(y0);
+const focos = [];
+while (x0 < 2430) {
+const x1 = x0 + 150 + r() * 60, y1 = 4 + r() * 3, caida = 14 + r() * 9;
+const cx = (x0 + x1) / 2 + (r() - 0.5) * 14, cy = (y0 + y1) / 2 + 2 * caida;
+cable += ' Q' + n1(cx) + ' ' + n1(cy) + ' ' + n1(x1) + ' ' + n1(y1);
+[0.2, 0.5, 0.8].forEach((tb) => {
+const t = tb + (r() - 0.5) * 0.09, u = 1 - t;
+const px = u * u * x0 + 2 * u * t * cx + t * t * x1, py = u * u * y0 + 2 * u * t * cy + t * t * y1;
+const dx = 2 * u * (cx - x0) + 2 * t * (x1 - cx), dy = 2 * u * (cy - y0) + 2 * t * (y1 - cy);
+focos.push(foco(px, py + 0.5, Math.atan2(dy, dx) * 180 / Math.PI * 0.4 + (r() - 0.5) * 12));
+});
+x0 = x1; y0 = y1;
+}
+// Tiras de los costados (solo compu grande): bajan por el marco y se comban hacia adentro.
+const lado = () => {
+let yA = 0, c = 'M6 0';
+const fs = [];
+while (yA < 320) {
+const yB = yA + 58 + r() * 22, comba = 7 + r() * 4, ccx = 6 + 2 * comba, ccy = (yA + yB) / 2;
+c += ' Q' + n1(ccx) + ' ' + n1(ccy) + ' 6 ' + n1(yB);
+[0.34, 0.72].forEach((tb) => {
+const t = tb + (r() - 0.5) * 0.08, u = 1 - t;
+const px = u * u * 6 + 2 * u * t * ccx + t * t * 6, py = u * u * yA + 2 * u * t * ccy + t * t * yB;
+fs.push(foco(px, py, (r() - 0.5) * 16));
+});
+yA = yB;
+}
+return { cable: c, focos: fs };
+};
+const izq = lado(), der = lado();
+return {
+guirnaldas: GUIRNALDAS,
+guirColores: COLORES.map((c) => ({ idV: 'guir-v-' + c.k, idH: 'guir-h-' + c.k, claro: c.claro, medio: c.medio, borde: c.borde, luz: c.luz })),
+guirCable: cable,
+guirFocos: focos,
+guirGrupos: agrupar(focos),
+guirLadoCable: izq.cable,
+guirLadoFocos: izq.focos,
+guirLadoGrupos: agrupar(izq.focos),
+guirLadoCable2: der.cable,
+guirLadoFocos2: der.focos,
+guirLadoGrupos2: agrupar(der.focos)
+};
+})();
+// ===== GUIRNALDAS NAVIDEÑAS (fin) =====
 class Component extends DCLogic {
 roll() {
 return String(Math.floor(Math.random() * 100)).padStart(2, '0');
@@ -993,6 +1172,7 @@ const resSinSorteo = esHoy && !hoySortea;
 const ahoraNav = Date.now();
 const diasNav = Math.ceil((new Date('2026-12-23T00:00:00-03:00').getTime() - ahoraNav) / 86400000);
 return {
+...GUIR_VALORES,
 avisoComprobante: AVISO_COMPROBANTE,
 navidadVigente: ahoraNav < new Date('2026-12-23T21:00:00-03:00').getTime(),
 navidadFaltan: diasNav > 1 ? ('Faltan ' + diasNav + ' días') : (diasNav === 1 ? 'Falta 1 día' : '¡Es hoy a las 21!'),
