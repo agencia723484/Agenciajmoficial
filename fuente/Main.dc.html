@@ -182,7 +182,7 @@ Miércoles 23 de diciembre · 21 hs
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
 Reservá tu número
 </a>
-<span style="font-size: 15px; color: #4A5650">Elegís el número y te imprimimos el billete en el momento.</span>
+<span style="font-size: 15px; color: #4A5650">Elegí un número de 5 cifras, verificamos si está disponible y te imprimimos el billete en el momento.</span>
 </div>
 </div>
 </div>
@@ -518,9 +518,8 @@ Jugarlo
 <option value="20">A los 20</option>
 </select>
 </label>
-<label style="flex: 1 1 120px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A5650">Importe ($)
-<input type="text" inputmode="numeric" maxlength="7" placeholder="100" value="{{item.imp}}" onChange="{{item.setImp}}" style="width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; font-family: inherit; font-size: 22px; font-weight: 800; color: #17211B; font-variant-numeric: tabular-nums">
-</label>
+<label style="flex: 1 1 120px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A5650"><span style="white-space: nowrap">Importe <span style="font-size: 13px; font-weight: 600; color: #5F6B64">· mínimo $100</span></span>
+<input type="text" inputmode="numeric" maxlength="6" placeholder="0" value="{{item.impVer}}" onChange="{{item.setImp}}" style="width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; font-family: inherit; font-size: 22px; font-weight: 800; color: #17211B; font-variant-numeric: tabular-nums"></label>
 <sc-if value="{{item.puedeQuitar}}" hint-placeholder-val="{{ false }}">
 <button type="button" onClick="{{item.quitar}}" aria-label="Quitar este número" style="flex: 0 0 auto; width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; border: 2px solid #DDE2DA; background: #FFFFFF; color: #7A2E2E; cursor: pointer">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
@@ -603,7 +602,7 @@ Agregar otro número
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button type="button" onClick="{{alAzar}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 0; background: #E3B341; color: #17211B; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"></circle><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle></svg>
-Completar al azar
+{{azarTexto}}
 </button>
 <button type="button" onClick="{{borrarBolillas}}" style="min-height: 48px; padding: 0 18px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; color: #17211B; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Borrar</button>
 </div>
@@ -675,13 +674,13 @@ Soy mayor de 18 años
 <span style="font-size: 18px; line-height: 1.3; font-weight: 800; text-transform: uppercase">Revisá tu apuesta. <span style="color: #F2C14E">No se aceptan reclamos pasados 3 minutos del envío de la foto.</span></span>
 </div>
 <sc-if value="{{listo}}" hint-placeholder-val="{{ false }}">
-<a href="{{waUrl}}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 18px; border-radius: 12px; background: #17211B; color: #E3B341; font-size: 19px; font-weight: 800; text-decoration: none">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
-Enviar jugada por WhatsApp
+<a href="{{waUrl}}" target="_blank" rel="noopener noreferrer" style="display: flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: center; gap: 12px; min-height: 66px; padding: 12px 18px; border-radius: 14px; background: #1E9E4C; border: 3px solid #157A39; color: #FFFFFF; font-size: 21px; line-height: 1.2; font-weight: 800; text-align: center; text-decoration: none; box-shadow: 0 6px 16px rgba(21,122,57,0.35)">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Enviar mi jugada por WhatsApp
 </a>
 </sc-if>
 <sc-if value="{{noListo}}" hint-placeholder-val="{{ true }}">
-<button type="button" disabled style="min-height: 56px; border-radius: 12px; border: 0; background: #DDD3B5; color: #4A2F06; font-family: inherit; font-size: 19px; font-weight: 800">Enviar jugada por WhatsApp</button>
+<button type="button" disabled style="min-height: 56px; border-radius: 12px; border: 0; background: #DDD3B5; color: #4A2F06; font-family: inherit; font-size: 19px; font-weight: 800">Enviar mi jugada por WhatsApp</button>
 <span aria-live="polite" style="font-size: 16px; font-weight: 700; color: #7A2E2E">{{falta}}</span>
 </sc-if>
 <span style="font-size: 14px; line-height: 1.45; color: #4A2F06">El total final lo confirma la agencia al cargar la jugada en el sistema. Tu jugada queda hecha cuando se acredita el pago y te mandamos el ticket. Mandala con tiempo: el cierre es 15 minutos antes de cada sorteo.</span>
@@ -782,7 +781,7 @@ const juegos = [
 { id: 'quiniela', nombre: 'Quiniela', alt: 'Logo de Quiniela Provincia', logo: '/_blob/1eaa86e4f0958a687ada4d1d8bfbaa74', precio: 'Mínimo $100', desc: 'Elegís un número de una a cuatro cifras y en qué ubicación lo jugás. No tiene tope, y el premio lo cobrás acá, sea el monto que sea.' },
 { id: 'quinielaplus', nombre: 'Quiniela Plus', alt: 'Logo de Quiniela Plus', logo: '/_blob/1c401ef6e4a330b0b1bf6c9a65bf78e0', precio: '$1.000', desc: 'Elegís 8 números del 00 al 99 y con la misma jugada participás en Plus, Súper Plus y Chance Plus. Sale con la Nocturna.' },
 { id: 'quini6', nombre: 'Quini 6', alt: 'Logo de Quini 6', logo: '/_blob/b20f732583dfe194410f704213ff52f4', precio: '$4.000', desc: 'Elegís 6 números del 00 al 45 y participás en cuatro modalidades. Sortea miércoles y domingos.' },
-{ id: 'telekino', nombre: 'Telekino', alt: 'Logo de Telekino', logo: '/_blob/2d741827ba390ca0d4bd1f272136809e', precio: '$3.000', desc: 'Elegís 15 números del 1 al 25. Sortea los domingos.' },
+{ id: 'telekino', nombre: 'Telekino', alt: 'Logo de Telekino', logo: '/_blob/2d741827ba390ca0d4bd1f272136809e', precio: '$3.000', desc: 'Elegís hasta 3 números del 1 al 25 y el resto sale al azar, o lo jugás todo al azar. Sortea los domingos.' },
 { id: 'loto', nombre: 'Loto Plus', alt: 'Logo de Loto Plus', logo: '/_blob/e8d6929e0267dd31b867c6e64d45ac60', precio: '$4.000', desc: 'Elegís 6 números y además se sortea un Número Plus: si lo acertás, triplica el monto de tu premio. Sortea miércoles y sábados.' },
 { id: 'loto5', nombre: 'Loto 5', alt: 'Logo de Loto 5 Plus', logo: '/_blob/af293c20bb4201518503264f34c9da9f', precio: '$1.000', desc: 'Elegís 5 números del 0 al 36 y salen con ruleta. Un sorteo por semana.' },
 { id: 'brinco', nombre: 'Brinco', alt: 'Logo de Brinco', logo: '/_blob/f2fc58adfd7af40eea242bd952abe0ae', precio: '$1.500', desc: 'Elegís 6 números del 00 al 39. Sortea los domingos a las 21 hs.' }
@@ -842,7 +841,9 @@ toggle: () => setLinea(l.id, 'ubic2', u)
 })),
 setNum: (e) => setLinea(l.id, 'num', e.target.value.replace(/\D/g, '').slice(0, 4)),
 setUbic: (e) => { const u = e.target.value; setCampos(l.id, { ubic: u, ubic2: ubic2De({ ubic: u, ubic2: l.ubic2 }) }); },
-setImp: (e) => setLinea(l.id, 'imp', e.target.value.replace(/\D/g, '').slice(0, 7)),
+// Importe: solo números, hasta 5 cifras (99.999). Se guarda sin puntos y se muestra con punto de miles.
+setImp: (e) => setLinea(l.id, 'imp', e.target.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 5)),
+impVer: l.imp ? Number(l.imp).toLocaleString('es-AR') : '',
 quitar: () => this.setState({ lineas: lineasSt.filter((x) => x.id !== l.id) })
 });
 });
@@ -880,7 +881,7 @@ const precioDe = (id) => { const j = juegos.find((x) => x.id === id); return j ?
 const otros = [
 { id: 'quini6', nombre: 'Quini 6', cant: 6, min: 0, max: 45 },
 { id: 'loto', nombre: 'Loto Plus', cant: 6, min: 0, max: 41 },
-{ id: 'telekino', nombre: 'Telekino', cant: 15, min: 1, max: 25 },
+{ id: 'telekino', nombre: 'Telekino', cant: 15, elige: 3, min: 1, max: 25 },
 { id: 'brinco', nombre: 'Brinco', cant: 6, min: 0, max: 39 },
 { id: 'loto5', nombre: 'Loto 5', cant: 5, min: 0, max: 36 },
 { id: 'quinielaplus', nombre: 'Quiniela Plus', cant: 8, min: 0, max: 99 }
@@ -889,8 +890,10 @@ const otroId = st.otro || 'quini6';
 const otro = otros.find((o) => o.id === otroId) || otros[0];
 const otroPrecio = precioDe(otro.id);
 const sel = (st.sel || []).filter((n) => n >= otro.min && n <= otro.max);
+const limiteSel = otro.elige || otro.cant;
+const tkAzar = !!otro.elige && !!st.tkAzar && !sel.length;
 const otrosChips = otros.map((o) => Object.assign({ label: o.nombre }, chip(o.id === otro.id), {
-pick: () => this.setState({ otro: o.id, sel: [] })
+pick: () => this.setState({ otro: o.id, sel: [], tkAzar: false })
 }));
 const bolillas = [];
 for (let n = otro.min; n <= otro.max; n++) {
@@ -898,11 +901,12 @@ const on = sel.indexOf(n) !== -1;
 bolillas.push(Object.assign({ label: dos(n) }, chip(on), {
 toggle: () => {
 if (on) { this.setState({ sel: sel.filter((x) => x !== n) }); }
-else if (sel.length < otro.cant) { this.setState({ sel: sel.concat([n]) }); }
+else if (sel.length < limiteSel) { this.setState({ sel: sel.concat([n]), tkAzar: false }); }
 }
 }));
 }
 const alAzar = () => {
+if (otro.elige) { this.setState({ sel: [], tkAzar: true }); return; }
 const lista = sel.slice();
 while (lista.length < otro.cant) {
 const n = otro.min + Math.floor(Math.random() * (otro.max - otro.min + 1));
@@ -928,11 +932,14 @@ falta = !hoySortea ? 'Los domingos no hay sorteos de Quiniela.' : (!sorteosAbier
 msg = 'Hola! Quiero hacer esta jugada de Quiniela:\n' + validas.map((l) => '• ' + l.txt + ' — ' + fmt(l.impNum)).join('\n') + '\n' + porSorteo + (mult > 1 ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '');
 } else {
 boletaJuego = otro.nombre;
-total = sel.length === otro.cant ? otroPrecio : 0;
-resumen = sel.length ? [{ izq: otro.nombre, der: otroPrecio ? fmt(otroPrecio) : 'Consultá' }] : [];
-detalle = sel.length ? 'Números: ' + selOrden.map(dos).join(' - ') : '';
-falta = sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '';
-msg = 'Hola! Quiero hacer esta jugada de ' + otro.nombre + ':\nNúmeros: ' + selOrden.map(dos).join(' - ');
+// Telekino: hasta 3 números elegidos (el resto lo completa la terminal) o todo al azar.
+const otroCompleto = otro.elige ? (sel.length > 0 || tkAzar) : sel.length === otro.cant;
+const numerosTxt = tkAzar ? 'al azar' : (selOrden.map(dos).join(' - ') + (otro.elige ? ' (el resto, al azar)' : ''));
+total = otroCompleto ? otroPrecio : 0;
+resumen = (sel.length || tkAzar) ? [{ izq: otro.nombre, der: otroPrecio ? fmt(otroPrecio) : 'Consultá' }] : [];
+detalle = (sel.length || tkAzar) ? 'Números: ' + numerosTxt : '';
+falta = otro.elige ? (otroCompleto ? '' : 'Elegí hasta ' + otro.elige + ' números o tocá "Jugar al azar".') : (sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '');
+msg = 'Hola! Quiero hacer esta jugada de ' + otro.nombre + ':\nNúmeros: ' + numerosTxt;
 }
 if (!falta && !nombre.trim()) { falta = 'Poné tu nombre así identificamos tu jugada.'; }
 const celular = st.celular || '';
@@ -1022,11 +1029,12 @@ agregarLinea: () => this.setState({ lineas: lineasSt.concat([nuevaLinea()]) }),
 sorteosChips: sorteosChips,
 quinielasChips: quinielasChips,
 otrosChips: otrosChips,
-otroConsigna: 'Elegí ' + otro.cant + ' números del ' + dos(otro.min) + ' al ' + dos(otro.max),
-otroContador: sel.length + ' de ' + otro.cant,
+otroConsigna: otro.elige ? ('Elegí hasta ' + otro.elige + ' números del ' + dos(otro.min) + ' al ' + dos(otro.max) + ' o jugá al azar') : ('Elegí ' + otro.cant + ' números del ' + dos(otro.min) + ' al ' + dos(otro.max)),
+otroContador: tkAzar ? 'Al azar' : (sel.length + ' de ' + limiteSel),
+azarTexto: otro.elige ? 'Jugar al azar' : 'Completar al azar',
 bolillas: bolillas,
 alAzar: alAzar,
-borrarBolillas: () => this.setState({ sel: [] }),
+borrarBolillas: () => this.setState({ sel: [], tkAzar: false }),
 boletaJuego: boletaJuego,
 resumen: resumen,
 resumenVacio: resumen.length === 0,
