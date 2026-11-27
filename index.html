@@ -39,6 +39,26 @@ a{color:#1F5135}a:hover{color:#123222}
 .pal-brillo{animation:pal-brillo .7s ease-out both}
 .pal-guino{animation:pal-guino 1.6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.pal-latido,.pal-giro,.pal-temblor,.pal-pop,.pal-chispa,.pal-brillo,.pal-guino{animation:none;filter:none}}
+/* ===== GUIRNALDAS NAVIDEÑAS (inicio) ===== */
+.guir{position:relative;height:62px;overflow:hidden;overflow-x:clip;overflow-y:visible;pointer-events:none;background:linear-gradient(to bottom,rgba(255,214,150,.10),rgba(255,214,150,0))}
+.guir-escala{position:absolute;left:0;top:0;transform-origin:0 0}
+.guir-svg{display:block;overflow:visible}
+.guir-g0{animation:guir-a 3.7s ease-in-out infinite}
+.guir-g1{animation:guir-a 4.6s ease-in-out -1.3s infinite}
+.guir-g2{animation:guir-b 5.3s ease-in-out -2.1s infinite}
+.guir-g3{animation:guir-a 4.1s ease-in-out -3.4s infinite}
+.guir-g4{animation:guir-c 7.3s ease-in-out -0.7s infinite}
+.guir-g5{animation:guir-b 5.9s ease-in-out -4.2s infinite}
+@keyframes guir-a{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes guir-b{0%,100%{opacity:.68}40%{opacity:1}72%{opacity:.48}}
+@keyframes guir-c{0%,100%{opacity:.82}45%{opacity:1}86%{opacity:.96}87%{opacity:.18}88.5%{opacity:.9}90%{opacity:.35}91.5%{opacity:1}}
+.guir-lado{display:none;position:absolute;top:58px;width:48px;height:320px;overflow:visible;pointer-events:none}
+.guir-izq{left:8px}
+.guir-der{right:8px;transform:scaleX(-1)}
+@media (min-width:1260px){.guir-lado{display:block}}
+@media (max-width:640px){.guir{height:38px}.guir-escala{transform:scale(.6)}}
+@media (prefers-reduced-motion: reduce){.guir-g0,.guir-g1,.guir-g2,.guir-g3,.guir-g4,.guir-g5{animation:none;opacity:.9}}
+/* ===== GUIRNALDAS NAVIDEÑAS (fin) ===== */
 </style>
 </head>
 <body>
@@ -47,7 +67,96 @@ a{color:#1F5135}a:hover{color:#123222}
 <template id="plantilla">
 <div style="width: 100%; background: #F6F7F2; color: #17211B; font-family: 'Archivo', system-ui, sans-serif; font-size: 18px; line-height: 1.55">
 
-<header style="background: {{primary}}; color: #FFFFFF">
+<header style="position: relative; background: {{primary}}; color: #FFFFFF">
+<!-- ===== GUIRNALDAS NAVIDEÑAS (inicio) ===== -->
+<sc-if value="{{guirnaldas}}" hint-placeholder-val="{{ true }}">
+<div class="guir" aria-hidden="true">
+<div class="guir-escala">
+<svg class="guir-svg" width="2400" height="62" viewBox="0 0 2400 62" aria-hidden="true">
+<defs>
+<sc-for list="{{guirColores}}" as="c">
+<radialGradient id="{{c.idV}}" cx="0.42" cy="0.4" r="0.72">
+<stop offset="0" stop-color="{{c.claro}}"></stop>
+<stop offset="0.5" stop-color="{{c.medio}}"></stop>
+<stop offset="1" stop-color="{{c.borde}}"></stop>
+</radialGradient>
+<radialGradient id="{{c.idH}}" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0" stop-color="{{c.luz}}" stop-opacity="0.55"></stop>
+<stop offset="0.45" stop-color="{{c.luz}}" stop-opacity="0.18"></stop>
+<stop offset="1" stop-color="{{c.luz}}" stop-opacity="0"></stop>
+</radialGradient>
+</sc-for>
+</defs>
+<path d="{{guirCable}}" fill="none" stroke="#0E2116" stroke-width="2.6" stroke-linecap="round"></path>
+<path d="{{guirCable}}" fill="none" stroke="#35523D" stroke-width="1" stroke-dasharray="2.6 3.4" stroke-linecap="round" opacity="0.85"></path>
+<sc-for list="{{guirFocos}}" as="b">
+<g transform="{{b.tf}}">
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}" opacity="0.55"></path>
+<rect x="-3.3" y="0" width="6.6" height="7.8" rx="1.3" fill="#1A3423"></rect>
+<rect x="-3.3" y="2.6" width="6.6" height="0.9" fill="#0C1C12"></rect>
+<rect x="-3.3" y="4.8" width="6.6" height="0.9" fill="#0C1C12"></rect>
+</g>
+</sc-for>
+<sc-for list="{{guirGrupos}}" as="gr">
+<g class="{{gr.clase}}">
+<sc-for list="{{gr.focos}}" as="b">
+<g transform="{{b.tf}}">
+<circle cx="0" cy="16" r="26" fill="{{b.halo}}"></circle>
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}"></path>
+<ellipse cx="-2.1" cy="11.5" rx="1.1" ry="2.7" fill="#FFFFFF" opacity="0.8" transform="rotate(12 -2.1 11.5)"></ellipse>
+</g>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+</div>
+</div>
+<svg class="guir-lado guir-izq" viewBox="0 0 48 320" aria-hidden="true">
+<path d="{{guirLadoCable}}" fill="none" stroke="#0E2116" stroke-width="2.6" stroke-linecap="round"></path>
+<path d="{{guirLadoCable}}" fill="none" stroke="#35523D" stroke-width="1" stroke-dasharray="2.6 3.4" stroke-linecap="round" opacity="0.85"></path>
+<sc-for list="{{guirLadoFocos}}" as="b">
+<g transform="{{b.tf}}">
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}" opacity="0.55"></path>
+<rect x="-3.3" y="0" width="6.6" height="7.8" rx="1.3" fill="#1A3423"></rect>
+<rect x="-3.3" y="2.6" width="6.6" height="0.9" fill="#0C1C12"></rect>
+</g>
+</sc-for>
+<sc-for list="{{guirLadoGrupos}}" as="gr">
+<g class="{{gr.clase}}">
+<sc-for list="{{gr.focos}}" as="b">
+<g transform="{{b.tf}}">
+<circle cx="0" cy="16" r="24" fill="{{b.halo}}"></circle>
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}"></path>
+<ellipse cx="-2.1" cy="11.5" rx="1.1" ry="2.7" fill="#FFFFFF" opacity="0.8" transform="rotate(12 -2.1 11.5)"></ellipse>
+</g>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+<svg class="guir-lado guir-der" viewBox="0 0 48 320" aria-hidden="true">
+<path d="{{guirLadoCable2}}" fill="none" stroke="#0E2116" stroke-width="2.6" stroke-linecap="round"></path>
+<path d="{{guirLadoCable2}}" fill="none" stroke="#35523D" stroke-width="1" stroke-dasharray="2.6 3.4" stroke-linecap="round" opacity="0.85"></path>
+<sc-for list="{{guirLadoFocos2}}" as="b">
+<g transform="{{b.tf}}">
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}" opacity="0.55"></path>
+<rect x="-3.3" y="0" width="6.6" height="7.8" rx="1.3" fill="#1A3423"></rect>
+<rect x="-3.3" y="2.6" width="6.6" height="0.9" fill="#0C1C12"></rect>
+</g>
+</sc-for>
+<sc-for list="{{guirLadoGrupos2}}" as="gr">
+<g class="{{gr.clase}}">
+<sc-for list="{{gr.focos}}" as="b">
+<g transform="{{b.tf}}">
+<circle cx="0" cy="16" r="24" fill="{{b.halo}}"></circle>
+<path d="M-4.4 7 C-7 10 -7 17 -3.3 22 C-1.9 24.2 -0.6 25.7 0 26.6 C0.6 25.7 1.9 24.2 3.3 22 C7 17 7 10 4.4 7 Z" fill="{{b.vidrio}}"></path>
+<ellipse cx="-2.1" cy="11.5" rx="1.1" ry="2.7" fill="#FFFFFF" opacity="0.8" transform="rotate(12 -2.1 11.5)"></ellipse>
+</g>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+</sc-if>
+<!-- ===== GUIRNALDAS NAVIDEÑAS (fin) ===== -->
 <div style="max-width: 1100px; margin: 0 auto; padding: 24px 20px 18px">
 <sc-if value="{{cartelA}}" hint-placeholder-val="{{ false }}">
 <div style="position: relative; background: #141210; border-radius: 18px; padding: clamp(30px, 4.5vw, 48px) clamp(22px, 5vw, 64px); text-align: center; box-shadow: inset 0 0 0 3px #E3B341, inset 0 0 0 9px #141210, inset 0 0 0 11px #B8862A, 0 16px 32px rgba(0,0,0,0.35)">

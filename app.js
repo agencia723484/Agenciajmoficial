@@ -4,6 +4,76 @@ const AVISO_COMPROBANTE = {
 principal: 'Sin comprobante, tu jugada NO se carga.',
 apoyo: 'Enviá tu comprobante apenas te confirmemos el monto.'
 };
+// ===== GUIRNALDAS NAVIDEÑAS (inicio) =====
+// Para sacarlas después de las fiestas: poner GUIRNALDAS = false (o borrar los bloques marcados "GUIRNALDAS").
+const GUIRNALDAS = true;
+const GUIR_VALORES = (function () {
+// Azar con semilla fija: la tira sale siempre igual (curvas y colores irregulares pero estables).
+let s = 20261225;
+const r = () => { s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+const n1 = (v) => Math.round(v * 10) / 10;
+// Paleta cálida clásica: predomina el blanco cálido / ámbar.
+const COLORES = [
+{ k: 'calido', claro: '#FFF8E6', medio: '#FFDC96', borde: '#D9A040', luz: '#FFD98A' },
+{ k: 'ambar', claro: '#FFE9BC', medio: '#F2B552', borde: '#B9701C', luz: '#FFC163' },
+{ k: 'rojo', claro: '#FFC9B8', medio: '#CF4B3C', borde: '#7E1D17', luz: '#FF7A5C' },
+{ k: 'verde', claro: '#D3F0CF', medio: '#3F9A5A', borde: '#1C5530', luz: '#7EE09A' },
+{ k: 'azul', claro: '#D5E3FF', medio: '#4F7FC9', borde: '#233F78', luz: '#8FB4FF' },
+{ k: 'dorado', claro: '#FFF2C2', medio: '#DDB04A', borde: '#9C6E17', luz: '#FFD766' }
+];
+const PESOS = ['calido', 'calido', 'calido', 'ambar', 'ambar', 'rojo', 'verde', 'azul', 'dorado'];
+const col = (k) => COLORES.find((c) => c.k === k);
+const elegirColor = () => col(PESOS[Math.floor(r() * PESOS.length)]);
+const elegirGrupo = () => { const v = r(); return v < 0.07 ? 4 : [0, 1, 2, 3, 5][Math.floor(r() * 5)]; };
+const foco = (x, y, ang) => { const c = elegirColor(); return { tf: 'translate(' + n1(x) + ' ' + n1(y) + ') rotate(' + n1(ang) + ')', vidrio: 'url(#guir-v-' + c.k + ')', halo: 'url(#guir-h-' + c.k + ')', g: elegirGrupo() }; };
+const agrupar = (focos) => [0, 1, 2, 3, 4, 5].map((g) => ({ clase: 'guir-g' + g, focos: focos.filter((f) => f.g === g) })).filter((x) => x.focos.length);
+// Tira de arriba: tramos que cuelgan por su peso, de largo y caída distintos.
+let x0 = -30, y0 = 4 + r() * 3, cable = 'M' + n1(x0) + ' ' + n1(y0);
+const focos = [];
+while (x0 < 2430) {
+const x1 = x0 + 150 + r() * 60, y1 = 4 + r() * 3, caida = 14 + r() * 9;
+const cx = (x0 + x1) / 2 + (r() - 0.5) * 14, cy = (y0 + y1) / 2 + 2 * caida;
+cable += ' Q' + n1(cx) + ' ' + n1(cy) + ' ' + n1(x1) + ' ' + n1(y1);
+[0.2, 0.5, 0.8].forEach((tb) => {
+const t = tb + (r() - 0.5) * 0.09, u = 1 - t;
+const px = u * u * x0 + 2 * u * t * cx + t * t * x1, py = u * u * y0 + 2 * u * t * cy + t * t * y1;
+const dx = 2 * u * (cx - x0) + 2 * t * (x1 - cx), dy = 2 * u * (cy - y0) + 2 * t * (y1 - cy);
+focos.push(foco(px, py + 0.5, Math.atan2(dy, dx) * 180 / Math.PI * 0.4 + (r() - 0.5) * 12));
+});
+x0 = x1; y0 = y1;
+}
+// Tiras de los costados (solo compu grande): bajan por el marco y se comban hacia adentro.
+const lado = () => {
+let yA = 0, c = 'M6 0';
+const fs = [];
+while (yA < 320) {
+const yB = yA + 58 + r() * 22, comba = 7 + r() * 4, ccx = 6 + 2 * comba, ccy = (yA + yB) / 2;
+c += ' Q' + n1(ccx) + ' ' + n1(ccy) + ' 6 ' + n1(yB);
+[0.34, 0.72].forEach((tb) => {
+const t = tb + (r() - 0.5) * 0.08, u = 1 - t;
+const px = u * u * 6 + 2 * u * t * ccx + t * t * 6, py = u * u * yA + 2 * u * t * ccy + t * t * yB;
+fs.push(foco(px, py, (r() - 0.5) * 16));
+});
+yA = yB;
+}
+return { cable: c, focos: fs };
+};
+const izq = lado(), der = lado();
+return {
+guirnaldas: GUIRNALDAS,
+guirColores: COLORES.map((c) => ({ idV: 'guir-v-' + c.k, idH: 'guir-h-' + c.k, claro: c.claro, medio: c.medio, borde: c.borde, luz: c.luz })),
+guirCable: cable,
+guirFocos: focos,
+guirGrupos: agrupar(focos),
+guirLadoCable: izq.cable,
+guirLadoFocos: izq.focos,
+guirLadoGrupos: agrupar(izq.focos),
+guirLadoCable2: der.cable,
+guirLadoFocos2: der.focos,
+guirLadoGrupos2: agrupar(der.focos)
+};
+})();
+// ===== GUIRNALDAS NAVIDEÑAS (fin) =====
 class Component extends DCLogic {
 roll() {
 return String(Math.floor(Math.random() * 100)).padStart(2, '0');
@@ -258,6 +328,7 @@ const resSinSorteo = esHoy && !hoySortea;
 const ahoraNav = Date.now();
 const diasNav = Math.ceil((new Date('2026-12-23T00:00:00-03:00').getTime() - ahoraNav) / 86400000);
 return {
+...GUIR_VALORES,
 avisoComprobante: AVISO_COMPROBANTE,
 navidadVigente: ahoraNav < new Date('2026-12-23T21:00:00-03:00').getTime(),
 navidadFaltan: diasNav > 1 ? ('Faltan ' + diasNav + ' días') : (diasNav === 1 ? 'Falta 1 día' : '¡Es hoy a las 21!'),
