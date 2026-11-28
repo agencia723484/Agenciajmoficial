@@ -93,9 +93,29 @@ this._palTimers.push(setTimeout(() => this.setState({ palFase: 'listo', palpito:
 }
 componentDidMount() {
 this._reloj = setInterval(() => this.forceUpdate(), 30000);
+// Carrito: se recupera del navegador (no se guarda en ningún servidor).
+try {
+const guardado = JSON.parse(localStorage.getItem('agenciajm-carrito') || '[]');
+if (Array.isArray(guardado) && guardado.length) {
+this.setState({ carrito: guardado.filter((x) => x && typeof x.juego === 'string' && typeof x.nombre === 'string' && isFinite(x.total)).slice(0, 30) });
+}
+} catch (e) {}
+// En celular, la barra del carrito se esconde cuando el carrito ya está a la vista.
+this._obsTimer = setTimeout(() => {
+const el = document.getElementById('carrito');
+if (el && typeof IntersectionObserver !== 'undefined') {
+this._obsCarrito = new IntersectionObserver((es) => {
+const v = es.some((x) => x.isIntersecting);
+if (v !== !!(this.state && this.state.carritoEnVista)) { this.setState({ carritoEnVista: v }); }
+});
+this._obsCarrito.observe(el);
+}
+}, 0);
 }
 componentWillUnmount() {
 clearInterval(this._reloj);
+clearTimeout(this._obsTimer);
+if (this._obsCarrito) { this._obsCarrito.disconnect(); }
 (this._palTimers || []).forEach((t) => clearTimeout(t));
 }
 extractos() {
@@ -214,8 +234,9 @@ const sorteoVacio = jugadas.find((x) => !x.qs.length);
 const jugadasOk = jugadas.filter((x) => x.qs.length);
 const precioDe = (id) => { const j = juegos.find((x) => x.id === id); return j ? (parseInt(String(j.precio).replace(/\D/g, ''), 10) || 0) : 0; };
 const otros = [
-{ id: 'quini6', nombre: 'Quini 6', cant: 6, min: 0, max: 45 },
-{ id: 'loto', nombre: 'Loto Plus', cant: 6, min: 0, max: 41 },
+// repite: los juegos con la misma marca usan la misma cantidad y rango de números, y se pueden "repetir" entre sí.
+{ id: 'quini6', nombre: 'Quini 6', cant: 6, min: 0, max: 45, repite: 'seis-00-45' },
+{ id: 'loto', nombre: 'Loto Plus', cant: 6, min: 0, max: 45, plus: true, repite: 'seis-00-45' },
 { id: 'telekino', nombre: 'Telekino', cant: 15, elige: 3, min: 1, max: 25 },
 { id: 'brinco', nombre: 'Brinco', cant: 6, min: 0, max: 39 },
 { id: 'loto5', nombre: 'Loto 5', cant: 5, min: 0, max: 36 },
@@ -227,8 +248,40 @@ const otroPrecio = precioDe(otro.id);
 const sel = (st.sel || []).filter((n) => n >= otro.min && n <= otro.max);
 const limiteSel = otro.elige || otro.cant;
 const tkAzar = !!otro.elige && !!st.tkAzar && !sel.length;
+// Loto Plus: además de los 6 números, un Número Plus del 0 al 9.
+const plusSel = otro.plus && typeof st.plus === 'number' && st.plus >= 0 && st.plus <= 9 ? st.plus : null;
+const plusChips = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => Object.assign({ label: String(n) }, chip(plusSel === n), {
+toggle: () => this.setState({ plus: plusSel === n ? null : n })
+}));
+// Repetir los mismos números en otro juego de números (Quini 6, Loto Plus, Loto 5, Brinco, Quiniela Plus, Telekino).
+// Se copian los que entran en el rango del destino, hasta la cantidad que pide; el resto lo completa la persona.
+// Los extras propios del destino (Número Plus del Loto) los elige la persona o al azar.
+const repetirEn = (o, numeros, subir) => {
+if (!o || !Array.isArray(numeros) || !numeros.length) { return []; }
+if (!(o.elige ? numeros.length <= o.elige : numeros.length === o.cant)) { return []; }
+const nums = numeros.slice().sort((a, b) => a - b);
+return otros.filter((x) => x.id !== o.id && nums.some((n) => n >= x.min && n <= x.max)).map((x) => ({
+label: 'Repetir en ' + x.nombre,
+ir: () => {
+const enRango = nums.filter((n) => n >= x.min && n <= x.max);
+const fuera = nums.length - enRango.length;
+const limite = x.elige || x.cant;
+const copiados = enRango.slice(0, limite);
+const avisos = [];
+if (fuera) { avisos.push((fuera === 1 ? '1 número no existe' : fuera + ' números no existen') + ' en ' + x.nombre + ' (va del ' + dos(x.min) + ' al ' + dos(x.max) + ') y no se ' + (fuera === 1 ? 'copió' : 'copiaron') + '.'); }
+if (enRango.length > limite) { avisos.push('Se copiaron ' + limite + ' de tus ' + nums.length + ' números. Podés cambiarlos antes de agregar.'); }
+// "completar" y "plus" se muestran solo mientras falten; los avisos fijos quedan.
+const completar = (!x.elige && copiados.length < x.cant) ? ('Se copiaron tus ' + copiados.length + ' números; ' + x.nombre + ' lleva ' + x.cant + ': completá los que faltan o tocá «Completar al azar».') : '';
+const plusTxt = x.plus ? 'El Número Plus lo elegís vos (o «Extra al azar»).' : '';
+this.setState({ modo: 'otros', otro: x.id, sel: copiados, tkAzar: false, plus: null, agregado: false, avisoRepetir: { fijos: avisos.join(' '), completar: completar, plus: plusTxt } });
+const el = subir ? document.getElementById('jugada') : null;
+if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+}));
+};
+const plusAzar = () => this.setState({ plus: Math.floor(Math.random() * 10) });
 const otrosChips = otros.map((o) => Object.assign({ label: o.nombre }, chip(o.id === otro.id), {
-pick: () => this.setState({ otro: o.id, sel: [], tkAzar: false })
+pick: () => this.setState({ otro: o.id, sel: [], tkAzar: false, plus: null, avisoRepetir: '' })
 }));
 const bolillas = [];
 for (let n = otro.min; n <= otro.max; n++) {
@@ -247,14 +300,14 @@ while (lista.length < otro.cant) {
 const n = otro.min + Math.floor(Math.random() * (otro.max - otro.min + 1));
 if (lista.indexOf(n) === -1) { lista.push(n); }
 }
-this.setState({ sel: lista });
+this.setState({ sel: lista, plus: otro.plus ? (plusSel !== null ? plusSel : Math.floor(Math.random() * 10)) : null });
 };
 const selOrden = sel.slice().sort((a, b) => a - b);
 const esQuiniela = modo === 'quiniela';
 const validas = lineas.filter((l) => l.valida);
 const nombre = st.nombre || '';
 const mayor = !!st.mayor;
-let resumen, detalle, total, falta, boletaJuego, msg;
+let resumen, detalle, total, falta, boletaJuego, msg, numerosTxtOtro = '';
 if (esQuiniela) {
 boletaJuego = 'Quiniela';
 // Cada número se juega una vez por cada par sorteo + quiniela que realmente sortea.
@@ -264,25 +317,96 @@ resumen = validas.map((l) => ({ izq: l.txt, der: fmt(l.impNum) }));
 const porSorteo = jugadasOk.map((x) => x.s + ': ' + x.qs.join(', ')).join('\n');
 detalle = jugadasOk.length ? (porSorteo + (mult > 1 && validas.length ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '')) : ((sorteosSel.length ? '' : 'Sin sorteo elegido\n') + (quinielasSel.length ? '' : 'Sin quiniela elegida'));
 falta = !hoySortea ? 'Los domingos no hay sorteos de Quiniela.' : (!sorteosAbiertos.length ? 'Ya cerraron todos los sorteos de hoy. Mañana podés mandar tu jugada.' : (!validas.length ? 'Cargá al menos un número con su importe.' : (!quinielasSel.length ? 'Elegí al menos una quiniela.' : (!sorteosSel.length ? 'Elegí al menos un sorteo.' : (sorteoVacio ? ('En ' + sorteoVacio.s + ' no sortea ninguna de las quinielas que elegiste. Sacá ese sorteo o sumá otra quiniela.') : '')))));
-msg = 'Hola! Quiero hacer esta jugada de Quiniela:\n' + validas.map((l) => '• ' + l.txt + ' — ' + fmt(l.impNum)).join('\n') + '\n' + porSorteo + (mult > 1 ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '');
 } else {
 boletaJuego = otro.nombre;
 // Telekino: hasta 3 números elegidos (el resto lo completa la terminal) o todo al azar.
-const otroCompleto = otro.elige ? (sel.length > 0 || tkAzar) : sel.length === otro.cant;
-const numerosTxt = tkAzar ? 'al azar' : (selOrden.map(dos).join(' - ') + (otro.elige ? ' (el resto, al azar)' : ''));
+const numerosOk = otro.elige ? (sel.length > 0 || tkAzar) : sel.length === otro.cant;
+const otroCompleto = numerosOk && (!otro.plus || plusSel !== null);
+const numerosTxt = (tkAzar ? 'al azar' : (selOrden.map(dos).join(' - ') + (otro.elige ? ' (el resto, al azar)' : ''))) + (otro.plus && plusSel !== null ? ' · Número Plus: ' + plusSel : '');
+numerosTxtOtro = numerosTxt;
 total = otroCompleto ? otroPrecio : 0;
 resumen = (sel.length || tkAzar) ? [{ izq: otro.nombre, der: otroPrecio ? fmt(otroPrecio) : 'Consultá' }] : [];
 detalle = (sel.length || tkAzar) ? 'Números: ' + numerosTxt : '';
-falta = otro.elige ? (otroCompleto ? '' : 'Elegí hasta ' + otro.elige + ' números o tocá "Jugar al azar".') : (sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '');
-msg = 'Hola! Quiero hacer esta jugada de ' + otro.nombre + ':\nNúmeros: ' + numerosTxt;
+falta = otro.elige ? (numerosOk ? '' : 'Elegí hasta ' + otro.elige + ' números o tocá "Jugar al azar".') : (sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '');
+if (!falta && otro.plus && plusSel === null) { falta = 'Elegí el Número Plus (del 0 al 9).'; }
 }
-if (!falta && !nombre.trim()) { falta = 'Poné tu nombre así identificamos tu jugada.'; }
+// Aviso de "Repetir en…": la instrucción de completar desaparece apenas la jugada está completa.
+const avR = (!esQuiniela && st.avisoRepetir && typeof st.avisoRepetir === 'object') ? st.avisoRepetir : null;
+const numerosCompletos = otro.elige ? (sel.length > 0 || tkAzar) : sel.length === otro.cant;
+const avisoRepetirTxt = avR ? [avR.fijos, numerosCompletos ? '' : avR.completar, plusSel === null ? avR.plus : ''].filter((t) => t).join(' ') : '';
+// ===== CARRITO: varias jugadas en un solo envío =====
+const faltaItem = falta;
+const carrito = Array.isArray(st.carrito) ? st.carrito : [];
+const guardarCarrito = (c, extra) => {
+this.setState(Object.assign({ carrito: c }, extra || {}));
+try { localStorage.setItem('agenciajm-carrito', JSON.stringify(c)); } catch (e) {}
+};
+const ORDEN_JUEGO = ['quiniela', 'quini6', 'loto', 'telekino', 'brinco', 'loto5', 'quinielaplus'];
+const agregarAlCarrito = () => {
+if (faltaItem) { return; }
+const id = Date.now() + '-' + Math.floor(Math.random() * 1e6);
+const item = esQuiniela
+? { id: id, juego: 'quiniela', nombre: 'Quiniela', lineas: validas.map((l) => ({ txt: l.txt, imp: l.impNum })), jugadas: jugadasOk.map((x) => ({ s: x.s, qs: x.qs.slice() })), total: total, raw: { modo: 'quiniela', lineas: lineasSt, quinielas: quinielasSel, sorteos: sorteosSel } }
+: { id: id, juego: otro.id, nombre: otro.nombre, numeros: numerosTxtOtro, total: total, raw: { modo: 'otros', otro: otro.id, sel: sel.slice(), tkAzar: tkAzar, plus: plusSel } };
+const limpio = esQuiniela ? { lineas: [nuevaLinea()] } : { sel: [], tkAzar: false, plus: null };
+guardarCarrito(carrito.concat([item]), Object.assign(limpio, { agregado: true, avisoRepetir: '' }));
+};
+const carritoItems = carrito.map((it, i) => ({ it: it, i: i })).sort((a, b) => (ORDEN_JUEGO.indexOf(a.it.juego) - ORDEN_JUEGO.indexOf(b.it.juego)) || (a.i - b.i)).map((x) => {
+const it = x.it;
+let detalleIt = '', error = '';
+if (it.juego === 'quiniela') {
+const js = Array.isArray(it.jugadas) ? it.jugadas : [];
+const mult = js.reduce((a, j) => a + (j.qs || []).length, 0);
+detalleIt = (it.lineas || []).map((l) => '• ' + l.txt + ' — ' + fmt(l.imp)).join('\n') + '\n' + js.map((j) => j.s + ': ' + (j.qs || []).join(', ')).join('\n') + (mult > 1 ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '');
+const cerrado = js.find((j) => !sorteoAbierto(j.s));
+if (!hoySortea) { error = 'Hoy es domingo: no hay sorteos de Quiniela. Quitá esta jugada.'; }
+else if (cerrado) { error = 'El sorteo ' + cerrado.s + ' ya cerró. Quitá esta jugada o editala.'; }
+} else {
+detalleIt = 'Números: ' + it.numeros;
+}
+return {
+repetir: it.raw ? repetirEn(otros.find((o) => o.id === it.juego), it.raw.sel, true) : [],
+titulo: it.nombre,
+subtotalTexto: fmt(it.total),
+total: Number(it.total) || 0,
+detalle: detalleIt,
+error: error,
+tieneError: !!error,
+borde: error ? '#9B1C1C' : '#E3D3A4',
+bloque: String(it.nombre).toUpperCase() + '\n' + detalleIt + '\nSubtotal: ' + fmt(it.total),
+quitarAria: 'Quitar ' + it.nombre + ' del carrito',
+editarAria: 'Editar ' + it.nombre,
+quitar: () => guardarCarrito(carrito.filter((c) => c.id !== it.id)),
+editar: () => {
+guardarCarrito(carrito.filter((c) => c.id !== it.id), Object.assign({}, it.raw || {}, { agregado: false }));
+const el = document.getElementById('jugada');
+if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+};
+});
+const carritoTotal = carritoItems.reduce((a, x) => a + x.total, 0);
+falta = !carritoItems.length ? 'Agregá al menos una jugada a tu carrito.' : (carritoItems.some((x) => x.tieneError) ? 'Hay una jugada con un sorteo cerrado: quitala o editala.' : '');
+let faltaCampo = !carritoItems.length ? 'carrito' : (falta ? 'cerrado' : '');
+if (!falta && !nombre.trim()) { falta = 'Poné tu nombre así identificamos tu jugada.'; faltaCampo = 'nombre'; }
 const celular = st.celular || '';
 const celDig = celular.replace(/\D/g, '').replace(/^0/, '');
-if (!falta && !celDig) { falta = 'Poné tu celular así te mandamos la foto del ticket.'; }
-if (!falta && celDig.length !== 10) { falta = 'Revisá el celular: código de área y número, sin 0 ni 15 (10 números).'; }
-if (!falta && !mayor) { falta = 'Confirmá que sos mayor de 18 años.'; }
-msg += '\nTotal: ' + fmt(total) + '\nNombre: ' + nombre.trim() + '\nCelular: ' + celDig + '\nEspero que me confirmen el total para transferir.' + '\n\nIMPORTANTE: ' + AVISO_COMPROBANTE.principal + '\n' + AVISO_COMPROBANTE.apoyo;
+if (!falta && !celDig) { falta = 'Poné tu celular así te mandamos la foto del ticket.'; faltaCampo = 'celular'; }
+if (!falta && celDig.length !== 10) { falta = 'Revisá el celular: código de área y número, sin 0 ni 15 (10 números).'; faltaCampo = 'celular'; }
+if (!falta && !mayor) { falta = 'Confirmá que sos mayor de 18 años.'; faltaCampo = 'mayor'; }
+// Botón de WhatsApp siempre verde: si falta algo, al tocarlo lleva al primer dato que falta y lo marca en rojo.
+const marcado = st.marcarFalta && st.marcarFalta === faltaCampo ? faltaCampo : '';
+const irAlFaltante = () => {
+this.setState({ marcarFalta: faltaCampo, avisoVacio: faltaCampo === 'carrito' });
+const destino = { carrito: 'jugada', cerrado: 'carrito', nombre: 'jm-nombre', celular: 'jm-celular', mayor: 'jm-mayor' }[faltaCampo];
+setTimeout(() => {
+const el = destino ? document.getElementById(destino) : null;
+if (!el) { return; }
+el.scrollIntoView({ block: faltaCampo === 'carrito' || faltaCampo === 'cerrado' ? 'start' : 'center' });
+if (el.focus && /^jm-/.test(destino)) { try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); } }
+}, 30);
+};
+msg = 'Hola! Quiero hacer esta jugada:\n\n' + carritoItems.map((x) => x.bloque).join('\n\n') + '\n\nTOTAL: ' + fmt(carritoTotal) + '\nNombre: ' + nombre.trim() + '\nCelular: ' + celDig + '\nEspero que me confirmen el total para transferir.' + '\n\nIMPORTANTE: ' + AVISO_COMPROBANTE.principal + '\n' + AVISO_COMPROBANTE.apoyo;
+// ===== CARRITO (fin) =====
 const ext = this.extractos();
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
@@ -370,7 +494,33 @@ otroContador: tkAzar ? 'Al azar' : (sel.length + ' de ' + limiteSel),
 azarTexto: otro.elige ? 'Jugar al azar' : 'Completar al azar',
 bolillas: bolillas,
 alAzar: alAzar,
-borrarBolillas: () => this.setState({ sel: [], tkAzar: false }),
+borrarBolillas: () => this.setState({ sel: [], tkAzar: false, plus: null, avisoRepetir: '' }),
+avisoRepetir: avisoRepetirTxt,
+hayAvisoRepetir: !!avisoRepetirTxt,
+irAlFaltante: irAlFaltante,
+marcaNombre: marcado === 'nombre' ? 'true' : 'false',
+marcaCelular: marcado === 'celular' ? 'true' : 'false',
+marcaMayor: marcado === 'mayor' ? 'true' : 'false',
+bordeNombre: marcado === 'nombre' ? '3px solid #9B1C1C' : '2px solid #C9B98F',
+bordeCelular: marcado === 'celular' ? '3px solid #9B1C1C' : '2px solid #C9B98F',
+bordeMayor: marcado === 'mayor' ? '3px solid #9B1C1C' : '2px solid transparent',
+mostrarAvisoVacio: !!st.avisoVacio && carritoItems.length === 0,
+tienePlus: !!otro.plus,
+plusAzar: plusAzar,
+repetirActual: repetirEn(otro, sel, false),
+plusChips: plusChips,
+plusTexto: plusSel === null ? 'Sin elegir' : 'Plus: ' + plusSel,
+listoItem: !faltaItem,
+noListoItem: !!faltaItem,
+faltaItem: faltaItem,
+agregarAlCarrito: agregarAlCarrito,
+agregadoAviso: !!st.agregado && !!faltaItem && carrito.length > 0,
+pendienteSinAgregar: !faltaItem,
+carritoItems: carritoItems,
+carritoVacio: carritoItems.length === 0,
+carritoTotalTexto: fmt(carritoTotal),
+carritoCuenta: carritoItems.length + (carritoItems.length === 1 ? ' jugada' : ' jugadas'),
+barraVisible: carritoItems.length > 0 && !st.carritoEnVista,
 boletaJuego: boletaJuego,
 resumen: resumen,
 resumenVacio: resumen.length === 0,

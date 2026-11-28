@@ -39,6 +39,13 @@ a{color:#1F5135}a:hover{color:#123222}
 .pal-brillo{animation:pal-brillo .7s ease-out both}
 .pal-guino{animation:pal-guino 1.6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.pal-latido,.pal-giro,.pal-temblor,.pal-pop,.pal-chispa,.pal-brillo,.pal-guino{animation:none;filter:none}}
+/* Carrito: barra fija abajo, solo en celular */
+.barra-carrito{display:none}
+.barra-espacio{display:none}
+@media (max-width:700px){
+.barra-carrito{position:fixed;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:60px;padding:8px 10px 8px 14px;box-sizing:border-box;border-radius:16px;background:#17211B;color:#FFFFFF;border:2px solid #F2C14E;box-shadow:0 10px 24px rgba(0,0,0,.35);text-decoration:none}
+.barra-espacio{display:block;height:84px}
+}
 /* ===== GUIRNALDAS NAVIDEÑAS (inicio) ===== */
 .guir{position:relative;height:62px;overflow:hidden;overflow-x:clip;overflow-y:visible;pointer-events:none;background:linear-gradient(to bottom,rgba(255,214,150,.10),rgba(255,214,150,0))}
 .guir-escala{position:absolute;left:0;top:0;transform-origin:0 0}
@@ -719,17 +726,40 @@ Agregar otro número
 <span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">2 · {{otroConsigna}}</span>
 <span aria-live="polite" style="font-size: 17px; font-weight: 800; color: {{primary}}">{{otroContador}}</span>
 </div>
+<sc-if value="{{hayAvisoRepetir}}" hint-placeholder-val="{{ false }}">
+<span role="status" style="display: block; padding: 10px 12px; border-radius: 10px; background: #FFF4D6; border: 2px solid #E3B341; font-size: 15px; font-weight: 700; line-height: 1.4; color: #4A2F06">{{avisoRepetir}}</span>
+</sc-if>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 6px">
 <sc-for list="{{bolillas}}" as="item" hint-placeholder-count="46">
 <button type="button" aria-pressed="{{item.on}}" aria-label="Número {{item.label}}" onClick="{{item.toggle}}" style="height: 50px; border-radius: 50%; border: 2px solid {{item.borde}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; cursor: pointer">{{item.label}}</button>
 </sc-for>
 </div>
+<sc-if value="{{tienePlus}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #FFFFFF; border: 2px dashed #C9B98F">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">3 · Número Plus · del 0 al 9</span>
+<span aria-live="polite" style="font-size: 17px; font-weight: 800; color: {{primary}}">{{plusTexto}}</span>
+</div>
+<div role="group" aria-label="Número Plus" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px">
+<sc-for list="{{plusChips}}" as="item" hint-placeholder-count="10">
+<button type="button" aria-pressed="{{item.on}}" aria-label="Número Plus {{item.label}}" onClick="{{item.toggle}}" style="height: 46px; border-radius: 10px; border: 2px solid {{item.borde}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; cursor: pointer">{{item.label}}</button>
+</sc-for>
+</div>
+<button type="button" onClick="{{plusAzar}}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 0; background: #E3B341; color: #17211B; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Extra al azar</button>
+</div>
+</sc-if>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button type="button" onClick="{{alAzar}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 0; background: #E3B341; color: #17211B; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"></circle><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle></svg>
 {{azarTexto}}
 </button>
 <button type="button" onClick="{{borrarBolillas}}" style="min-height: 48px; padding: 0 18px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; color: #17211B; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Borrar</button>
+<sc-for list="{{repetirActual}}" as="rp" hint-placeholder-count="0">
+<button type="button" onClick="{{rp.ir}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 2px solid {{primary}}; background: #FFFFFF; color: {{primary}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.7"></path><path d="M20 3.5v5.2h-5.2"></path><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15.3"></path><path d="M4 20.5v-5.2h5.2"></path></svg>
+{{rp.label}}
+</button>
+</sc-for>
 </div>
 </div>
 </div>
@@ -753,23 +783,84 @@ Agregar otro número
 </div>
 <div aria-hidden="true" style="margin: 0 18px; border-top: 3px dashed #C9B98F"></div>
 <div style="padding: 16px 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
-<span style="font-size: 18px; font-weight: 800">Total</span>
+<span style="font-size: 18px; font-weight: 800">Esta jugada</span>
 <span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 40px; line-height: 1; color: #17211B; font-variant-numeric: tabular-nums">{{totalTexto}}</span>
 </div>
-<div role="note" style="margin: 0 18px 18px; display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: #17211B; border: 2px solid #F2C14E">
+<div style="padding: 0 22px 22px; display: flex; flex-direction: column; gap: 10px">
+<sc-if value="{{mostrarAvisoVacio}}" hint-placeholder-val="{{ false }}">
+<span role="alert" style="display: block; padding: 10px 12px; border-radius: 10px; background: #FFFFFF; border: 3px solid #9B1C1C; font-size: 16px; font-weight: 800; color: #9B1C1C">Agregá al menos una jugada: armala acá y tocá «Agregar a mi jugada».</span>
+</sc-if>
+<sc-if value="{{listoItem}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{agregarAlCarrito}}" style="display: flex; width: 100%; align-items: center; justify-content: center; gap: 10px; min-height: 60px; padding: 10px 18px; border-radius: 14px; border: 0; background: {{primary}}; color: #FFFFFF; font-family: inherit; font-size: 20px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 14px rgba(31,81,53,0.3)">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+Agregar a mi jugada
+</button>
+</sc-if>
+<sc-if value="{{noListoItem}}" hint-placeholder-val="{{ true }}">
+<button type="button" disabled style="min-height: 56px; border-radius: 14px; border: 0; background: #DDD3B5; color: #4A2F06; font-family: inherit; font-size: 19px; font-weight: 800">Agregar a mi jugada</button>
+<span aria-live="polite" style="font-size: 16px; font-weight: 700; color: #7A2E2E">{{faltaItem}}</span>
+</sc-if>
+<sc-if value="{{agregadoAviso}}" hint-placeholder-val="{{ false }}">
+<a href="#carrito" style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 10px; background: #E5F2E8; border: 2px solid #1F5135; color: #17211B; font-size: 16px; font-weight: 700; text-decoration: none">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F5135" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+Listo, se agregó a tu carrito. Podés armar otra o bajar a enviarla.
+</a>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div id="carrito" style="scroll-margin-top: 12px; display: flex; flex-wrap: wrap; background: #FFF4D6; border: 2px solid #E3B341; border-radius: 18px; overflow: hidden">
+<div style="flex: 1 1 380px; min-width: 0; box-sizing: border-box; padding: clamp(16px, 3vw, 24px); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7A5410" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M3 4h2.2l2.1 10.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.2L20.5 8H6.1"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #7A5410">Tu carrito · {{carritoCuenta}}</span>
+</div>
+<sc-if value="{{carritoVacio}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 17px; color: #4A2F06">Todavía no agregaste jugadas. Armá una arriba y tocá «Agregar a mi jugada». Podés sumar Quiniela, Quini 6, Loto y los demás juegos, y mandar todo junto.</span>
+</sc-if>
+<sc-for list="{{carritoItems}}" as="it" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 14px; background: #FFFFFF; border: 2px solid {{it.borde}}">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+<span style="font-size: 19px; font-weight: 800; color: #17211B">{{it.titulo}}</span>
+<span style="font-size: 19px; font-weight: 800; color: #17211B; font-variant-numeric: tabular-nums">{{it.subtotalTexto}}</span>
+</div>
+<span style="font-size: 16px; line-height: 1.45; color: #4A2F06; white-space: pre-line; font-variant-numeric: tabular-nums">{{it.detalle}}</span>
+<sc-if value="{{it.tieneError}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; font-weight: 800; color: #9B1C1C">{{it.error}}</span>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" onClick="{{it.editar}}" aria-label="{{it.editarAria}}" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid #1F5135; background: #FFFFFF; color: #1F5135; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Editar</button>
+<button type="button" onClick="{{it.quitar}}" aria-label="{{it.quitarAria}}" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid #DDE2DA; background: #FFFFFF; color: #7A2E2E; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+Quitar
+</button>
+<sc-for list="{{it.repetir}}" as="rp" hint-placeholder-count="0">
+<button type="button" onClick="{{rp.ir}}" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFF4D6; color: #17211B; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">{{rp.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<div aria-hidden="true" style="border-top: 3px dashed #C9B98F"></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+<span style="font-size: 20px; font-weight: 800">Total</span>
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 44px; line-height: 1; color: #17211B; font-variant-numeric: tabular-nums">{{carritoTotalTexto}}</span>
+</div>
+<div role="note" style="display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: #17211B; border: 2px solid #F2C14E">
 <span style="font-size: 17px; line-height: 1.25; font-weight: 800; text-transform: uppercase; color: #F2C14E">{{avisoComprobante.principal}}</span>
 <span style="font-size: 15px; line-height: 1.35; font-weight: 700; color: #FFFFFF">{{avisoComprobante.apoyo}}</span>
 </div>
-<div style="padding: 0 22px 22px; display: flex; flex-direction: column; gap: 12px">
+</div>
+<div style="flex: 1 1 320px; min-width: 0; box-sizing: border-box; padding: clamp(16px, 3vw, 24px); display: flex; flex-direction: column; gap: 12px">
 <label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06">Tu nombre
-<input type="text" autocomplete="name" placeholder="Para identificar tu jugada" value="{{nombre}}" onChange="{{setNombre}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B">
+<input id="jm-nombre" type="text" autocomplete="name" placeholder="Para identificar tu jugada" value="{{nombre}}" onChange="{{setNombre}}" aria-invalid="{{marcaNombre}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: {{bordeNombre}}; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B">
 </label>
-<label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06">Tu celular
-<input type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Ej: 291 4357210" value="{{celular}}" onChange="{{setCelular}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B; font-variant-numeric: tabular-nums">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06"><span>Tu celular <span style="color: #B3261E">*</span> <span style="font-size: 13px; font-weight: 700; color: #B3261E">obligatorio</span></span>
+<input id="jm-celular" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Ej: 291 4357210" aria-required="true" value="{{celular}}" onChange="{{setCelular}}" aria-invalid="{{marcaCelular}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: {{bordeCelular}}; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B; font-variant-numeric: tabular-nums">
 <span style="font-size: 14px; font-weight: 500">Con código de área, sin 0 ni 15. Ahí te mandamos la foto de tu ticket.</span>
 </label>
-<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 17px; font-weight: 700; color: #17211B; cursor: pointer">
-<input type="checkbox" checked="{{mayor}}" onChange="{{toggleMayor}}" style="flex: 0 0 auto; width: 24px; height: 24px; margin: 0; accent-color: #1F5135">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 8px; margin: 0 -8px; border-radius: 10px; border: {{bordeMayor}}; font-size: 17px; font-weight: 700; color: #17211B; cursor: pointer">
+<input id="jm-mayor" type="checkbox" checked="{{mayor}}" onChange="{{toggleMayor}}" aria-invalid="{{marcaMayor}}" style="flex: 0 0 auto; width: 24px; height: 24px; margin: 0; accent-color: #1F5135">
 Soy mayor de 18 años
 </label>
 <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 14px; background: #FFFFFF; border: 2px solid #C9B98F">
@@ -805,14 +896,28 @@ Enviar mi jugada por WhatsApp
 </a>
 </sc-if>
 <sc-if value="{{noListo}}" hint-placeholder-val="{{ true }}">
-<button type="button" disabled style="min-height: 56px; border-radius: 12px; border: 0; background: #DDD3B5; color: #4A2F06; font-family: inherit; font-size: 19px; font-weight: 800">Enviar mi jugada por WhatsApp</button>
-<span aria-live="polite" style="font-size: 16px; font-weight: 700; color: #7A2E2E">{{falta}}</span>
+<button type="button" aria-disabled="true" aria-describedby="jm-falta" onClick="{{irAlFaltante}}" style="display: flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: center; gap: 12px; min-height: 66px; padding: 12px 18px; border-radius: 14px; background: #2E9A58; border: 3px solid #1F7A43; color: #FFFFFF; font-family: inherit; font-size: 21px; line-height: 1.2; font-weight: 800; text-align: center; cursor: pointer; box-shadow: 0 6px 16px rgba(21,122,57,0.25)">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Enviar mi jugada por WhatsApp
+</button>
+<span id="jm-falta" aria-live="polite" style="font-size: 16px; font-weight: 700; color: #7A2E2E">{{falta}}</span>
+</sc-if>
+<sc-if value="{{pendienteSinAgregar}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; font-weight: 700; color: #7A5410">Ojo: la jugada que estás armando arriba todavía no está en tu carrito. Tocá «Agregar a mi jugada» para sumarla.</span>
 </sc-if>
 <span style="font-size: 14px; line-height: 1.45; color: #4A2F06">El total final lo confirma la agencia al cargar la jugada en el sistema. Tu jugada queda hecha cuando se acredita el pago y te mandamos el ticket. Mandala con tiempo: el cierre es 15 minutos antes de cada sorteo.</span>
 </div>
 </div>
 </div>
-</div>
+<sc-if value="{{barraVisible}}" hint-placeholder-val="{{ false }}">
+<a href="#carrito" class="barra-carrito" aria-label="Ver tu carrito y enviar la jugada">
+<span style="display: inline-flex; align-items: center; gap: 10px; min-width: 0">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M3 4h2.2l2.1 10.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.2L20.5 8H6.1"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>
+<span style="font-size: 17px; font-weight: 800; white-space: nowrap">{{carritoCuenta}} · {{carritoTotalTexto}}</span>
+</span>
+<span style="flex: 0 0 auto; padding: 8px 14px; border-radius: 10px; background: #F2C14E; color: #17211B; font-size: 16px; font-weight: 800">Ver y enviar</span>
+</a>
+</sc-if>
 </section>
 
 <section id="resultados" style="background: {{primary}}; color: #FFFFFF">
@@ -856,6 +961,9 @@ Enviar mi jugada por WhatsApp
 </div>
 </footer>
 
+<sc-if value="{{barraVisible}}" hint-placeholder-val="{{ false }}">
+<div class="barra-espacio" aria-hidden="true"></div>
+</sc-if>
 </div>
 </template>
 <script src="vendor/preact.min.umd.js"></script>
