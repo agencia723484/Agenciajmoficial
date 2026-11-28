@@ -27,6 +27,13 @@ a{color:#1F5135}a:hover{color:#123222}
 .pal-brillo{animation:pal-brillo .7s ease-out both}
 .pal-guino{animation:pal-guino 1.6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.pal-latido,.pal-giro,.pal-temblor,.pal-pop,.pal-chispa,.pal-brillo,.pal-guino{animation:none;filter:none}}
+/* Carrito: barra fija abajo, solo en celular */
+.barra-carrito{display:none}
+.barra-espacio{display:none}
+@media (max-width:700px){
+.barra-carrito{position:fixed;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:60px;padding:8px 10px 8px 14px;box-sizing:border-box;border-radius:16px;background:#17211B;color:#FFFFFF;border:2px solid #F2C14E;box-shadow:0 10px 24px rgba(0,0,0,.35);text-decoration:none}
+.barra-espacio{display:block;height:84px}
+}
 /* ===== GUIRNALDAS NAVIDEÑAS (inicio) ===== */
 .guir{position:relative;height:62px;overflow:hidden;overflow-x:clip;overflow-y:visible;pointer-events:none;background:linear-gradient(to bottom,rgba(255,214,150,.10),rgba(255,214,150,0))}
 .guir-escala{position:absolute;left:0;top:0;transform-origin:0 0}
@@ -703,17 +710,40 @@ Agregar otro número
 <span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">2 · {{otroConsigna}}</span>
 <span aria-live="polite" style="font-size: 17px; font-weight: 800; color: {{primary}}">{{otroContador}}</span>
 </div>
+<sc-if value="{{hayAvisoRepetir}}" hint-placeholder-val="{{ false }}">
+<span role="status" style="display: block; padding: 10px 12px; border-radius: 10px; background: #FFF4D6; border: 2px solid #E3B341; font-size: 15px; font-weight: 700; line-height: 1.4; color: #4A2F06">{{avisoRepetir}}</span>
+</sc-if>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 6px">
 <sc-for list="{{bolillas}}" as="item" hint-placeholder-count="46">
 <button type="button" aria-pressed="{{item.on}}" aria-label="Número {{item.label}}" onClick="{{item.toggle}}" style="height: 50px; border-radius: 50%; border: 2px solid {{item.borde}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; cursor: pointer">{{item.label}}</button>
 </sc-for>
 </div>
+<sc-if value="{{tienePlus}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 12px; background: #FFFFFF; border: 2px dashed #C9B98F">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4A5650">3 · Número Plus · del 0 al 9</span>
+<span aria-live="polite" style="font-size: 17px; font-weight: 800; color: {{primary}}">{{plusTexto}}</span>
+</div>
+<div role="group" aria-label="Número Plus" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px">
+<sc-for list="{{plusChips}}" as="item" hint-placeholder-count="10">
+<button type="button" aria-pressed="{{item.on}}" aria-label="Número Plus {{item.label}}" onClick="{{item.toggle}}" style="height: 46px; border-radius: 10px; border: 2px solid {{item.borde}}; background: {{item.bg}}; color: {{item.fg}}; font-family: inherit; font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; cursor: pointer">{{item.label}}</button>
+</sc-for>
+</div>
+<button type="button" onClick="{{plusAzar}}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 0; background: #E3B341; color: #17211B; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Extra al azar</button>
+</div>
+</sc-if>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <button type="button" onClick="{{alAzar}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 0; background: #E3B341; color: #17211B; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"></circle><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle></svg>
 {{azarTexto}}
 </button>
 <button type="button" onClick="{{borrarBolillas}}" style="min-height: 48px; padding: 0 18px; border-radius: 10px; border: 2px solid #9AA59E; background: #FFFFFF; color: #17211B; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Borrar</button>
+<sc-for list="{{repetirActual}}" as="rp" hint-placeholder-count="0">
+<button type="button" onClick="{{rp.ir}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 2px solid {{primary}}; background: #FFFFFF; color: {{primary}}; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.7"></path><path d="M20 3.5v5.2h-5.2"></path><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15.3"></path><path d="M4 20.5v-5.2h5.2"></path></svg>
+{{rp.label}}
+</button>
+</sc-for>
 </div>
 </div>
 </div>
@@ -737,23 +767,84 @@ Agregar otro número
 </div>
 <div aria-hidden="true" style="margin: 0 18px; border-top: 3px dashed #C9B98F"></div>
 <div style="padding: 16px 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
-<span style="font-size: 18px; font-weight: 800">Total</span>
+<span style="font-size: 18px; font-weight: 800">Esta jugada</span>
 <span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 40px; line-height: 1; color: #17211B; font-variant-numeric: tabular-nums">{{totalTexto}}</span>
 </div>
-<div role="note" style="margin: 0 18px 18px; display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: #17211B; border: 2px solid #F2C14E">
+<div style="padding: 0 22px 22px; display: flex; flex-direction: column; gap: 10px">
+<sc-if value="{{mostrarAvisoVacio}}" hint-placeholder-val="{{ false }}">
+<span role="alert" style="display: block; padding: 10px 12px; border-radius: 10px; background: #FFFFFF; border: 3px solid #9B1C1C; font-size: 16px; font-weight: 800; color: #9B1C1C">Agregá al menos una jugada: armala acá y tocá «Agregar a mi jugada».</span>
+</sc-if>
+<sc-if value="{{listoItem}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{agregarAlCarrito}}" style="display: flex; width: 100%; align-items: center; justify-content: center; gap: 10px; min-height: 60px; padding: 10px 18px; border-radius: 14px; border: 0; background: {{primary}}; color: #FFFFFF; font-family: inherit; font-size: 20px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 14px rgba(31,81,53,0.3)">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+Agregar a mi jugada
+</button>
+</sc-if>
+<sc-if value="{{noListoItem}}" hint-placeholder-val="{{ true }}">
+<button type="button" disabled style="min-height: 56px; border-radius: 14px; border: 0; background: #DDD3B5; color: #4A2F06; font-family: inherit; font-size: 19px; font-weight: 800">Agregar a mi jugada</button>
+<span aria-live="polite" style="font-size: 16px; font-weight: 700; color: #7A2E2E">{{faltaItem}}</span>
+</sc-if>
+<sc-if value="{{agregadoAviso}}" hint-placeholder-val="{{ false }}">
+<a href="#carrito" style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 10px; background: #E5F2E8; border: 2px solid #1F5135; color: #17211B; font-size: 16px; font-weight: 700; text-decoration: none">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1F5135" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>
+Listo, se agregó a tu carrito. Podés armar otra o bajar a enviarla.
+</a>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div id="carrito" style="scroll-margin-top: 12px; display: flex; flex-wrap: wrap; background: #FFF4D6; border: 2px solid #E3B341; border-radius: 18px; overflow: hidden">
+<div style="flex: 1 1 380px; min-width: 0; box-sizing: border-box; padding: clamp(16px, 3vw, 24px); display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7A5410" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M3 4h2.2l2.1 10.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.2L20.5 8H6.1"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>
+<span style="font-size: 15px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #7A5410">Tu carrito · {{carritoCuenta}}</span>
+</div>
+<sc-if value="{{carritoVacio}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 17px; color: #4A2F06">Todavía no agregaste jugadas. Armá una arriba y tocá «Agregar a mi jugada». Podés sumar Quiniela, Quini 6, Loto y los demás juegos, y mandar todo junto.</span>
+</sc-if>
+<sc-for list="{{carritoItems}}" as="it" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: 14px; background: #FFFFFF; border: 2px solid {{it.borde}}">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+<span style="font-size: 19px; font-weight: 800; color: #17211B">{{it.titulo}}</span>
+<span style="font-size: 19px; font-weight: 800; color: #17211B; font-variant-numeric: tabular-nums">{{it.subtotalTexto}}</span>
+</div>
+<span style="font-size: 16px; line-height: 1.45; color: #4A2F06; white-space: pre-line; font-variant-numeric: tabular-nums">{{it.detalle}}</span>
+<sc-if value="{{it.tieneError}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; font-weight: 800; color: #9B1C1C">{{it.error}}</span>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" onClick="{{it.editar}}" aria-label="{{it.editarAria}}" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid #1F5135; background: #FFFFFF; color: #1F5135; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Editar</button>
+<button type="button" onClick="{{it.quitar}}" aria-label="{{it.quitarAria}}" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid #DDE2DA; background: #FFFFFF; color: #7A2E2E; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+Quitar
+</button>
+<sc-for list="{{it.repetir}}" as="rp" hint-placeholder-count="0">
+<button type="button" onClick="{{rp.ir}}" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFF4D6; color: #17211B; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">{{rp.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<div aria-hidden="true" style="border-top: 3px dashed #C9B98F"></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px">
+<span style="font-size: 20px; font-weight: 800">Total</span>
+<span style="font-family: 'Anton', 'Archivo', sans-serif; font-size: 44px; line-height: 1; color: #17211B; font-variant-numeric: tabular-nums">{{carritoTotalTexto}}</span>
+</div>
+<div role="note" style="display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; background: #17211B; border: 2px solid #F2C14E">
 <span style="font-size: 17px; line-height: 1.25; font-weight: 800; text-transform: uppercase; color: #F2C14E">{{avisoComprobante.principal}}</span>
 <span style="font-size: 15px; line-height: 1.35; font-weight: 700; color: #FFFFFF">{{avisoComprobante.apoyo}}</span>
 </div>
-<div style="padding: 0 22px 22px; display: flex; flex-direction: column; gap: 12px">
+</div>
+<div style="flex: 1 1 320px; min-width: 0; box-sizing: border-box; padding: clamp(16px, 3vw, 24px); display: flex; flex-direction: column; gap: 12px">
 <label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06">Tu nombre
-<input type="text" autocomplete="name" placeholder="Para identificar tu jugada" value="{{nombre}}" onChange="{{setNombre}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B">
+<input id="jm-nombre" type="text" autocomplete="name" placeholder="Para identificar tu jugada" value="{{nombre}}" onChange="{{setNombre}}" aria-invalid="{{marcaNombre}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: {{bordeNombre}}; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B">
 </label>
-<label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06">Tu celular
-<input type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Ej: 291 4357210" value="{{celular}}" onChange="{{setCelular}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 2px solid #C9B98F; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B; font-variant-numeric: tabular-nums">
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 700; color: #4A2F06"><span>Tu celular <span style="color: #B3261E">*</span> <span style="font-size: 13px; font-weight: 700; color: #B3261E">obligatorio</span></span>
+<input id="jm-celular" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Ej: 291 4357210" aria-required="true" value="{{celular}}" onChange="{{setCelular}}" aria-invalid="{{marcaCelular}}" style="width: 100%; min-height: 50px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: {{bordeCelular}}; background: #FFFFFF; font-family: inherit; font-size: 18px; color: #17211B; font-variant-numeric: tabular-nums">
 <span style="font-size: 14px; font-weight: 500">Con código de área, sin 0 ni 15. Ahí te mandamos la foto de tu ticket.</span>
 </label>
-<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 17px; font-weight: 700; color: #17211B; cursor: pointer">
-<input type="checkbox" checked="{{mayor}}" onChange="{{toggleMayor}}" style="flex: 0 0 auto; width: 24px; height: 24px; margin: 0; accent-color: #1F5135">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 8px; margin: 0 -8px; border-radius: 10px; border: {{bordeMayor}}; font-size: 17px; font-weight: 700; color: #17211B; cursor: pointer">
+<input id="jm-mayor" type="checkbox" checked="{{mayor}}" onChange="{{toggleMayor}}" aria-invalid="{{marcaMayor}}" style="flex: 0 0 auto; width: 24px; height: 24px; margin: 0; accent-color: #1F5135">
 Soy mayor de 18 años
 </label>
 <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 14px; background: #FFFFFF; border: 2px solid #C9B98F">
@@ -789,14 +880,28 @@ Enviar mi jugada por WhatsApp
 </a>
 </sc-if>
 <sc-if value="{{noListo}}" hint-placeholder-val="{{ true }}">
-<button type="button" disabled style="min-height: 56px; border-radius: 12px; border: 0; background: #DDD3B5; color: #4A2F06; font-family: inherit; font-size: 19px; font-weight: 800">Enviar mi jugada por WhatsApp</button>
-<span aria-live="polite" style="font-size: 16px; font-weight: 700; color: #7A2E2E">{{falta}}</span>
+<button type="button" aria-disabled="true" aria-describedby="jm-falta" onClick="{{irAlFaltante}}" style="display: flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: center; gap: 12px; min-height: 66px; padding: 12px 18px; border-radius: 14px; background: #2E9A58; border: 3px solid #1F7A43; color: #FFFFFF; font-family: inherit; font-size: 21px; line-height: 1.2; font-weight: 800; text-align: center; cursor: pointer; box-shadow: 0 6px 16px rgba(21,122,57,0.25)">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Enviar mi jugada por WhatsApp
+</button>
+<span id="jm-falta" aria-live="polite" style="font-size: 16px; font-weight: 700; color: #7A2E2E">{{falta}}</span>
+</sc-if>
+<sc-if value="{{pendienteSinAgregar}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; font-weight: 700; color: #7A5410">Ojo: la jugada que estás armando arriba todavía no está en tu carrito. Tocá «Agregar a mi jugada» para sumarla.</span>
 </sc-if>
 <span style="font-size: 14px; line-height: 1.45; color: #4A2F06">El total final lo confirma la agencia al cargar la jugada en el sistema. Tu jugada queda hecha cuando se acredita el pago y te mandamos el ticket. Mandala con tiempo: el cierre es 15 minutos antes de cada sorteo.</span>
 </div>
 </div>
 </div>
-</div>
+<sc-if value="{{barraVisible}}" hint-placeholder-val="{{ false }}">
+<a href="#carrito" class="barra-carrito" aria-label="Ver tu carrito y enviar la jugada">
+<span style="display: inline-flex; align-items: center; gap: 10px; min-width: 0">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2C14E" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto"><path d="M3 4h2.2l2.1 10.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.2L20.5 8H6.1"></path><circle cx="9.5" cy="19.5" r="1.4"></circle><circle cx="17" cy="19.5" r="1.4"></circle></svg>
+<span style="font-size: 17px; font-weight: 800; white-space: nowrap">{{carritoCuenta}} · {{carritoTotalTexto}}</span>
+</span>
+<span style="flex: 0 0 auto; padding: 8px 14px; border-radius: 10px; background: #F2C14E; color: #17211B; font-size: 16px; font-weight: 800">Ver y enviar</span>
+</a>
+</sc-if>
 </section>
 
 <section id="resultados" style="background: {{primary}}; color: #FFFFFF">
@@ -840,6 +945,9 @@ Enviar mi jugada por WhatsApp
 </div>
 </footer>
 
+<sc-if value="{{barraVisible}}" hint-placeholder-val="{{ false }}">
+<div class="barra-espacio" aria-hidden="true"></div>
+</sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"cartel":{"editor":"enum","options":["A","B"],"default":"B"},"primary":{"editor":"color","default":"#1F5135","options":["#1F5135","#1E3A5F","#7A2E2E"]},"$preview":{"width":1280,"height":9000}}'>
@@ -937,9 +1045,29 @@ this._palTimers.push(setTimeout(() => this.setState({ palFase: 'listo', palpito:
 }
 componentDidMount() {
 this._reloj = setInterval(() => this.forceUpdate(), 30000);
+// Carrito: se recupera del navegador (no se guarda en ningún servidor).
+try {
+const guardado = JSON.parse(localStorage.getItem('agenciajm-carrito') || '[]');
+if (Array.isArray(guardado) && guardado.length) {
+this.setState({ carrito: guardado.filter((x) => x && typeof x.juego === 'string' && typeof x.nombre === 'string' && isFinite(x.total)).slice(0, 30) });
+}
+} catch (e) {}
+// En celular, la barra del carrito se esconde cuando el carrito ya está a la vista.
+this._obsTimer = setTimeout(() => {
+const el = document.getElementById('carrito');
+if (el && typeof IntersectionObserver !== 'undefined') {
+this._obsCarrito = new IntersectionObserver((es) => {
+const v = es.some((x) => x.isIntersecting);
+if (v !== !!(this.state && this.state.carritoEnVista)) { this.setState({ carritoEnVista: v }); }
+});
+this._obsCarrito.observe(el);
+}
+}, 0);
 }
 componentWillUnmount() {
 clearInterval(this._reloj);
+clearTimeout(this._obsTimer);
+if (this._obsCarrito) { this._obsCarrito.disconnect(); }
 (this._palTimers || []).forEach((t) => clearTimeout(t));
 }
 extractos() {
@@ -1058,8 +1186,9 @@ const sorteoVacio = jugadas.find((x) => !x.qs.length);
 const jugadasOk = jugadas.filter((x) => x.qs.length);
 const precioDe = (id) => { const j = juegos.find((x) => x.id === id); return j ? (parseInt(String(j.precio).replace(/\D/g, ''), 10) || 0) : 0; };
 const otros = [
-{ id: 'quini6', nombre: 'Quini 6', cant: 6, min: 0, max: 45 },
-{ id: 'loto', nombre: 'Loto Plus', cant: 6, min: 0, max: 41 },
+// repite: los juegos con la misma marca usan la misma cantidad y rango de números, y se pueden "repetir" entre sí.
+{ id: 'quini6', nombre: 'Quini 6', cant: 6, min: 0, max: 45, repite: 'seis-00-45' },
+{ id: 'loto', nombre: 'Loto Plus', cant: 6, min: 0, max: 45, plus: true, repite: 'seis-00-45' },
 { id: 'telekino', nombre: 'Telekino', cant: 15, elige: 3, min: 1, max: 25 },
 { id: 'brinco', nombre: 'Brinco', cant: 6, min: 0, max: 39 },
 { id: 'loto5', nombre: 'Loto 5', cant: 5, min: 0, max: 36 },
@@ -1071,8 +1200,40 @@ const otroPrecio = precioDe(otro.id);
 const sel = (st.sel || []).filter((n) => n >= otro.min && n <= otro.max);
 const limiteSel = otro.elige || otro.cant;
 const tkAzar = !!otro.elige && !!st.tkAzar && !sel.length;
+// Loto Plus: además de los 6 números, un Número Plus del 0 al 9.
+const plusSel = otro.plus && typeof st.plus === 'number' && st.plus >= 0 && st.plus <= 9 ? st.plus : null;
+const plusChips = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => Object.assign({ label: String(n) }, chip(plusSel === n), {
+toggle: () => this.setState({ plus: plusSel === n ? null : n })
+}));
+// Repetir los mismos números en otro juego de números (Quini 6, Loto Plus, Loto 5, Brinco, Quiniela Plus, Telekino).
+// Se copian los que entran en el rango del destino, hasta la cantidad que pide; el resto lo completa la persona.
+// Los extras propios del destino (Número Plus del Loto) los elige la persona o al azar.
+const repetirEn = (o, numeros, subir) => {
+if (!o || !Array.isArray(numeros) || !numeros.length) { return []; }
+if (!(o.elige ? numeros.length <= o.elige : numeros.length === o.cant)) { return []; }
+const nums = numeros.slice().sort((a, b) => a - b);
+return otros.filter((x) => x.id !== o.id && nums.some((n) => n >= x.min && n <= x.max)).map((x) => ({
+label: 'Repetir en ' + x.nombre,
+ir: () => {
+const enRango = nums.filter((n) => n >= x.min && n <= x.max);
+const fuera = nums.length - enRango.length;
+const limite = x.elige || x.cant;
+const copiados = enRango.slice(0, limite);
+const avisos = [];
+if (fuera) { avisos.push((fuera === 1 ? '1 número no existe' : fuera + ' números no existen') + ' en ' + x.nombre + ' (va del ' + dos(x.min) + ' al ' + dos(x.max) + ') y no se ' + (fuera === 1 ? 'copió' : 'copiaron') + '.'); }
+if (enRango.length > limite) { avisos.push('Se copiaron ' + limite + ' de tus ' + nums.length + ' números. Podés cambiarlos antes de agregar.'); }
+// "completar" y "plus" se muestran solo mientras falten; los avisos fijos quedan.
+const completar = (!x.elige && copiados.length < x.cant) ? ('Se copiaron tus ' + copiados.length + ' números; ' + x.nombre + ' lleva ' + x.cant + ': completá los que faltan o tocá «Completar al azar».') : '';
+const plusTxt = x.plus ? 'El Número Plus lo elegís vos (o «Extra al azar»).' : '';
+this.setState({ modo: 'otros', otro: x.id, sel: copiados, tkAzar: false, plus: null, agregado: false, avisoRepetir: { fijos: avisos.join(' '), completar: completar, plus: plusTxt } });
+const el = subir ? document.getElementById('jugada') : null;
+if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+}));
+};
+const plusAzar = () => this.setState({ plus: Math.floor(Math.random() * 10) });
 const otrosChips = otros.map((o) => Object.assign({ label: o.nombre }, chip(o.id === otro.id), {
-pick: () => this.setState({ otro: o.id, sel: [], tkAzar: false })
+pick: () => this.setState({ otro: o.id, sel: [], tkAzar: false, plus: null, avisoRepetir: '' })
 }));
 const bolillas = [];
 for (let n = otro.min; n <= otro.max; n++) {
@@ -1091,14 +1252,14 @@ while (lista.length < otro.cant) {
 const n = otro.min + Math.floor(Math.random() * (otro.max - otro.min + 1));
 if (lista.indexOf(n) === -1) { lista.push(n); }
 }
-this.setState({ sel: lista });
+this.setState({ sel: lista, plus: otro.plus ? (plusSel !== null ? plusSel : Math.floor(Math.random() * 10)) : null });
 };
 const selOrden = sel.slice().sort((a, b) => a - b);
 const esQuiniela = modo === 'quiniela';
 const validas = lineas.filter((l) => l.valida);
 const nombre = st.nombre || '';
 const mayor = !!st.mayor;
-let resumen, detalle, total, falta, boletaJuego, msg;
+let resumen, detalle, total, falta, boletaJuego, msg, numerosTxtOtro = '';
 if (esQuiniela) {
 boletaJuego = 'Quiniela';
 // Cada número se juega una vez por cada par sorteo + quiniela que realmente sortea.
@@ -1108,25 +1269,96 @@ resumen = validas.map((l) => ({ izq: l.txt, der: fmt(l.impNum) }));
 const porSorteo = jugadasOk.map((x) => x.s + ': ' + x.qs.join(', ')).join('\n');
 detalle = jugadasOk.length ? (porSorteo + (mult > 1 && validas.length ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '')) : ((sorteosSel.length ? '' : 'Sin sorteo elegido\n') + (quinielasSel.length ? '' : 'Sin quiniela elegida'));
 falta = !hoySortea ? 'Los domingos no hay sorteos de Quiniela.' : (!sorteosAbiertos.length ? 'Ya cerraron todos los sorteos de hoy. Mañana podés mandar tu jugada.' : (!validas.length ? 'Cargá al menos un número con su importe.' : (!quinielasSel.length ? 'Elegí al menos una quiniela.' : (!sorteosSel.length ? 'Elegí al menos un sorteo.' : (sorteoVacio ? ('En ' + sorteoVacio.s + ' no sortea ninguna de las quinielas que elegiste. Sacá ese sorteo o sumá otra quiniela.') : '')))));
-msg = 'Hola! Quiero hacer esta jugada de Quiniela:\n' + validas.map((l) => '• ' + l.txt + ' — ' + fmt(l.impNum)).join('\n') + '\n' + porSorteo + (mult > 1 ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '');
 } else {
 boletaJuego = otro.nombre;
 // Telekino: hasta 3 números elegidos (el resto lo completa la terminal) o todo al azar.
-const otroCompleto = otro.elige ? (sel.length > 0 || tkAzar) : sel.length === otro.cant;
-const numerosTxt = tkAzar ? 'al azar' : (selOrden.map(dos).join(' - ') + (otro.elige ? ' (el resto, al azar)' : ''));
+const numerosOk = otro.elige ? (sel.length > 0 || tkAzar) : sel.length === otro.cant;
+const otroCompleto = numerosOk && (!otro.plus || plusSel !== null);
+const numerosTxt = (tkAzar ? 'al azar' : (selOrden.map(dos).join(' - ') + (otro.elige ? ' (el resto, al azar)' : ''))) + (otro.plus && plusSel !== null ? ' · Número Plus: ' + plusSel : '');
+numerosTxtOtro = numerosTxt;
 total = otroCompleto ? otroPrecio : 0;
 resumen = (sel.length || tkAzar) ? [{ izq: otro.nombre, der: otroPrecio ? fmt(otroPrecio) : 'Consultá' }] : [];
 detalle = (sel.length || tkAzar) ? 'Números: ' + numerosTxt : '';
-falta = otro.elige ? (otroCompleto ? '' : 'Elegí hasta ' + otro.elige + ' números o tocá "Jugar al azar".') : (sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '');
-msg = 'Hola! Quiero hacer esta jugada de ' + otro.nombre + ':\nNúmeros: ' + numerosTxt;
+falta = otro.elige ? (numerosOk ? '' : 'Elegí hasta ' + otro.elige + ' números o tocá "Jugar al azar".') : (sel.length < otro.cant ? ('Te ' + (otro.cant - sel.length === 1 ? 'falta 1 número' : 'faltan ' + (otro.cant - sel.length) + ' números') + '.') : '');
+if (!falta && otro.plus && plusSel === null) { falta = 'Elegí el Número Plus (del 0 al 9).'; }
 }
-if (!falta && !nombre.trim()) { falta = 'Poné tu nombre así identificamos tu jugada.'; }
+// Aviso de "Repetir en…": la instrucción de completar desaparece apenas la jugada está completa.
+const avR = (!esQuiniela && st.avisoRepetir && typeof st.avisoRepetir === 'object') ? st.avisoRepetir : null;
+const numerosCompletos = otro.elige ? (sel.length > 0 || tkAzar) : sel.length === otro.cant;
+const avisoRepetirTxt = avR ? [avR.fijos, numerosCompletos ? '' : avR.completar, plusSel === null ? avR.plus : ''].filter((t) => t).join(' ') : '';
+// ===== CARRITO: varias jugadas en un solo envío =====
+const faltaItem = falta;
+const carrito = Array.isArray(st.carrito) ? st.carrito : [];
+const guardarCarrito = (c, extra) => {
+this.setState(Object.assign({ carrito: c }, extra || {}));
+try { localStorage.setItem('agenciajm-carrito', JSON.stringify(c)); } catch (e) {}
+};
+const ORDEN_JUEGO = ['quiniela', 'quini6', 'loto', 'telekino', 'brinco', 'loto5', 'quinielaplus'];
+const agregarAlCarrito = () => {
+if (faltaItem) { return; }
+const id = Date.now() + '-' + Math.floor(Math.random() * 1e6);
+const item = esQuiniela
+? { id: id, juego: 'quiniela', nombre: 'Quiniela', lineas: validas.map((l) => ({ txt: l.txt, imp: l.impNum })), jugadas: jugadasOk.map((x) => ({ s: x.s, qs: x.qs.slice() })), total: total, raw: { modo: 'quiniela', lineas: lineasSt, quinielas: quinielasSel, sorteos: sorteosSel } }
+: { id: id, juego: otro.id, nombre: otro.nombre, numeros: numerosTxtOtro, total: total, raw: { modo: 'otros', otro: otro.id, sel: sel.slice(), tkAzar: tkAzar, plus: plusSel } };
+const limpio = esQuiniela ? { lineas: [nuevaLinea()] } : { sel: [], tkAzar: false, plus: null };
+guardarCarrito(carrito.concat([item]), Object.assign(limpio, { agregado: true, avisoRepetir: '' }));
+};
+const carritoItems = carrito.map((it, i) => ({ it: it, i: i })).sort((a, b) => (ORDEN_JUEGO.indexOf(a.it.juego) - ORDEN_JUEGO.indexOf(b.it.juego)) || (a.i - b.i)).map((x) => {
+const it = x.it;
+let detalleIt = '', error = '';
+if (it.juego === 'quiniela') {
+const js = Array.isArray(it.jugadas) ? it.jugadas : [];
+const mult = js.reduce((a, j) => a + (j.qs || []).length, 0);
+detalleIt = (it.lineas || []).map((l) => '• ' + l.txt + ' — ' + fmt(l.imp)).join('\n') + '\n' + js.map((j) => j.s + ': ' + (j.qs || []).join(', ')).join('\n') + (mult > 1 ? '\nCada jugada va en ' + mult + ' loterías (una por quiniela y sorteo).' : '');
+const cerrado = js.find((j) => !sorteoAbierto(j.s));
+if (!hoySortea) { error = 'Hoy es domingo: no hay sorteos de Quiniela. Quitá esta jugada.'; }
+else if (cerrado) { error = 'El sorteo ' + cerrado.s + ' ya cerró. Quitá esta jugada o editala.'; }
+} else {
+detalleIt = 'Números: ' + it.numeros;
+}
+return {
+repetir: it.raw ? repetirEn(otros.find((o) => o.id === it.juego), it.raw.sel, true) : [],
+titulo: it.nombre,
+subtotalTexto: fmt(it.total),
+total: Number(it.total) || 0,
+detalle: detalleIt,
+error: error,
+tieneError: !!error,
+borde: error ? '#9B1C1C' : '#E3D3A4',
+bloque: String(it.nombre).toUpperCase() + '\n' + detalleIt + '\nSubtotal: ' + fmt(it.total),
+quitarAria: 'Quitar ' + it.nombre + ' del carrito',
+editarAria: 'Editar ' + it.nombre,
+quitar: () => guardarCarrito(carrito.filter((c) => c.id !== it.id)),
+editar: () => {
+guardarCarrito(carrito.filter((c) => c.id !== it.id), Object.assign({}, it.raw || {}, { agregado: false }));
+const el = document.getElementById('jugada');
+if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+};
+});
+const carritoTotal = carritoItems.reduce((a, x) => a + x.total, 0);
+falta = !carritoItems.length ? 'Agregá al menos una jugada a tu carrito.' : (carritoItems.some((x) => x.tieneError) ? 'Hay una jugada con un sorteo cerrado: quitala o editala.' : '');
+let faltaCampo = !carritoItems.length ? 'carrito' : (falta ? 'cerrado' : '');
+if (!falta && !nombre.trim()) { falta = 'Poné tu nombre así identificamos tu jugada.'; faltaCampo = 'nombre'; }
 const celular = st.celular || '';
 const celDig = celular.replace(/\D/g, '').replace(/^0/, '');
-if (!falta && !celDig) { falta = 'Poné tu celular así te mandamos la foto del ticket.'; }
-if (!falta && celDig.length !== 10) { falta = 'Revisá el celular: código de área y número, sin 0 ni 15 (10 números).'; }
-if (!falta && !mayor) { falta = 'Confirmá que sos mayor de 18 años.'; }
-msg += '\nTotal: ' + fmt(total) + '\nNombre: ' + nombre.trim() + '\nCelular: ' + celDig + '\nEspero que me confirmen el total para transferir.' + '\n\nIMPORTANTE: ' + AVISO_COMPROBANTE.principal + '\n' + AVISO_COMPROBANTE.apoyo;
+if (!falta && !celDig) { falta = 'Poné tu celular así te mandamos la foto del ticket.'; faltaCampo = 'celular'; }
+if (!falta && celDig.length !== 10) { falta = 'Revisá el celular: código de área y número, sin 0 ni 15 (10 números).'; faltaCampo = 'celular'; }
+if (!falta && !mayor) { falta = 'Confirmá que sos mayor de 18 años.'; faltaCampo = 'mayor'; }
+// Botón de WhatsApp siempre verde: si falta algo, al tocarlo lleva al primer dato que falta y lo marca en rojo.
+const marcado = st.marcarFalta && st.marcarFalta === faltaCampo ? faltaCampo : '';
+const irAlFaltante = () => {
+this.setState({ marcarFalta: faltaCampo, avisoVacio: faltaCampo === 'carrito' });
+const destino = { carrito: 'jugada', cerrado: 'carrito', nombre: 'jm-nombre', celular: 'jm-celular', mayor: 'jm-mayor' }[faltaCampo];
+setTimeout(() => {
+const el = destino ? document.getElementById(destino) : null;
+if (!el) { return; }
+el.scrollIntoView({ block: faltaCampo === 'carrito' || faltaCampo === 'cerrado' ? 'start' : 'center' });
+if (el.focus && /^jm-/.test(destino)) { try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); } }
+}, 30);
+};
+msg = 'Hola! Quiero hacer esta jugada:\n\n' + carritoItems.map((x) => x.bloque).join('\n\n') + '\n\nTOTAL: ' + fmt(carritoTotal) + '\nNombre: ' + nombre.trim() + '\nCelular: ' + celDig + '\nEspero que me confirmen el total para transferir.' + '\n\nIMPORTANTE: ' + AVISO_COMPROBANTE.principal + '\n' + AVISO_COMPROBANTE.apoyo;
+// ===== CARRITO (fin) =====
 const ext = this.extractos();
 const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
@@ -1214,7 +1446,33 @@ otroContador: tkAzar ? 'Al azar' : (sel.length + ' de ' + limiteSel),
 azarTexto: otro.elige ? 'Jugar al azar' : 'Completar al azar',
 bolillas: bolillas,
 alAzar: alAzar,
-borrarBolillas: () => this.setState({ sel: [], tkAzar: false }),
+borrarBolillas: () => this.setState({ sel: [], tkAzar: false, plus: null, avisoRepetir: '' }),
+avisoRepetir: avisoRepetirTxt,
+hayAvisoRepetir: !!avisoRepetirTxt,
+irAlFaltante: irAlFaltante,
+marcaNombre: marcado === 'nombre' ? 'true' : 'false',
+marcaCelular: marcado === 'celular' ? 'true' : 'false',
+marcaMayor: marcado === 'mayor' ? 'true' : 'false',
+bordeNombre: marcado === 'nombre' ? '3px solid #9B1C1C' : '2px solid #C9B98F',
+bordeCelular: marcado === 'celular' ? '3px solid #9B1C1C' : '2px solid #C9B98F',
+bordeMayor: marcado === 'mayor' ? '3px solid #9B1C1C' : '2px solid transparent',
+mostrarAvisoVacio: !!st.avisoVacio && carritoItems.length === 0,
+tienePlus: !!otro.plus,
+plusAzar: plusAzar,
+repetirActual: repetirEn(otro, sel, false),
+plusChips: plusChips,
+plusTexto: plusSel === null ? 'Sin elegir' : 'Plus: ' + plusSel,
+listoItem: !faltaItem,
+noListoItem: !!faltaItem,
+faltaItem: faltaItem,
+agregarAlCarrito: agregarAlCarrito,
+agregadoAviso: !!st.agregado && !!faltaItem && carrito.length > 0,
+pendienteSinAgregar: !faltaItem,
+carritoItems: carritoItems,
+carritoVacio: carritoItems.length === 0,
+carritoTotalTexto: fmt(carritoTotal),
+carritoCuenta: carritoItems.length + (carritoItems.length === 1 ? ' jugada' : ' jugadas'),
+barraVisible: carritoItems.length > 0 && !st.carritoEnVista,
 boletaJuego: boletaJuego,
 resumen: resumen,
 resumenVacio: resumen.length === 0,
